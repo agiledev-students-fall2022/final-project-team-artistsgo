@@ -14,9 +14,11 @@ ArtistsGo allows college students to exchange artistic products and services and
 
 ## Team Members
 
-Derek Han - 
-Genie Hou - 
+
+Derek Han - https://github.com/alograti
+Genie Hou - https://github.com/fairyygenie
 Isabel Chen - https://github.com/isabelgchen
+Joseph Yusufov - https://github.com/josephyusufov
 
 ## History and how to contribute
 
