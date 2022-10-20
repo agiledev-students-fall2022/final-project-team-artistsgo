@@ -1,0 +1,31 @@
+.intro-text {
+    font-size: calc(5px + 1vmin);
+}
+
+.image {
+    width: 300px;
+  vertical-align: middle;
+}
+
+.description {
+  padding: 10px 100px;
+}
+
+.profile-link {
+    display: inline-block;
+}
+.profile-link a {
+color: black;
+text-decoration: none;
+}
+
+.profile-link:hover a {
+color: gray;
+}
+
+
+
+
+
+
+
