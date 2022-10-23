@@ -1,22 +1,23 @@
-.Header-nav {
+.Header-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .Header-header {
-  background-color: #370444;
-  min-height: 7vh;
+  background-color: #413c58;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(2px + 1vmin);
-  color: white;
+  font-size: calc(12px + 1vmin);
+  color: #a5ffd6;
 }
 
 .logo {
-  display: inline-block;
+  display: block;
+  padding: 1em;
 }
 
 .nav-links {
@@ -24,10 +25,11 @@
 }
 .nav-item {
   display: inline-block;
-  padding: 10px 15px;
+  align-items: left;
+  padding: 1em;
 }
 .nav-item a {
-  color: white;
+  color: #a5ffd6;
   text-decoration: none;
 }
 
@@ -36,6 +38,6 @@
 }
 
 .logo img {
-  width: 175px;
-  vertical-align: middle;
+  width: 200px;
+  vertical-align: sub;
 }

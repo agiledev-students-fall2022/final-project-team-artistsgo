@@ -11,7 +11,7 @@ const Footer = props => {
       <p>Contact Us</p>
       <p>FAQ</p>
       <p>About Us</p>
-      <p>&copy;2022. Foo Barstein. All rights reserved. </p>
+      <p>&copy;2022. Team ArtistsGo. All rights reserved. </p>
     </footer>
   )
 }
