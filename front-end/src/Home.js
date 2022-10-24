@@ -1,24 +1,21 @@
 import { Link } from 'react-router-dom'
-import { slide as Menu } from 'react-burger-menu'
 import './Home.css'
+import art1 from './art-1.jpeg'
+import art2 from './art-2.jpeg'
 
-/**
- * A React component that represents the Home page of the app.
- * @param {*} param0 an object holding any props passed to this component from its parent component
- * @returns The contents of this component, in JSX form.
- */
 const Home = props => {
   return (
-    <>
-      <h1>Home page place holder</h1>
-      <h>The links below are just there so we can navigate before making the home page</h>
-      <p>
-         <Link to="/ProductListing">Product Listing Page</Link>.
+    <home className="Home-top">
+      <h1 className="h1">
+        Welcome to the NYU art community ! 
+      <img src={art1} className="topimg"/>
+      <img src={art2} className="topimg"/>
+
+      </h1>
+      <p className="p1">
+         Popular Work
       </p>
-      <p>
-        <Link to="/ProfilePage">Profile Page</Link>.
-      </p>
-    </>
+    </home>
   )
 }
 

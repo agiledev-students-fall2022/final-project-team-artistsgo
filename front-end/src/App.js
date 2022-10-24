@@ -4,12 +4,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Home'
 import ProductListing from './ProductListing';
 import ProfilePage from './ProfilePage';
-import Header from './Header'
-import Footer from './Footer'
+import Header from './Header';
+import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" id="outer-container">
+      <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+      <div id="page-wrap">
+      </div>
     <Router>
       <Header />
       <main className="App-main">
@@ -20,7 +24,6 @@ function App() {
           <Route path="/ProductListing" element={<ProductListing />}></Route>
           {/* a route for the profile page */}
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
-          
         </Routes>
       </main>
       <Footer />
