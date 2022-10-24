@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import './ProductListing.css'
-import IMG from './CeramicCup.png'
+import productPhoto from './CeramicCup.png'
 
 /**
  * A React component that represents the ProductListing page of the app.
@@ -15,13 +15,13 @@ const ProductListing = props => {
     <h1>Checkered Handmade Ceramic Mug</h1>
     {/* later should be filled with user name from DB */}
     <h1 className="profile-link">
-            <Link to="/ProfilePage">Isabel Chen</Link>
+            <Link to="/ProfilePage">Foo Barstein</Link>
      </h1>
     {/* later should be filled with product price from DB */}
     <h1> $15.00 </h1>
     </div>
         {/* later should be filled with product picture from DB */}
-        <img className="image" src={IMG} alt="Our fabulous logo" />
+        <img className="product-listing-photo" src={productPhoto} alt="Product Listing Photo" />
 
     {/* later should be filled with product description from DB */}
     <p className = "description">This is a handmade mug that is glazed in a checkered pattern. It was handmade by me!
