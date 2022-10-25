@@ -8,9 +8,17 @@ import './Footer.css'
 const Footer = props => {
   return (
     <footer className="Footer-footer">
-      <p>Contact Us</p>
-      <p>FAQ</p>
-      <p>About Us</p>
+      <p className='p1-footer'>
+      <div>
+        Contact Us
+      </div>
+      <div>
+        FAQ
+      </div>
+      <div>
+        About us
+      </div>
+      </p>
       <p>&copy;2022. Team ArtistsGo. All rights reserved. </p>
     </footer>
   )

@@ -5,7 +5,7 @@
 }
 
 .Header-header {
-  background-color: #413c58;
+  background: linear-gradient(90deg,#413c58,#b7c3f3);
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -38,6 +38,6 @@
 }
 
 .logo img {
-  width: 200px;
+  width: 100%;
   vertical-align: sub;
 }
