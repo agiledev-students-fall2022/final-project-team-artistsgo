@@ -1,5 +1,5 @@
 .Home-top {
-    background: #b7c3f3; ;
+    background: linear-gradient(60deg,#b7c3f3,white) ;
     min-height: 20vh;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     Padding: 20px;;
 }
 .p1{
-    font-size: 14px;
+    font-size: 20px;
 }
 .slideshowpic{
 
