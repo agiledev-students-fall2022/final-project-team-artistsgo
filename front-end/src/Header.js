@@ -1,6 +1,5 @@
 import './Header.css'
 import logo from './ArtistsGoLogo.png'
-//import menu from './menubar.png'
 import { Link } from 'react-router-dom'
 
 /**
@@ -15,17 +14,6 @@ const Header = props => {
         <Link to="/" className="logo">
           <img src={logo} alt="Our logo" />
         </Link>
-        {/* <ul className="nav-links">
-          <li className="nav-item">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/messages">Messages</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/aboutme">About Me</Link>
-          </li>
-        </ul> */}
       </nav> 
     </header>
   )

@@ -1,26 +1,82 @@
-.Home-top {
-    background: linear-gradient(60deg,#b7c3f3,white) ;
-    min-height: 20vh;
-    display: flex;
-    flex-direction: column;
+.Home-home {
+    background: linear-gradient(#b7c3f3,white) ;
+}
+.h1-home{
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 0.5vmin); /* half the font size of the header */
+    font-size: calc(1.2em + 0.5vmin); 
     color: black;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    Padding: calc(5px + 0.5vmin);
+    background: linear-gradient(60deg,#b7c3f3,white) ;
 }
-.h1{
-    font-size: 20px;
-    Padding: 20px;;
+.p1-home{
+    align-items: center;
+    justify-content: center;
+    font-size: calc(1em + 0.5vmin); 
+    color: black;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    Padding: 10px ;
 }
-.p1{
-    font-size: 20px;
+/*Slideshow*/
+.slideshow{
+    margin: 0 auto;
+    overflow: hidden;
+    max-width:500 px;
+    padding: 5px;
+    vertical-align: top;
 }
-.slideshowpic{
-
+.slide{
+    display: inline-block;
+    width: auto;
+    height: 300px;
+    border-radius: 20px;
 }
-.topimg {
-    width: 500px;
-    display: block;
-    padding: 1em;
+.slideshowSlider{
+    transition: ease 1000ms;
+    white-space: nowrap;
+}
+/* Buttons */
+.slideshowDots {
+    text-align: center;
+}
+.slideshowDot {
+    display: inline-block;
+    vertical-align:top;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 15px 7px 10px;
+    background-color: #c4c4c4;
   }
+  .slideshowDot.active {
+    background-color: #dd7596;
+  }
+
+  .gallery {
+    --s: 30vw; /* controls the size */
+    --g: 5vw;  /* controls the gap */
+  
+    display: grid;
+    gap: var(--g);
+    width: calc(3*var(--s) + 2*var(--g)); /* 3 times the size plus 2 times the gap */
+    aspect-ratio: 1;
+    grid-template-columns: repeat(3, auto);
+  }
+
+  .gallery > img {
+    width: 0;
+    height: 0;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+  }
+ 
+  .gallery p{
+    font-size:  calc(1.2em + 0.5vmin); 
+  }
+  .g-back{
+    background: linear-gradient(60deg,#b7c3f3,white) ;
+  }
+  

@@ -5,9 +5,6 @@ import './Sidebar.css'
 const Sidebar = props=>{
     return(
         <Menu>
-            <a className='menu-item' href='./Login'>
-                Login
-            </a>
             <a className='menu-item' href="/">
                 Home
             </a>
@@ -23,6 +20,9 @@ const Sidebar = props=>{
             <a className='menu-item' href="/ProductListing">
                 Market
             </a>  
+            <a className='menu-item' href='./Login'>
+                Login
+            </a>
         </Menu>
         
     )

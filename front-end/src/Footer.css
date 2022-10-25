@@ -7,4 +7,13 @@
   justify-content: center;
   font-size: calc(10px + 0.5vmin); /* half the font size of the header */
   color: #a5ffd6;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.p1-footer{
+  font-size: calc(10px + 0.5vmin); /* half the font size of the header */
+  color: #a5ffd6;
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1.2fr;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
