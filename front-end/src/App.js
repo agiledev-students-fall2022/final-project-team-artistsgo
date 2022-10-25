@@ -7,6 +7,8 @@ import ProfilePage from './ProfilePage';
 import Header from './Header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
+import Login from './Login';
+import Register from './Register';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/ProductListing" element={<ProductListing />}></Route>
           {/* a route for the profile page */}
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
+          <Route path ="/Login" element={<Login/>}></Route>
+          <Route path ="/Register" element={<Register/>}></Route>
         </Routes>
       </main>
       <Footer />
