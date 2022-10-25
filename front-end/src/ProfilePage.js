@@ -1,5 +1,8 @@
 
 import './ProfilePage.css'
+import profilePhoto from './profile-photo.png'
+import productPhoto from './CeramicCup.png'
+import { Link } from 'react-router-dom'
 
 
 /**
@@ -10,8 +13,60 @@ import './ProfilePage.css'
 const ProfilePage = props => {
   return (
     <>
-    <p > Nothing in here yet
+    
+    <div>
+    {/* later should be filled with user name from DB */}
+      <h1>
+           Foo Barstein
+     </h1>
+     <h className="user-name">
+            @fooceramics
+     </h>
+
+     </div>
+      {/* later should be filled with product picture from DB */}
+      <img className="profile-picture" src={profilePhoto} alt="Profile Photo" />
+
+
+
+    {/* later should be filled with product description from DB */}
+    <p className = "profile-description">Hi there! My name is Foo Barstein and I specialize in ceramics.
+    Specifically, I specialize in handmade and natural shaped mugs and cups. I'm a student at NYU and I
+    am a computer science major, but I create these items in my free time! Thank you for visitng my page
+    and I hope you find some joy in my products. Please reach out to me if you have any questions or concerns!
+    <br></br>
+    Contact me at: foobarstein@gmail.com or at 555-123-4567
     </p>
+
+
+    <div className="full-product">
+    <a href = "/ProductListing">
+    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
+    </a>
+    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
+    </div>
+
+    <div className="full-product">
+    <a href = "/ProductListing">
+    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
+    </a>
+    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
+    </div>
+
+    <div className="full-product">
+    <a href = "/ProductListing">
+    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
+    </a>
+    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
+    </div>
+
+    <div className="full-product">
+    <a href = "/ProductListing">
+    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
+    </a>
+    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
+    </div>
+
   </>
   )
 }

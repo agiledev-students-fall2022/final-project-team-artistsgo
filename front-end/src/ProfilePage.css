@@ -1,0 +1,25 @@
+.profile-picture {
+    width: 250px;
+    vertical-align: middle;
+}
+
+.user-name {
+    display: inline-block;
+    padding-bottom: 30px;
+}
+
+.profile-description {
+    padding: 10px 100px;
+  }
+
+.featured-works {
+    width:250px;
+}
+
+.full-product {
+    padding-bottom: 15px;
+}
+
+
+
+
