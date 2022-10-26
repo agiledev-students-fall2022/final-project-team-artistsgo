@@ -61,33 +61,39 @@ const Home=()=>{
         <gall className='gallery'>
           <a href="/ProductListing"><img src={art2}/>
           <desc>Oil paint no.141</desc>
-          <p></p>
-          <artists><Link to ="/ProfilePage">Genie Hou</Link></artists>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Genie Hou</Link></artists>
+          </p>
           </a>
           <a href="/ProductListing"><img src={art3}/>
           <desc>Girls</desc>
-          <p></p>
-          <artists><Link to ="/ProfilePage">Isabel Chen</Link></artists>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Isabel Chen</Link></artists>
+          </p>
           </a>
           <a href="/ProductListing"><img src={art4}/>
           <desc>Bridge</desc>
-          <p></p>
-          <artists><Link to ="/ProfilePage">Edward Hopper</Link></artists>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Edward Hopper</Link></artists>
+          </p>
           </a>
           <a href="/ProductListing"><img src={mug}/>
           <desc>Mug!</desc>
-          <p></p>
-          <artists><Link to ="/ProfilePage">Derek Han</Link></artists>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Derek Han</Link></artists>
+          </p>
           </a>
           <a href="/ProductListing"><img src={art1}/>
           <desc>Starry Night</desc>
-          <p></p>
-          <artists><Link to ="/ProfilePage">Van Gogh</Link></artists>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Van Gogh</Link></artists>
+          </p>
           </a>
           <a href="/ProductListing"><img src={mug2}/>
           <desc>Mug2!</desc>
-          <p></p>
-          <artists><Link to ="/ProfilePage">Joseph Yusurof</Link></artists>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Joseph Yusurof</Link></artists>
+          </p>
           </a>
         </gall>
         </div>

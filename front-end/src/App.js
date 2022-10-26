@@ -13,6 +13,7 @@ import Aboutus from './Aboutus';
 import ArtsAndCrafts from './ArtsAndCrafts';
 import Dance from './Dance';
 import Marketplace from './Marketplace';
+import Services from './Services';
 import Music from './Music';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path ="/Register" element={<Register/>}></Route>
           <Route path ="/Aboutus" element={<Aboutus/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
+          <Route path ="/Services" element={<Services/>}></Route>
           <Route path ="/Dance" element={<Dance/>}></Route>
           <Route path ="/Marketplace" element={<Marketplace/>}></Route>
           <Route path ="/Music" element={<Music/>}></Route>

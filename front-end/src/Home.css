@@ -91,6 +91,15 @@
     font-size:  2vw ; 
     color: #413c58;
   }
+
+.gallery desc{
+  padding-bottom: 0px;
+}
+  .gallery .gallery-artist-link{
+    padding: 0;
+    margin: 0;
+  }
+
   .g-back{
     background:white;
     background-blend-mode: screen;
