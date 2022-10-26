@@ -17,8 +17,8 @@ const Sidebar = props=>{
             <a className='menu-item' href="/Arts-And-Crafts">
                 Arts & Crafts
             </a>
-            <a className='menu-item' href="/ProductListing">
-                Market
+            <a className='menu-item' href="/Marketplace">
+                Marketplace
             </a>  
             <a className='menu-item' href='./Login'>
                 Login

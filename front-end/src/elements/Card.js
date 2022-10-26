@@ -12,6 +12,7 @@ const Card = props => {
     <Link className='card-container' to={`/${props.path}`}>
         <img src={props.image} alt="Image" />
         <h3>{props.name}</h3>
+        {props.price? <p className="price">${props.price.toFixed(2)}</p>: <></>}
         <p className='author'>{props.author}</p>
         <p className='description'>{props.description}</p>
     </Link>  
