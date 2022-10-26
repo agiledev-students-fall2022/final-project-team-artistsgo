@@ -1,15 +1,16 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
     position: fixed;
-    width: 36px;
-    height: 36px;
+    width:  36px;
+    height: 30px;
     left:2em;
-    top:1.5em;
+    top:3.3vh;
   }
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
     background: #a5ffd6;
+    border-radius: 20%;
   }
   
   /* Color/shape of burger icon bars on hover*/
@@ -25,7 +26,7 @@
   
   /* Color/shape of close button cross */
   .bm-cross {
-    background: #bdc3c7;
+    background: #413c58;
   }
   
   /*
@@ -42,6 +43,7 @@
     background: #b7c3f3;
     padding: 2.5em 1.5em 1.5em ;
     font-size: 1.3em;
+    border-radius: 5%;
   }
   
   /* Morph shape necessary with bubble or elastic */
@@ -68,3 +70,8 @@
   .bm-overlay {
     background: #413c58;
   }
+
+  .bm:hover{
+    color: #cf1259;
+  }
+  a:link { text-decoration: none; }
