@@ -10,6 +10,7 @@ import Sidebar from './Sidebar';
 import Login from './Login';
 import Register from './Register';
 import ArtsAndCrafts from './ArtsAndCrafts';
+import Dance from './Dance';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path ="/Login" element={<Login/>}></Route>
           <Route path ="/Register" element={<Register/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
+          <Route path ="/Dance" element={<Dance/>}></Route>
         </Routes>
       </main>
       <Footer />
