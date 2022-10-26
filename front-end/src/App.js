@@ -20,7 +20,7 @@ function App() {
       <div id="page-wrap">
       </div>
     <Router>
-      <Header ></Header>
+      <Header/>
       <main className="App-main">
         <Routes>
           {/* a route for the home page */}

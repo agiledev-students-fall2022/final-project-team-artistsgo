@@ -15,7 +15,8 @@
 }
 .p1-footer{
   margin-top: auto;
-  font-size: 3vw; /* half the font size of the header */
+  font-size: 2vw; /* half the font size of the header */
+  top: 10px;
   color: #413c58;
   display: grid;
   grid-template-columns: 1.2fr 1.2fr 1.2fr;
