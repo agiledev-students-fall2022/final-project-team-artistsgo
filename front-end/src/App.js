@@ -11,6 +11,7 @@ import Login from './Login';
 import Register from './Register';
 import Aboutus from './Aboutus';
 
+import ArtsAndCrafts from './ArtsAndCrafts';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path ="/Login" element={<Login/>}></Route>
           <Route path ="/Register" element={<Register/>}></Route>
           <Route path ="/Aboutus" element={<Aboutus/>}></Route>
+          <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
         </Routes>
       </main>
       <Footer />
