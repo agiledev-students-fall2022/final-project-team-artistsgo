@@ -10,13 +10,9 @@ import Sidebar from './Sidebar';
 import Login from './Login';
 import Register from './Register';
 import Aboutus from './Aboutus';
-
 import ArtsAndCrafts from './ArtsAndCrafts';
-<<<<<<< HEAD
 import Dance from './Dance';
-=======
 import Marketplace from './Marketplace';
->>>>>>> origin/master
 
 function App() {
   return (
@@ -38,11 +34,8 @@ function App() {
           <Route path ="/Register" element={<Register/>}></Route>
           <Route path ="/Aboutus" element={<Aboutus/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
-<<<<<<< HEAD
           <Route path ="/Dance" element={<Dance/>}></Route>
-=======
           <Route path ="/Marketplace" element={<Marketplace/>}></Route>
->>>>>>> origin/master
         </Routes>
       </main>
       <Footer />
