@@ -1,38 +1,41 @@
 .user-container {
     font-weight: 500;
     padding-bottom: 30px;
+    text-align: left;
 }
 
 .email-container {
     font-weight: 500;
     padding-bottom: 30px;
+    text-align: left;
 }
 
 .pass-container {
     font-weight: 500;
     padding-bottom: 30px;
+    text-align: left;
 }
 
-.button-container {
-    display:inline-block;
-    padding:0.3em 1.2em;
-    margin:0 0.3em 0.3em 0;
-    border-radius:2em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:300;
-    color:#FFFFFF;
-    background-color:#4eb5f1;
-    text-align:center;
-    transition: all 0.2s;
+.button {
+    margin-top:75px;
+    color: black;
+    border: 2px solid #0b623b;
+    border-radius: 0px;
+    padding: 18px 36px;
+    display: inline-block;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #413c58;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
 }
-.button-container:hover {
-    background-color:#4095c6;
+.button2:hover {
+    box-shadow: inset 0 0 0 50px #413c58;
 }
-/* @media all and (max-width:30em) {
-    .button-container {
-    display:block;
-    margin:0.2em auto;
-    }
-} */
+
+.wrapper {
+    padding-bottom: 175px;
+}

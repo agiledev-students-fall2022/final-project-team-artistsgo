@@ -5,13 +5,16 @@ import './Login.css'
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
-
+const handleSubmit = event => {
+    event.preventDefault();
+    console.log("Form Submitted");
+}
 const Login = props => {
     return (
     <>
     <h1>Login</h1>
     <div>
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="user-container">
                 <label>Username </label>
                 <input type="text" name="uname" required />
@@ -20,13 +23,15 @@ const Login = props => {
                 <label>Password </label>
                 <input type="password" name="pass" required />
             </div>
-            <div className="button-container">
-                <input type= "submit" />
+            <div>
+                <button className="button button2">Submit</button>
             </div>
         </form>
     </div>
-    <h3>Don't have an account?</h3>
-    <a href='./Register'>Sign up</a>
+    <div className ="bOfPage">
+        <h3>Don't have an account?</h3>
+        <a href='./Register'>Sign up</a>
+    </div>
     </>
     )
 }
