@@ -8,11 +8,15 @@
   background: linear-gradient(90deg,#413c58,#b7c3f3);
   min-height: 10vh;
   display: flex;
+  width: 100vw;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(12px + 1vmin);
   color: #a5ffd6;
+  position: fixed;
+  top: 0;
+  z-index: 2;
 }
 
 .logo {

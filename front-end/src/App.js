@@ -9,6 +9,7 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Login from './Login';
 import Register from './Register';
+import ArtsAndCrafts from './ArtsAndCrafts';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
           <Route path ="/Login" element={<Login/>}></Route>
           <Route path ="/Register" element={<Register/>}></Route>
+          <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
         </Routes>
       </main>
       <Footer />
