@@ -9,8 +9,14 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Login from './Login';
 import Register from './Register';
+import Aboutus from './Aboutus';
+
 import ArtsAndCrafts from './ArtsAndCrafts';
+<<<<<<< HEAD
 import Dance from './Dance';
+=======
+import Marketplace from './Marketplace';
+>>>>>>> origin/master
 
 function App() {
   return (
@@ -19,7 +25,7 @@ function App() {
       <div id="page-wrap">
       </div>
     <Router>
-      <Header />
+      <Header/>
       <main className="App-main">
         <Routes>
           {/* a route for the home page */}
@@ -30,8 +36,13 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
           <Route path ="/Login" element={<Login/>}></Route>
           <Route path ="/Register" element={<Register/>}></Route>
+          <Route path ="/Aboutus" element={<Aboutus/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
+<<<<<<< HEAD
           <Route path ="/Dance" element={<Dance/>}></Route>
+=======
+          <Route path ="/Marketplace" element={<Marketplace/>}></Route>
+>>>>>>> origin/master
         </Routes>
       </main>
       <Footer />
