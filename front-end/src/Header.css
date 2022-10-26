@@ -5,7 +5,10 @@
 }
 
 .Header-header {
-  background: linear-gradient(90deg,#413c58,#b7c3f3);
+  background:
+    linear-gradient(#b7c3f3,transparent),
+    linear-gradient(to bottom left,#dd7596, transparent),
+    linear-gradient(to bottom right, blue, transparent);
   min-height: 10vh;
   display: flex;
   flex-direction: column;
