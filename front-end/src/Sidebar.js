@@ -8,7 +8,7 @@ const Sidebar = props=>{
             <a className='menu-item' href="/">
                 Home
             </a>
-            <a className='menu-item' href="/ProductListing">
+            <a className='menu-item' href="/Music">
                 Music
             </a>
             <a className='menu-item' href="/ProductListing">

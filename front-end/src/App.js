@@ -13,6 +13,7 @@ import Aboutus from './Aboutus';
 
 import ArtsAndCrafts from './ArtsAndCrafts';
 import Marketplace from './Marketplace';
+import Music from './Music';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path ="/Aboutus" element={<Aboutus/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
           <Route path ="/Marketplace" element={<Marketplace/>}></Route>
+          <Route path ="/Music" element={<Music/>}></Route>
         </Routes>
       </main>
       <Footer />
