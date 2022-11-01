@@ -14,6 +14,14 @@ axios
     .catch(err => next(err))
 })
 
+app.get("/getProductData", (req, res, next) => {
+axios
+    .get("https://my.api.mockaroo.com/product_data.json?key=8103fdd0")
+    .then(apiResponse => res.json(apiResponse.data)) 
+    .catch(err => next(err))
+})
+
+// *********IGNORE THIS STUFF BELOW ITS SOME EXPERIMENTATION*********
 // app.get("/getRandomPictures", (req, res, next) => {
 // // use axios to make a request to an API for animal data
 // axios
