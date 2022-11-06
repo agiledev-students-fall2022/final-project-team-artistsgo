@@ -9,6 +9,7 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Login from './Login';
 import Register from './Register';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

@@ -1,33 +1,4 @@
-.user-container {
-    font-weight: 500;
-    padding-bottom: 30px;
-}
-
-.pass-container {
-    font-weight: 500;
-    padding-bottom: 30px;
-}
-
-.button {
-    margin-top:75px;
-    color: black;
-    border: 2px solid #0b623b;
-    border-radius: 0px;
-    padding: 18px 36px;
-    display: inline-block;
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 14px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 0 #413c58;
-    -webkit-transition: ease-out 0.4s;
-    -moz-transition: ease-out 0.4s;
-    transition: ease-out 0.4s;
-}
-.button2:hover {
-    box-shadow: inset 0 0 0 50px #413c58;
-}
-
-.bOfPage {
-    padding-top: 150px;
+.container {
+    padding-top: 100px;
+    padding-bottom: 312.5px;
 }
