@@ -3,10 +3,12 @@ import art1 from './art-1.jpeg'
 import art2 from './art-2.jpeg'
 import art3 from './art3.jpg'
 import art4 from './art4.jpg'
+import mug from './mug3.png'
+import mug2 from './mug1.png'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Slideimages=[art1,art2,art3,art4];
+const Slideimages=[art1,art2,art3,art4,mug,mug2];
 const delay = 4000;
 
 const Home=()=>{
@@ -57,11 +59,42 @@ const Home=()=>{
     <div className='g-back'>
     <div className='p1-home'>Popular Work</div>
         <gall className='gallery'>
-          <img src={art2}/>
-          <img src={art3}/>
-          <img src={art4}/>
-          <img src={art2}></img>
-          <img src={art1}></img>
+          <a href="/ProductListing"><img src={art2}/>
+          <desc>Oil paint no.141</desc>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Genie Hou</Link></artists>
+          </p>
+          </a>
+          <a href="/ProductListing"><img src={art3}/>
+          <desc>Girls</desc>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Isabel Chen</Link></artists>
+          </p>
+          </a>
+          <a href="/ProductListing"><img src={art4}/>
+          <desc>Bridge</desc>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Edward Hopper</Link></artists>
+          </p>
+          </a>
+          <a href="/ProductListing"><img src={mug}/>
+          <desc>Mug!</desc>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Derek Han</Link></artists>
+          </p>
+          </a>
+          <a href="/ProductListing"><img src={art1}/>
+          <desc>Starry Night</desc>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Van Gogh</Link></artists>
+          </p>
+          </a>
+          <a href="/ProductListing"><img src={mug2}/>
+          <desc>Mug2!</desc>
+          <p className="gallery-artist-link">
+            <artists><Link to ="/ProfilePage">Joseph Yusurof</Link></artists>
+          </p>
+          </a>
         </gall>
         </div>
       </home>

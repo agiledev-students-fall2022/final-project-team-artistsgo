@@ -1,7 +1,7 @@
 
 import './ProfilePage.css'
 import profilePhoto from './profile-photo.png'
-import productPhoto from './CeramicCup.png'
+import productPhoto from './mug1.png'
 import { Link } from 'react-router-dom'
 
 
@@ -15,20 +15,21 @@ const ProfilePage = props => {
     <>
     
     <div>
-    {/* later should be filled with user name from DB */}
-      <h1>
-           Foo Barstein
-     </h1>
-     <h className="user-name">
-            @fooceramics
-     </h>
 
      </div>
       {/* later should be filled with product picture from DB */}
       <img className="profile-picture" src={profilePhoto} alt="Profile Photo" />
 
+          {/* later should be filled with user name from DB */}
+      <p className="users-name">
+           Foo Barstein
+     </p>
+     <h className="user-name">
+            @fooceramics
+     </h>
 
 
+    <div className="description-style">
     {/* later should be filled with product description from DB */}
     <p className = "profile-description">Hi there! My name is Foo Barstein and I specialize in ceramics.
     Specifically, I specialize in handmade and natural shaped mugs and cups. I'm a student at NYU and I
@@ -38,6 +39,8 @@ const ProfilePage = props => {
     Contact me at: foobarstein@gmail.com or at 555-123-4567
     </p>
 
+    </div>
+
 
     <div className="full-product">
     <a href = "/ProductListing">
@@ -66,6 +69,7 @@ const ProfilePage = props => {
     </a>
     <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
     </div>
+
 
   </>
   )

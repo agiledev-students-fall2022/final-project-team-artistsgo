@@ -9,7 +9,12 @@ import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Login from './Login';
 import Register from './Register';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Aboutus from './Aboutus';
+import ArtsAndCrafts from './ArtsAndCrafts';
+import Dance from './Dance';
+import Marketplace from './Marketplace';
+import Services from './Services';
+import Music from './Music';
 
 function App() {
   return (
@@ -18,7 +23,7 @@ function App() {
       <div id="page-wrap">
       </div>
     <Router>
-      <Header />
+      <Header/>
       <main className="App-main">
         <Routes>
           {/* a route for the home page */}
@@ -29,6 +34,12 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
           <Route path ="/Login" element={<Login/>}></Route>
           <Route path ="/Register" element={<Register/>}></Route>
+          <Route path ="/Aboutus" element={<Aboutus/>}></Route>
+          <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
+          <Route path ="/Services" element={<Services/>}></Route>
+          <Route path ="/Dance" element={<Dance/>}></Route>
+          <Route path ="/Marketplace" element={<Marketplace/>}></Route>
+          <Route path ="/Music" element={<Music/>}></Route>
         </Routes>
       </main>
       <Footer />

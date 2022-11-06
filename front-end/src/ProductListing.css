@@ -1,5 +1,11 @@
 .intro-text {
     font-size: calc(5px + 1vmin);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.title {
+  padding-top: 20px;
+  font-size: 20px;
 }
 
 .product-listing-photo {
@@ -9,6 +15,7 @@
 
 .description {
   padding: 10px 100px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .profile-link {
