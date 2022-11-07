@@ -15,6 +15,7 @@ import Dance from './Dance';
 import Marketplace from './Marketplace';
 import Services from './Services';
 import Music from './Music';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
