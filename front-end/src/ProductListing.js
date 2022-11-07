@@ -5,6 +5,8 @@ import art2 from './mug2.png'
 import art3 from './mug3.png'
 import art4 from './mug4.png'
 import React from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 /**
  * A React component that represents the ProductListing page of the app.
@@ -15,6 +17,68 @@ import React from 'react'
  const delay = 4000;
 
 const ProductListing = props => {
+  // const [products, setProducts] = useState([])
+  // const [loaded, setLoaded] = useState(false)
+  // const [error, setError] = useState('')
+  // const [feedback, setFeedback] = useState('')
+
+  // const fetchProducts = () => {
+  //   // setMessages([])
+  //   // setLoaded(false)
+  //   axios
+  //     .get(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`)
+  //     .then(response => {
+  //       // axios bundles up all response data in response.data property
+  //       const getProductData = response.data.getProductData
+  //       setProducts(getProductData)
+  //     })
+  //     .catch(err => {
+  //       setError(err)
+  //     })
+  //     .finally(() => {
+  //       // the response has been received, so remove the loading icon
+  //       setLoaded(true)
+  //     })
+  // }
+
+  const useFetch = () => {
+    const [data, setData] = useState(null);
+  
+    useEffect(() => {
+      fetch(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`).then(async res => {
+        if (res.status !== 200) {
+          setData('uh oh error!');
+        }
+        const data = await res.json();
+        setData(data);
+      });
+    }, [setData, `${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`]);
+  
+    return [data];
+  }
+
+  // useEffect(() => {
+  //   // fetch messages this once
+  //   fetchProducts()
+
+  //   // // set a timer to load data from server every n seconds
+  //   // const intervalHandle = setInterval(() => {
+  //   //   fetchMessages()
+  //   // }, 5000)
+
+  //   // // return a function that will be called when this component unloads
+  //   // return e => {
+  //   //   // clear the timer, so we don't still load messages when this component is not loaded anymore
+  //   //   clearInterval(intervalHandle)
+  //   // }
+  // }, [])
+
+  // console.log(products)
+  const [unauthData] = useFetch();
+  // console.log(unauthData)
+
+
+
   const [index, setIndex]=React.useState(0);
   const timeoutRef = React.useRef(null);
   function resetTimeout() {
@@ -39,6 +103,9 @@ const ProductListing = props => {
 
   return (
     <>
+    <div>
+    User data: {JSON.stringify(unauthData)}
+    </div>
     <div className = "intro-text">
     {/* later should be filled with product name from DB */}
     <p className="title">Checkered Handmade Ceramic Mug</p>

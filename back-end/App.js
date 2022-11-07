@@ -28,13 +28,13 @@ app.get("/parameter-example/:title", async (req, res) => {
     // we use a Mock API here, but imagine we passed the animalId to a real API and received back data about that animal
     try {
       const apiResponse = await axios.get(
-        `${process.env.API_BASE_URL_PRODUCT}?key=${process.env.API_SECRET_KEY_PRODUCT}&title=${req.params.title}`
+        `${process.env.API_BASE_URL_PRODUCT}?key=${process.env.API_SECRET_KEY_PRODUCT}&username=${req.params.username}`
       )
   
       // express places parameters into the req.params object
       const responseData = {
         status: "wonderful",
-        message: `Imagine we got the data from the API for animal #${req.query.title}`,
+        message: `Imagine we got the data from the API for animal #${req.params.username}`,
         product: apiResponse.data,
         title: req.params.title,
         username: req.params.username,
