@@ -1,38 +1,72 @@
-import './Register.css'
-/**
- * A React component that represents the Form page of the app.
- * @param {*} param0 an object holding any props passed to this component from its parent component
- * @returns The contents of this component, in JSX form.
- */
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Register.css";
 
-const Register = props => {
+export default function Register() {
+    const [loading, setLoading] = useState(false);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+    }
+
     return (
-    <>
-    <h1>Register</h1>
-    <div className="wrapper">
-        <form>
-            <div className="user-container">
-                <label>Username: </label>
-                <input type="text" name="uname" required />
+        <>
+        <div className="container">
+            <div className="row">
+
+            <div className="col-md-6 offset-md-3">
+                <div className="card">
+                <div className="card-header">Register</div>
+                <div className="card-body">
+                    <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        placeholder="Enter email"
+                        //value of email, addOnChange
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Password"
+                        //value of password, add onChange
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Confirm Password</label>
+                        <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Confirm Password"
+                        //value of password, add onChange
+                        />
+                    </div>
+                    <button
+                        disabled={loading}
+                        type="submit"
+                        className="btn btn-primary"
+                    >
+                        Register
+                    </button>
+                    </form>
+                </div>
+                <div className="card-footer">
+                    <Link to="/login">Already have an account? Login</Link>
+                </div>
+                </div>
             </div>
-            <div className="pass-container">
-                <label>Password: </label>
-                <input type="password" name="pass" required />
             </div>
-            <div className="pass-container">
-                <label>Confirm Password: </label>
-                <input type="password" name="pass" required />
-            </div>
-            <div>
-                <button className="button button2">Submit</button>
-            </div>
-        </form>
-    </div>
-    </>
-    )
+        </div>
+        </>
+    );
 }
 
-// const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
 
-export default Register
