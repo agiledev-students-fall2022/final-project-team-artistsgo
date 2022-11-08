@@ -13,7 +13,6 @@ import axios from 'axios'
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
- const Slideimages=[art1,art2,art3,art4];
  const delay = 4000;
 
 //  const useFetch = () => {
@@ -118,6 +117,8 @@ const ProductListing = props => {
       resetTimeout();
     };
   }, [index]);
+
+  const Slideimages=[product? product.image: ""];
 
 
 
