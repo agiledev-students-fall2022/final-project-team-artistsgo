@@ -17,9 +17,9 @@ axios
     .catch(err => next(err))
 })
 
-app.get("/getProductData", (req, res, next) => {
+app.get("/product", (req, res, next) => {
 axios
-    .get("https://my.api.mockaroo.com/product_data.json?key=8103fdd0")
+    .get("https://my.api.mockaroo.com/item_data.json?key=94293da0")
     .then(apiResponse => res.json(apiResponse.data)) 
     .catch(err => next(err))
 })
