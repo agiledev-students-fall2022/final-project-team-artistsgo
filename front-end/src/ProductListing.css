@@ -5,7 +5,8 @@
 
 .title {
   padding-top: 20px;
-  font-size: 20px;
+  font-size: 3.5em;
+
 }
 
 .product-listing-photo {
@@ -16,10 +17,12 @@
 .description {
   padding: 10px 100px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.5em;
 }
 
 .profile-link {
     display: inline-block;
+    font-size: 2em;
 }
 .profile-link a {
 color: black;
@@ -28,6 +31,10 @@ text-decoration: none;
 
 .profile-link:hover a {
 color: gray;
+}
+
+.price{
+  font-size: 2em;
 }
 
 

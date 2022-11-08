@@ -125,15 +125,13 @@ const ProductListing = props => {
     <>
     <div className = "intro-text">
     {/* later should be filled with product name from DB */}
-    <p className="title">
-      {product? product.name: ""}
-      </p>
+    <p className="title">{product? product.name: ""}</p>
     {/* later should be filled with user name from DB */}
     <p className="profile-link">
             <Link to="/ProfilePage">{product? product.author_username: ""}</Link>
      </p>
     {/* later should be filled with product price from DB */}
-    <p> ${product? product.price: ""}</p>
+    <p className="price"> ${product? product.price: ""}</p>
     </div>
 
 
