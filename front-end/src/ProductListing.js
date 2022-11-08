@@ -36,52 +36,65 @@ import axios from 'axios'
 
 const ProductListing = props => {
 
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/product")
+    .then(apiResponse => {
+      // console.log(apiResponse.data[0])
+      setProduct(apiResponse.data[0]);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
+
   // useEffect(()=>{
   //   const [unauthData] = useFetch();
   //   console.log(unauthData)
   // },[])
 
-  const [products, setProducts] = useState([])
-  const [loaded, setLoaded] = useState(false)
-  const [error, setError] = useState('')
-  const [feedback, setFeedback] = useState('')
+  // const [products, setProducts] = useState([])
+  // const [loaded, setLoaded] = useState(false)
+  // const [error, setError] = useState('')
+  // const [feedback, setFeedback] = useState('')
 
-  const fetchProducts = () => {
-    // setMessages([])
-    // setLoaded(false)
-    axios
-      .get(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`)
-      .then(response => {
-        // axios bundles up all response data in response.data property
-        const products = response.data.products
-        setProducts(products)
-      })
-      .catch(err => {
-        setError(err)
-      })
-      .finally(() => {
-        // the response has been received, so remove the loading icon
-        setLoaded(true)
-      })
-  }
+  // const fetchProducts = () => {
+  //   // setMessages([])
+  //   // setLoaded(false)
+  //   axios
+  //     .get(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`)
+  //     .then(response => {
+  //       // axios bundles up all response data in response.data property
+  //       const products = response.data.products
+  //       setProducts(products)
+  //     })
+  //     .catch(err => {
+  //       setError(err)
+  //     })
+  //     .finally(() => {
+  //       // the response has been received, so remove the loading icon
+  //       setLoaded(true)
+  //     })
+  // }
 
-  useEffect(() => {
-    // fetch messages this once
-    fetchProducts()
+  // useEffect(() => {
+  //   // fetch messages this once
+  //   fetchProducts()
 
-    // set a timer to load data from server every n seconds
-    const intervalHandle = setInterval(() => {
-      fetchProducts()
-    }, 5000)
+  //   // set a timer to load data from server every n seconds
+  //   const intervalHandle = setInterval(() => {
+  //     fetchProducts()
+  //   }, 5000)
 
-    // return a function that will be called when this component unloads
-    return e => {
-      // clear the timer, so we don't still load messages when this component is not loaded anymore
-      clearInterval(intervalHandle)
-    }
-  }, []) 
+  //   // return a function that will be called when this component unloads
+  //   return e => {
+  //     // clear the timer, so we don't still load messages when this component is not loaded anymore
+  //     clearInterval(intervalHandle)
+  //   }
+  // }, []) 
 
-  // const [products] = useEffect();
+  // // const [products] = useEffect();
 
 
 
@@ -110,20 +123,17 @@ const ProductListing = props => {
 
   return (
     <>
-    <div>
-    {products.map(product => (
-      product={product}
-      ))}
-    </div>
     <div className = "intro-text">
     {/* later should be filled with product name from DB */}
-    <p className="title">Checkered Handmade Ceramic Mug</p>
+    <p className="title">
+      {product? product.name: ""}
+      </p>
     {/* later should be filled with user name from DB */}
     <p className="profile-link">
-            <Link to="/ProfilePage">Foo Barstein</Link>
+            <Link to="/ProfilePage">{product? product.author_username: ""}</Link>
      </p>
     {/* later should be filled with product price from DB */}
-    <p> $15.00 </p>
+    <p> ${product? product.price: ""}</p>
     </div>
 
 
@@ -153,11 +163,7 @@ const ProductListing = props => {
 
 
     {/* later should be filled with product description from DB */}
-    <p className = "description">This is a handmade mug that is glazed in a checkered pattern. It was handmade by me!
-        It can handle the dishwasher, but if you can, I would hand wash it more often than not.
-        Price is negotiable, but please be aware handmade items take a lot of time and love.
-        It's so cute and makes an amazing addition to any shelf. It'll make your morning coffee
-        so much more fun! If your interested please email me at foobarstein@gmail.com
+    <p className = "description">{product? product.description: ""}
     </p>
 
   </>
