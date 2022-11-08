@@ -1,6 +1,7 @@
 import './Header.css'
 import logo from './ArtistsGoLogo.png'
 import { Link } from 'react-router-dom'
+import SearchBar from './SearchBar'
 
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
@@ -15,6 +16,11 @@ const Header = props => {
           <img src={logo} alt="Our logo" />
         </Link>
       </nav> 
+        {/* <i className="fa fa-search" aria-hidden="true"></i>
+         <div className="togglesearch">
+            <input type="text" placeholder=""/>
+            <input type="button" value="Search"/>
+        </div> */}
     </header>
   )
 }

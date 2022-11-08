@@ -34,7 +34,12 @@ const Home=()=>{
   }, [index]);
 
   return (
-    <home><h1 className="h1-home"><div className='slideshow'>
+    <home>
+        <div className="togglesearch">
+          <input type="text" placeholder="Search for anything..."/>
+          <input type="button" value="Search"/>
+      </div> 
+      <h1 className="h1-home"><div className='slideshow'>
       <div className='slideshowSlider' style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         <div className='slide'>
           {Slideimages.map((imageslide, index) => (
