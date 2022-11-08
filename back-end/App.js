@@ -2,15 +2,17 @@ const express = require("express")
 const app = express() 
 const path = require("path")
 const axios = require("axios")
+const cors = require("cors")
 require("dotenv").config({ silent: true })
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/static", express.static("public"))
+app.use(cors())
 
-app.get("/getUserData", (req, res, next) => {
+app.get("/user", (req, res, next) => {
 axios
-    .get("https://my.api.mockaroo.com/user_data.json?key=8103fdd0")
+    .get("https://my.api.mockaroo.com/user_data.json?key=94293da0")
     .then(apiResponse => res.json(apiResponse.data)) 
     .catch(err => next(err))
 })
