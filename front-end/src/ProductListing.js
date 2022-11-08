@@ -16,66 +16,72 @@ import axios from 'axios'
  const Slideimages=[art1,art2,art3,art4];
  const delay = 4000;
 
+//  const useFetch = () => {
+//   const [data, setData] = useState(null);
+
+//   useEffect(() => {
+//     fetch(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`).then(async res => {
+//       if (res.status !== 200) {
+//         setData('Error');
+//       }
+//       const data = await res.json();
+//       setData(data);
+//     });
+
+
+//   }, [setData, `${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`]);
+
+//   return [data];
+// }
+
 const ProductListing = props => {
-  // const [products, setProducts] = useState([])
-  // const [loaded, setLoaded] = useState(false)
-  // const [error, setError] = useState('')
-  // const [feedback, setFeedback] = useState('')
 
-  // const fetchProducts = () => {
-  //   // setMessages([])
-  //   // setLoaded(false)
-  //   axios
-  //     .get(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`)
-  //     .then(response => {
-  //       // axios bundles up all response data in response.data property
-  //       const getProductData = response.data.getProductData
-  //       setProducts(getProductData)
-  //     })
-  //     .catch(err => {
-  //       setError(err)
-  //     })
-  //     .finally(() => {
-  //       // the response has been received, so remove the loading icon
-  //       setLoaded(true)
-  //     })
-  // }
+  // useEffect(()=>{
+  //   const [unauthData] = useFetch();
+  //   console.log(unauthData)
+  // },[])
 
-  const useFetch = () => {
-    const [data, setData] = useState(null);
-  
-    useEffect(() => {
-      fetch(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`).then(async res => {
-        if (res.status !== 200) {
-          setData('uh oh error!');
-        }
-        const data = await res.json();
-        setData(data);
-      });
-    }, [setData, `${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`]);
-  
-    return [data];
+  const [products, setProducts] = useState([])
+  const [loaded, setLoaded] = useState(false)
+  const [error, setError] = useState('')
+  const [feedback, setFeedback] = useState('')
+
+  const fetchProducts = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME_PRODUCT}`)
+      .then(response => {
+        // axios bundles up all response data in response.data property
+        const products = response.data.products
+        setProducts(products)
+      })
+      .catch(err => {
+        setError(err)
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true)
+      })
   }
 
-  // useEffect(() => {
-  //   // fetch messages this once
-  //   fetchProducts()
+  useEffect(() => {
+    // fetch messages this once
+    fetchProducts()
 
-  //   // // set a timer to load data from server every n seconds
-  //   // const intervalHandle = setInterval(() => {
-  //   //   fetchMessages()
-  //   // }, 5000)
+    // set a timer to load data from server every n seconds
+    const intervalHandle = setInterval(() => {
+      fetchProducts()
+    }, 5000)
 
-  //   // // return a function that will be called when this component unloads
-  //   // return e => {
-  //   //   // clear the timer, so we don't still load messages when this component is not loaded anymore
-  //   //   clearInterval(intervalHandle)
-  //   // }
-  // }, [])
+    // return a function that will be called when this component unloads
+    return e => {
+      // clear the timer, so we don't still load messages when this component is not loaded anymore
+      clearInterval(intervalHandle)
+    }
+  }, []) 
 
-  // console.log(products)
-  const [unauthData] = useFetch();
-  // console.log(unauthData)
+  // const [products] = useEffect();
 
 
 
@@ -101,10 +107,13 @@ const ProductListing = props => {
   }, [index]);
 
 
+
   return (
     <>
     <div>
-    User data: {JSON.stringify(unauthData)}
+    {products.map(product => (
+      product={product}
+      ))}
     </div>
     <div className = "intro-text">
     {/* later should be filled with product name from DB */}
