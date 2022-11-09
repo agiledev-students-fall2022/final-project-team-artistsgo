@@ -7,6 +7,7 @@ import mug from './mug3.png'
 import mug2 from './mug1.png'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SearchBar from './SearchBar';
 
 const Slideimages=[art1,art2,art3,art4,mug,mug2];
 const delay = 4000;
@@ -34,7 +35,13 @@ const Home=()=>{
   }, [index]);
 
   return (
-    <home><h1 className="h1-home"><div className='slideshow'>
+    <home>
+
+      <div className="searchBar">
+        <SearchBar />
+      </div>
+
+      <h1 className="h1-home"><div className='slideshow'>
       <div className='slideshowSlider' style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         <div className='slide'>
           {Slideimages.map((imageslide, index) => (
