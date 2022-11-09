@@ -16,6 +16,7 @@ import Marketplace from './Marketplace';
 import Services from './Services';
 import Music from './Music';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import SearchBar from './SearchBar';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
           <Route path ="/Login" element={<Login/>}></Route>
           <Route path ="/Register" element={<Register/>}></Route>
+          <Route path ="/SearchBar" element={<SearchBar/>}></Route>
           <Route path ="/Aboutus" element={<Aboutus/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>
           <Route path ="/Services" element={<Services/>}></Route>

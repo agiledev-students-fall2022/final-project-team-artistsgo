@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import SearchBar from './SearchBar';
 
 const delay = 4000;
 
@@ -47,7 +48,18 @@ const Home=props=>{
   }, [index]);
 
   return (
-    <home><h1 className="h1-home"><div className='slideshow'>
+    <home>
+        <div className="togglesearch">
+          <input type="text" placeholder="Search for anything..."/>
+          <input type="button" value="Search"/>
+      </div> 
+      
+
+      <div className="searchBar">
+        <SearchBar />
+      </div>
+
+      <h1 className="h1-home"><div className='slideshow'>
       <div className='slideshowSlider' style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         <div className='slide'>
           {Slideimages.map((imageslide, index) => (
