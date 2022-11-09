@@ -1,17 +1,30 @@
 import './Home.css';
-import art1 from './art-1.jpeg'
-import art2 from './art-2.jpeg'
-import art3 from './art3.jpg'
-import art4 from './art4.jpg'
-import mug from './mug3.png'
-import mug2 from './mug1.png'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const Slideimages=[art1,art2,art3,art4,mug,mug2];
 const delay = 4000;
 
-const Home=()=>{
+
+const Home=props=>{
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/product")
+    .then(apiResponse => {
+      setProducts(apiResponse.data);
+      //console.log("rendered 1")
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
+  
+  const Slideimages=[];
+  products.forEach(product=>{Slideimages.push(product? product.image: "")});
+
   const [index, setIndex]=React.useState(0);
   const timeoutRef = React.useRef(null);
   function resetTimeout() {
@@ -39,7 +52,7 @@ const Home=()=>{
         <div className='slide'>
           {Slideimages.map((imageslide, index) => (
             <div className='slide' key={index}>
-              <img src={imageslide} alt="your works" className='slide' />
+              <img src={imageslide} alt="works" className='slide' />
             </div>
           ))}
         </div>
@@ -59,40 +72,40 @@ const Home=()=>{
     <div className='g-back'>
     <div className='p1-home'>Popular Work</div>
         <gall className='gallery'>
-          <a href="/ProductListing"><img src={art2}/>
-          <desc>Oil paint no.141</desc>
+          <a href="/ProductListing"><img src={products[0]?products[0].image:""}/>
+          <desc>{products[0]?products[0].name:""}</desc>
           <p className="gallery-artist-link">
-            <artists><Link to ="/ProfilePage">Genie Hou</Link></artists>
+            <artists><Link to ="/ProfilePage">{products[0]?products[0].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href="/ProductListing"><img src={art3}/>
-          <desc>Girls</desc>
+          <a href="/ProductListing"><img src={products[1]?products[1].image:""}/>
+          <desc>{products[1]?products[1].name:""}</desc>
           <p className="gallery-artist-link">
-            <artists><Link to ="/ProfilePage">Isabel Chen</Link></artists>
+            <artists><Link to ="/ProfilePage">{products[1]?products[1].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href="/ProductListing"><img src={art4}/>
-          <desc>Bridge</desc>
+          <a href="/ProductListing"><img src={products[2]?products[2].image:""}/>
+          <desc>{products[2]?products[2].name:""}</desc>
           <p className="gallery-artist-link">
-            <artists><Link to ="/ProfilePage">Edward Hopper</Link></artists>
+            <artists><Link to ="/ProfilePage">{products[2]?products[2].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href="/ProductListing"><img src={mug}/>
-          <desc>Mug!</desc>
+          <a href="/ProductListing"><img src={products[3]?products[3].image:""}/>
+          <desc>{products[3]?products[3].name:""}</desc>
           <p className="gallery-artist-link">
-            <artists><Link to ="/ProfilePage">Derek Han</Link></artists>
+            <artists><Link to ="/ProfilePage">{products[3]?products[3].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href="/ProductListing"><img src={art1}/>
-          <desc>Starry Night</desc>
+          <a href="/ProductListing"><img src={products[4]?products[4].image:""}/>
+          <desc>{products[4]?products[4].name:""}</desc>
           <p className="gallery-artist-link">
-            <artists><Link to ="/ProfilePage">Van Gogh</Link></artists>
+            <artists><Link to ="/ProfilePage">{products[4]?products[4].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href="/ProductListing"><img src={mug2}/>
-          <desc>Mug2!</desc>
+          <a href="/ProductListing"><img src={products[5]?products[5].image:""}/>
+          <desc>{products[5]?products[5].name:""}</desc>
           <p className="gallery-artist-link">
-            <artists><Link to ="/ProfilePage">Joseph Yusurof</Link></artists>
+            <artists><Link to ="/ProfilePage">{products[5]?products[5].author_username:""}</Link></artists>
           </p>
           </a>
         </gall>
