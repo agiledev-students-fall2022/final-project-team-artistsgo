@@ -1,12 +1,13 @@
 import './Home.css';
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import SearchBar from './SearchBar';
+//TESTING
+import ReactSearchBox from 'react-search-box'
 
 const delay = 4000;
-
 
 const Home=props=>{
 
@@ -22,7 +23,7 @@ const Home=props=>{
       throw(err)
     })
   }, [])
-  
+
   const Slideimages=[];
   products.forEach(product=>{Slideimages.push(product? product.image: "")});
 
@@ -47,16 +48,32 @@ const Home=props=>{
     };
   }, [index]);
 
+//For search bar
+  const [search, setSearch] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/searchbar")
+    .then(apiResponse => {
+      setSearch(apiResponse.data);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
+
+  // search.forEach(product=>{console.log(product)});
   return (
     <home>
-        <div className="togglesearch">
-          <input type="text" placeholder="Search for anything..."/>
-          <input type="button" value="Search"/>
-      </div> 
-      
-
       <div className="searchBar">
-        <SearchBar />
+        {/* <SearchBar/> */}
+        <ReactSearchBox
+        placeholder="Placeholder"
+        value="Doe"
+        //need correct data here
+        data = {search}
+        callback={(record) => console.log(record)}
+      />
+        {/* <input type="button" value="Search"/> */}
       </div>
 
       <h1 className="h1-home"><div className='slideshow'>
