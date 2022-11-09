@@ -1,19 +1,24 @@
 import "./SearchBar.css";
-import { useState } from "react";
+import search from "./search.png"
 
-function SearchBar() {
-    const [searchTerm, setSearchTerm] = useState("");
+function SearchButton() {
     return (
-    <div className="search-bar">
-        <input 
-            type="text" 
-            placeholder="Search..." 
-            onChange ={event => {
-                setSearchTerm(event.target.value)
-            }} 
-         />
-    </div>
-    );
+        <div className = "search-button">
+            <img src={search}></img>
+        </div>
+    )
+}
+
+//send get request to backend 
+function SearchBar() {
+    return (
+        <div className="search-bar">
+            <input 
+                type="text" 
+                placeholder="Search..." 
+             />
+        </div>
+        );
 }
 
 export default SearchBar;

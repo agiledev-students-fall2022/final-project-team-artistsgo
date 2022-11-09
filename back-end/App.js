@@ -5,6 +5,7 @@ const axios = require("axios")
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+//Any reference to /static/html.html would = /public/html.html
 app.use("/static", express.static("public"))
 
 app.get("/getUserData", (req, res, next) => {

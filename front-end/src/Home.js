@@ -36,6 +36,11 @@ const Home=()=>{
 
   return (
     <home>
+        <div className="togglesearch">
+          <input type="text" placeholder="Search for anything..."/>
+          <input type="button" value="Search"/>
+      </div> 
+      
 
       <div className="searchBar">
         <SearchBar />

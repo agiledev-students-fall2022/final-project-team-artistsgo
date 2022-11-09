@@ -104,4 +104,8 @@
     background:white;
     background-blend-mode: screen;
   }
+
+  .togglesearch {
+    padding-top: 15px;
+  }
   
