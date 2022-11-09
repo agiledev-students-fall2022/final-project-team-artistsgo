@@ -18,7 +18,8 @@ export default function Register() {
                 <div className="card">
                 <div className="card-header">Register</div>
                 <div className="card-body">
-                    <form onSubmit={handleSubmit}>
+                    {/* Reoconsider the bottom line's action/HTTP Post */}
+                    <form action="/login" method = "POST" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input

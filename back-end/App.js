@@ -11,6 +11,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/static", express.static("public"))
 app.use(cors())
 
+app.get("/searchbar", (req, res) => {
+  const getUserData = axios
+    .get("https://my.api.mockaroo.com/mock.json?key=5d3a2e80")
+    .then(apiResponse => res.json(apiResponse.data))
+    .catch(err => next(err)) 
+})
+
+
 app.get("/user", (req, res, next) => {
 axios
     .get("https://my.api.mockaroo.com/user_data.json?key=94293da0")

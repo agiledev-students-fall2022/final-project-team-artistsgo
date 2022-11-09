@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React, { component } from 'react';
 import Home from './Home'
 import ProductListing from './ProductListing';
 import ProfilePage from './ProfilePage';
@@ -17,6 +18,8 @@ import Services from './Services';
 import Music from './Music';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import SearchBar from './SearchBar';
+//TESTING
+import ReactSearchBox from 'react-search-box'
 
 function App() {
   return (
