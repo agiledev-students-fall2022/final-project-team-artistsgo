@@ -8,10 +8,10 @@ function SearchBar() {
             <input 
                 type="text" 
                 placeholder="Search for anything..."
-                // action = "/searchbar"
-             />
+                action = "/searchbar"
+            />
         </div>
-        );
+    );
 }
 
 export default SearchBar;

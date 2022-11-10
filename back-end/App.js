@@ -14,10 +14,10 @@ app.use(cors())
 app.get("/searchbar", (req, res) => {
   const getUserData = axios
     .get("https://my.api.mockaroo.com/mock.json?key=5d3a2e80")
-    .then(apiResponse => res.json(apiResponse.data))
-    .catch(err => next(err)) 
+    .then(response => res.json(response.data))
+    .catch(err => next(err))  
 })
-
+  
 
 app.get("/user", (req, res, next) => {
 axios
