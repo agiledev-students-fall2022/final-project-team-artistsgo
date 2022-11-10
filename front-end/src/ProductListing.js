@@ -141,7 +141,7 @@ const ProductListing = props => {
         <div className='slide'>
           {Slideimages.map((imageslide, index) => (
             <div className='slide' key={index}>
-              <img src={imageslide} alt="your works" className='slide' />
+              <img src={imageslide} alt="your works" className='product-listing-photo slide' />
             </div>
           ))}
         </div>

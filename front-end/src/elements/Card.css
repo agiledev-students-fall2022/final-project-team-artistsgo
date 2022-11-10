@@ -22,6 +22,8 @@
     padding: 0px 10px;
     margin-bottom: 8px;
     margin-top: 10px;
+    text-overflow: hidden;
+    height: 200px;
 }
 .card-container .author{
     color: #555;
