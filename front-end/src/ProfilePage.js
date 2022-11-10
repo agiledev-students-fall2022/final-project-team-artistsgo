@@ -1,7 +1,6 @@
 
 import './ProfilePage.css'
-import profilePhoto from './profile-photo.png'
-import productPhoto from './mug1.png'
+import productPhoto from './homeart/mug1.png'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'

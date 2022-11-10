@@ -2,10 +2,6 @@
 import './ArtsAndCrafts.css'
 import { Link } from 'react-router-dom'
 import Card from './elements/Card'
-import mug1 from "./mug1.png"
-import mug2 from "./mug2.png"
-import mug3 from "./mug3.png"
-import mug4 from "./mug4.png"
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
