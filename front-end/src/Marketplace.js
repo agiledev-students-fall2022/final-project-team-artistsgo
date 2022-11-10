@@ -2,10 +2,10 @@
 import './Marketplace.css'
 import { Link } from 'react-router-dom'
 import Card from './elements/Card'
-import mug1 from "./mug1.png"
-import mug2 from "./mug2.png"
-import mug3 from "./mug3.png"
-import mug4 from "./mug4.png"
+import mug1 from "./homeart/mug1.png"
+import mug2 from "./homeart/mug2.png"
+import mug3 from "./homeart/mug3.png"
+import mug4 from "./homeart/mug4.png"
 
 /**
  * A React component that represents the Arts and Crafts page of the app.
