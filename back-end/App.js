@@ -4,11 +4,28 @@ const path = require("path")
 const axios = require("axios")
 const cors = require("cors")
 require("dotenv").config({ silent: true })
+const mongoose = require('mongoose');
+const dburl="mongodb+srv://<username>:<password>@cluster0.nrb6jku.mongodb.net/?retryWrites=true&w=majority"
+
+const connectionparams={
+  useNewUrlParser:"true",
+  useUnifiedTopology:"true"
+}
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/static", express.static("public"))
 app.use(cors())
+
+mongoose
+  .connect(dburl,connectionparams)
+  .then(()=>{
+    console.log("Connected to DB");
+  })
+  .catch((e)=>{
+    console.log("Error:", e);
+  });
 
 app.get("/user", (req, res, next) => {
 axios
