@@ -5,7 +5,7 @@ chai.use(chaiHttp);
 const should =chai.should();
 const app = require("../App");
 
-const baseUrl = "http://localhost:3001/product"
+const baseUrl = "http://localhost:3001"
 
 
 describe("test api get requests", () => {
