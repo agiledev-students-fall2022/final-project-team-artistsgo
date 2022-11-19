@@ -28,6 +28,7 @@ mongoose
   });
 
 const { Product } = require('./models/Product')
+const { User } = require('./models/User')
 
 app.get('/products', async (req, res) => {
   // load all products from database
@@ -46,7 +47,22 @@ app.get('/products', async (req, res) => {
   }
 })
 
-
+app.get('/user', async (req, res) => {
+  // load all products from database
+  try {
+    const users = await User.find({})
+    res.json({
+      users: users,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve products from the database',
+    })
+  }
+})
 
 
 // THIS STUFF BELOW IS FROM SPRINT 2
