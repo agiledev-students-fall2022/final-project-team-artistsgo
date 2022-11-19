@@ -48,7 +48,7 @@ app.get('/products', async (req, res) => {
 })
 
 app.get('/user', async (req, res) => {
-  // load all products from database
+  // load all users from database
   try {
     const users = await User.find({})
     res.json({
