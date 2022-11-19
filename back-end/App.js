@@ -30,7 +30,7 @@ mongoose
 const { Product } = require('./models/Product')
 const { User } = require('./models/User')
 
-app.get('/products', async (req, res) => {
+app.get('/product', async (req, res) => {
   // load all products from database
   try {
     const products = await Product.find({})

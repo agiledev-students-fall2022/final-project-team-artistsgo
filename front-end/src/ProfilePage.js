@@ -17,8 +17,9 @@ const ProfilePage = props => {
   useEffect(() => {
     axios.get("http://localhost:3001/user")
     .then(apiResponse => {
+      const users=apiResponse.data.users[0]
       // console.log(apiResponse.data[0])
-      setUser(apiResponse.data[0]);
+      setUser(users);
     })
     .catch(err => {
       throw(err)
