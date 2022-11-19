@@ -5,7 +5,7 @@ const axios = require("axios")
 const cors = require("cors")
 require("dotenv").config({ silent: true })
 const mongoose = require('mongoose');
-const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/?retryWrites=true&w=majority"
+const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
 app.use(express.json()) // decode JSON-formatted incoming POST data
 
 const connectionparams={
