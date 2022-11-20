@@ -17,8 +17,9 @@ const ProfilePage = props => {
   useEffect(() => {
     axios.get("http://localhost:3001/user")
     .then(apiResponse => {
+      const users=apiResponse.data.users[0]
       // console.log(apiResponse.data[0])
-      setUser(apiResponse.data[0]);
+      setUser(users);
     })
     .catch(err => {
       throw(err)
@@ -31,7 +32,7 @@ const ProfilePage = props => {
 
      </div>
       {/* later should be filled with product picture from DB */}
-      <img className="profile-picture" src={user? user.image: ""} alt="Profile Photo" />
+      <img className="profile-picture" src={user? user.profilepic: ""} alt="Profile Photo" />
 
           {/* later should be filled with user name from DB */}
       <p className="users-name">
@@ -45,7 +46,7 @@ const ProfilePage = props => {
     <div className="description-style">
     {/* later should be filled with product description from DB */}
     <p className = "profile-description">
-    {user? user.profile_description: ""}
+    {user? user.email: ""}
     </p>
 
     </div>

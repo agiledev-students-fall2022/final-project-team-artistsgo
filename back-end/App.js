@@ -5,7 +5,7 @@ const axios = require("axios")
 const cors = require("cors")
 require("dotenv").config({ silent: true })
 const mongoose = require('mongoose');
-const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/?retryWrites=true&w=majority"
+const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
 app.use(express.json()) // decode JSON-formatted incoming POST data
 
 const connectionparams={
@@ -28,8 +28,9 @@ mongoose
   });
 
 const { Product } = require('./models/Product')
+const { User } = require('./models/User')
 
-app.get('/products', async (req, res) => {
+app.get('/product', async (req, res) => {
   // load all products from database
   try {
     const products = await Product.find({})
@@ -46,7 +47,22 @@ app.get('/products', async (req, res) => {
   }
 })
 
-
+app.get('/user', async (req, res) => {
+  // load all users from database
+  try {
+    const users = await User.find({})
+    res.json({
+      users: users,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve products from the database',
+    })
+  }
+})
 
 
 // THIS STUFF BELOW IS FROM SPRINT 2

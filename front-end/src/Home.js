@@ -14,7 +14,7 @@ const Home=props=>{
   useEffect(() => {
     axios.get("http://localhost:3001/product")
     .then(apiResponse => {
-      setProducts(apiResponse.data);
+      setProducts(apiResponse.data.products);
       //console.log("rendered 1")
     })
     .catch(err => {
