@@ -1,5 +1,5 @@
 import './Header.css'
-import logo from './ArtistsGoLogo.png'
+import logo from './homeart/ArtistsGoLogo.png'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 

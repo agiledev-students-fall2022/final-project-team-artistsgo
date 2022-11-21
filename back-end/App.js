@@ -4,6 +4,14 @@ const path = require("path")
 const axios = require("axios")
 const cors = require("cors")
 require("dotenv").config({ silent: true })
+const mongoose = require('mongoose');
+const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
+app.use(express.json()) // decode JSON-formatted incoming POST data
+
+const connectionparams={
+  useNewUrlParser:"true",
+  useUnifiedTopology:"true"
+}
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -11,89 +19,91 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/static", express.static("public"))
 app.use(cors())
 
-app.get("/searchbar", (req, res) => {
-  const getUserData = axios
-    .get("https://my.api.mockaroo.com/mock.json?key=5d3a2e80")
-    .then(response => res.json(response.data))
-    .catch(err => next(err))  
-})
-  
-
-app.get("/user", (req, res, next) => {
-axios
-    .get("https://my.api.mockaroo.com/user_data.json?key=94293da0")
-    .then(apiResponse => res.json(apiResponse.data)) 
-    .catch(err => next(err))
-})
-
-app.get("/product", (req, res, next) => {
-axios
-    .get("https://my.api.mockaroo.com/item_data.json?key=94293da0")
-    .then(apiResponse => res.json(apiResponse.data)) 
-    .catch(err => next(err))
-})
-
-// route to get products that a specific user has listed
-app.get("/parameter-example/:title", async (req, res) => {
-    // use axios to make a request to an API to fetch a single animal's data
-    // we use a Mock API here, but imagine we passed the animalId to a real API and received back data about that animal
-    try {
-      const apiResponse = await axios.get(
-        `${process.env.API_BASE_URL_PRODUCT}?key=${process.env.API_SECRET_KEY_PRODUCT}&username=${req.params.username}`
-      )
-  
-      // express places parameters into the req.params object
-      const responseData = {
-        status: "wonderful",
-        message: `Imagine we got the data from the API for animal #${req.params.username}`,
-        product: apiResponse.data,
-        title: req.params.title,
-        username: req.params.username,
-
-        price: req.params.price,
-        description: req.params.description,
-        service_or_product: req.params.service_or_product,
-        num_of_likes: req.params.num_of_likes,
-        tags: req.params.tags
-
-
-        //animal: apiResponse.data,
-      }
-  
-      // send the data in the response
-      res.json(responseData)
-    } catch (err) {
-      // send an error JSON object back to the browser
-      res.json(err)
-    }
+mongoose
+  .connect(dburl,connectionparams)
+  .then(()=>{
+    console.log("Connected to DB");
   })
+  .catch((e)=>{
+    console.log("Error:", e);
+  });
 
-// *********IGNORE THIS STUFF BELOW ITS SOME EXPERIMENTATION*********
-// app.get("/getRandomPictures", (req, res, next) => {
-// // use axios to make a request to an API for animal data
+const { Product } = require('./models/Product')
+const { User } = require('./models/User')
+
+app.get('/product', async (req, res) => {
+  // load all products from database
+  try {
+    const products = await Product.find({})
+    res.json({
+      products: products,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve products from the database',
+    })
+  }
+})
+
+app.get('/user', async (req, res) => {
+  // load all users from database
+  try {
+    const users = await User.find({})
+    res.json({
+      users: users,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve products from the database',
+    })
+  }
+})
+
+
+// THIS STUFF BELOW IS FROM SPRINT 2
+// app.get("/user", (req, res, next) => {
 // axios
-//     .get("https://picsum.photos/200")
-//     .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-//     .catch(err => next(err)) // pass any errors to express
+//     .get("https://my.api.mockaroo.com/user_data.json?key=94293da0")
+//     .then(apiResponse => res.json(apiResponse.data)) 
+//     .catch(err => next(err))
 // })
 
-// app.get("/getRandomPictures", (req, res) => {
-//     res.sendFile("https://picsum.photos/200");
+// app.get("/product", (req, res, next) => {
+// axios
+//     .get("https://my.api.mockaroo.com/item_data.json?key=94293da0")
+//     .then(apiResponse => res.json(apiResponse.data)) 
+//     .catch(err => next(err))
+// })
+
+// // route to get a specific product
+// app.get("/product/:title", async (req, res) => {
+//     try {
+//       const apiResponse = await axios.get(
+//         `${process.env.API_BASE_URL_PRODUCT}?key=${process.env.API_SECRET_KEY_PRODUCT}&title=${req.params.title}`
+//       )
+      
+//       const product = apiResponse.data.find(p => p.title === title);
+
+//       const responseData = {
+//         title: product.title,
+//         username: product.username,
+//         description: product.description,
+//         service_or_product: product.service_or_product,
+//         num_of_likes: product.num_of_likes,
+//         tags: product.tags,
+//         price: product.price,
+//       }
+//       res.json(responseData)
+//     } catch (err) {
+//       res.json(err)
+//     }
 //   })
-
-
-//   app.get("/getRandomPictures", function(req, res) {
-//     var requestSettings = {
-//         url: "https://picsum.photos/200",
-//         method: 'GET',
-//         encoding: null
-//     };
-
-//     request(requestSettings, function(error, response, body) {
-//         res.set('Content-Type', 'image/png');
-//         res.send(body);
-//     });
-// });
 
 
 module.exports = app

@@ -17,9 +17,8 @@ import Marketplace from './Marketplace';
 import Services from './Services';
 import Music from './Music';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import SearchBar from './SearchBar';
-//TESTING
-import ReactSearchBox from 'react-search-box'
+import { useEffect, useState } from 'react';
+import jwt_decode from "jwt-decode";
 
 function App() {
   return (
