@@ -47,6 +47,27 @@ app.get('/product', async (req, res) => {
   }
 })
 
+app.get('/product/:productId', async (req, res) => {
+  console.log(req.params.productId)
+  const productId = req.params.productId
+  console.log(productId)
+  try {
+    const product = await Product.find({name: productId});
+    console.log(product)
+    res.json({
+      product: product,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve product from the database',
+    })
+  }
+})
+
+
 app.get('/user', async (req, res) => {
   // load all users from database
   try {

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import './ProductListing.css'
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 
 /**
@@ -14,12 +15,14 @@ import axios from 'axios'
 const ProductListing = props => {
 
   const [product, setProduct] = useState(null);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    axios.get("http://localhost:3001/product")
+    console.log(searchParams.get("product_id"));
+    axios.get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
     .then(apiResponse => {
-      // console.log(apiResponse.data[0])
-      setProduct(apiResponse.data[0]);
+      console.log(apiResponse)
+      setProduct(apiResponse.data.product[0]);
     })
     .catch(err => {
       throw(err)
