@@ -17,7 +17,7 @@ const Dance = props => {
     axios.get("http://localhost:3001/product")
     .then(apiResponse => {
       // console.log(apiResponse.data[0])
-      setCollection(apiResponse.data);
+      setCollection(apiResponse.data.products);
     })
     .catch(err => {
       throw(err)
@@ -34,7 +34,7 @@ const Dance = props => {
           collection?
             collection.map((item, i) => {
               if(i<10){
-                return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""}/>
+                return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
               }
             })
           : ""
