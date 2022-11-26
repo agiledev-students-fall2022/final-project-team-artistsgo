@@ -85,6 +85,26 @@ app.get('/user', async (req, res) => {
   }
 })
 
+app.get('/user/:username', async (req, res) => {
+  console.log(req.params.username)
+  const username = req.params.username
+  console.log(username)
+  try {
+    const user = await User.find({username: username});
+    console.log(user)
+    res.json({
+      user: user,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve user from the database',
+    })
+  }
+})
+
 
 // THIS STUFF BELOW IS FROM SPRINT 2
 // app.get("/user", (req, res, next) => {

@@ -4,6 +4,8 @@ import productPhoto from './homeart/mug1.png'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 
 /**
@@ -11,20 +13,64 @@ import axios from 'axios'
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
+
+
 const ProfilePage = props => {
   const [user, setUser] = useState(null);
+  const location = useLocation();
+  // const { from } = location.state
+  // const state  = this.props.location.state.username;
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/user")
+  //   .then(apiResponse => {
+  //     const users=apiResponse.data.users[0]
+  //     // console.log(apiResponse.data[0])
+  //     setUser(users);
+  //   })
+  //   .catch(err => {
+  //     throw(err)
+  //   })
+  // }, [])
+
+  const [searchParams] = useSearchParams();
+
+  // BELOW IS THE ACTUAL ONE WHEN WE HAVE REAL DATA
+
+  // useEffect(() => {
+  //   console.log(searchParams.get("location.state.id"));
+  //   axios.get(`http://localhost:3001/user/${"location.state.id"}`)
+  //   .then(apiResponse => {
+  //     console.log(apiResponse)
+  //     setUser(apiResponse.data.user[0]);
+  //   })
+  //   .catch(err => {
+  //     throw(err)
+  //   })
+  // }, [])
 
   useEffect(() => {
-    axios.get("http://localhost:3001/user")
+    console.log(searchParams.get("igeniede"));
+    axios.get(`http://localhost:3001/user/${"igeniede"}`)
     .then(apiResponse => {
-      const users=apiResponse.data.users[0]
-      // console.log(apiResponse.data[0])
-      setUser(users);
+      console.log(apiResponse)
+      setUser(apiResponse.data.user[0]);
     })
     .catch(err => {
       throw(err)
     })
   }, [])
+
+  const productList = [];
+
+  for (let product of user.products) {
+    productList.push(<li>{product}</li>)
+  }
+
+  // console.log(user.products)
+
+
+
   return (
     <>
     
@@ -41,14 +87,31 @@ const ProfilePage = props => {
      <h className="user-name">
             @{user? user.username: ""}
      </h>
+     <br></br>
+     <h className="user-name">
+            {user? user.email: ""}
+     </h>
 
 
     <div className="description-style">
     {/* later should be filled with product description from DB */}
     <p className = "profile-description">
-    {user? user.email: ""}
+    {user? user.profiledescription: ""}
     </p>
 
+    </div>
+
+
+    <div>
+      {productList.map(product => {
+        return (
+          <div>
+            
+            <h2>name: {product}</h2>
+            <hr />
+          </div>
+        );
+      })}
     </div>
 
 
