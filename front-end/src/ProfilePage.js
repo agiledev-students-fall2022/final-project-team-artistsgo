@@ -17,21 +17,34 @@ import { useSearchParams } from 'react-router-dom'
 
 const ProfilePage = props => {
   const [user, setUser] = useState(null);
+  const [product, setProduct] = useState(null);
   const location = useLocation();
   // const { from } = location.state
   // const state  = this.props.location.state.username;
 
+  useEffect(() => {
+    axios.get("http://localhost:3001/product")
+    .then(apiResponse => {
+      // console.log(apiResponse.data[0])
+      console.log(apiResponse.data)
+      setProduct(apiResponse.data.products);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
+
   // useEffect(() => {
-  //   axios.get("http://localhost:3001/user")
+  //   axios.get(`http://localhost:3001/product`)
   //   .then(apiResponse => {
-  //     const users=apiResponse.data.users[0]
-  //     // console.log(apiResponse.data[0])
-  //     setUser(users);
+  //     console.log(apiResponse)
+  //     setProduct(apiResponse.data.product[0]);
   //   })
   //   .catch(err => {
   //     throw(err)
   //   })
   // }, [])
+
 
   const [searchParams] = useSearchParams();
 
@@ -50,7 +63,7 @@ const ProfilePage = props => {
   // }, [])
 
   useEffect(() => {
-    console.log(searchParams.get("igeniede"));
+    //console.log(searchParams.get("igeniede"));
     axios.get(`http://localhost:3001/user/${"igeniede"}`)
     .then(apiResponse => {
       console.log(apiResponse)
@@ -61,13 +74,51 @@ const ProfilePage = props => {
     })
   }, [])
 
-  const productList = [];
+  // useEffect(() => {
+  //   console.log(searchParams.get("name"));
+  //   axios.get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
+  //   .then(apiResponse => {
+  //     console.log(apiResponse)
+  //     setProduct(apiResponse.data.product[0]);
+  //   })
+  //   .catch(err => {
+  //     throw(err)
+  //   })
+  // }, [])
+  // useEffect(() => {
+  //   console.log(searchParams.get("product"));
+  //   axios.get(`http://localhost:3001/product/${"product"}`)
+  //   .then(apiResponse => {
+  //     console.log(apiResponse)
+  //     setProduct(apiResponse.data.product[0]);
+  //   })
+  //   .catch(err => {
+  //     throw(err)
+  //   })
+  // }, [])
 
-  for (let product of user.products) {
-    productList.push(<li>{product}</li>)
-  }
+  // const productList = user.products;
+  const productImageList = [];
+  
+  console.log(user)
 
-  // console.log(user.products)
+  // for (let element of user.products) {
+  //   //productList.name.push(<li>{element}</li>)
+
+  //   console.log(product)
+
+
+  //   for (let item of product) {
+  //     if (item.name === element) {
+  //       productList.push({"name": "element", "image": "item.image"})
+  //       console.log(productList)
+  //     }
+  //     else {
+  //       productList.push({"name": "element", "image": "null"})
+  //     }
+  //   }
+  // }
+
 
 
 
@@ -103,11 +154,19 @@ const ProfilePage = props => {
 
 
     <div>
-      {productList.map(product => {
+      {user.products.map(element => {
         return (
           <div>
-            
-            <h2>name: {product}</h2>
+            <div>
+              {product.map(item => {
+                return (
+                  <div>
+                    {item.name === "obj23434"? <img className="featured-works" src={item.image} />: void(0)} 
+                  </div>
+                );
+              })}
+            </div>
+            <p><Link to="/ProductListing">{element}</Link></p>
             <hr />
           </div>
         );
@@ -115,7 +174,7 @@ const ProfilePage = props => {
     </div>
 
 
-    <div className="full-product">
+    {/* <div className="full-product">
     <a href = "/ProductListing">
     <img className="featured-works" src={productPhoto} alt="Profile Photo" />
     </a>
@@ -141,7 +200,7 @@ const ProfilePage = props => {
     <img className="featured-works" src={productPhoto} alt="Profile Photo" />
     </a>
     <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
+    </div> */}
 
 
   </>

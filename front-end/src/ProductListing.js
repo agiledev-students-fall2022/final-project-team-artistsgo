@@ -61,12 +61,12 @@ const ProductListing = props => {
     <p className="title">{product? product.name: ""}</p>
     {/* later should be filled with user name from DB */}
     <p className="profile-link">
-            {/* <Link to="/ProfilePage">{product? product.author_username: ""}</Link> */}
-
+            <Link to="/ProfilePage">{product? product.author_username: ""}</Link>
+{/* 
             <Link to= "/ProfilePage"
             state={{
               id : product? product.author_username: ""
-            }}>{product? product.author_username: ""}</Link>
+            }}>{product? product.author_username: ""}</Link> */}
      </p>
     {/* later should be filled with product price from DB */}
     <p className="price"> ${product? product.price: ""}</p>
