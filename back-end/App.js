@@ -67,6 +67,26 @@ app.get('/product/:productId', async (req, res) => {
   }
 })
 
+app.get('/product/:name', async (req, res) => {
+  console.log(req.params.name)
+  const name = req.params.name
+  console.log(name)
+  try {
+    const product = await Product.find({name: name});
+    console.log(product)
+    res.json({
+      product: product,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve product from the database',
+    })
+  }
+})
+
 
 app.get('/user', async (req, res) => {
   // load all users from database
@@ -81,6 +101,26 @@ app.get('/user', async (req, res) => {
     res.status(400).json({
       error: err,
       status: 'failed to retrieve products from the database',
+    })
+  }
+})
+
+app.get('/user/:username', async (req, res) => {
+  console.log(req.params.username)
+  const username = req.params.username
+  console.log(username)
+  try {
+    const user = await User.find({username: username});
+    console.log(user)
+    res.json({
+      user: user,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve user from the database',
     })
   }
 })
