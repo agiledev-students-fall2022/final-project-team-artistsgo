@@ -125,6 +125,26 @@ app.get('/user/:username', async (req, res) => {
   }
 })
 
+app.post('/product/save', async (req, res) => {
+  // try to save the message to the database
+  try {
+    const product = await Product.create({
+      likes: req.body.likes,
+      product: req.body.product,
+    })
+    return res.json({
+      product: product, // return the message we just saved
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save the message to the database',
+    })
+  }
+})
+
 
 // THIS STUFF BELOW IS FROM SPRINT 2
 // app.get("/user", (req, res, next) => {

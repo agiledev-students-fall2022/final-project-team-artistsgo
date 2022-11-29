@@ -18,7 +18,19 @@ import { useSearchParams } from 'react-router-dom'
 const ProfilePage = props => {
   const [user, setUser] = useState(null);
   const [product, setProduct] = useState(null);
-  const location = useLocation();
+  //const location = useLocation();
+
+  useEffect(() => {
+    console.log(searchParams.get("username"));
+    axios.get(`http://localhost:3001/user/${"igeniede"}`)
+    .then(apiResponse => {
+      console.log(apiResponse)
+      setUser(apiResponse.data.user[0]);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
   // const { from } = location.state
   // const state  = this.props.location.state.username;
 
@@ -62,18 +74,6 @@ const ProfilePage = props => {
   //   })
   // }, [])
 
-  useEffect(() => {
-    //console.log(searchParams.get("igeniede"));
-    axios.get(`http://localhost:3001/user/${"igeniede"}`)
-    .then(apiResponse => {
-      console.log(apiResponse)
-      setUser(apiResponse.data.user[0]);
-    })
-    .catch(err => {
-      throw(err)
-    })
-  }, [])
-
   // useEffect(() => {
   //   console.log(searchParams.get("name"));
   //   axios.get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
@@ -97,7 +97,7 @@ const ProfilePage = props => {
   //   })
   // }, [])
 
-  // const productList = user.products;
+  // const productList = user? user.products: "";
   const productImageList = [];
   
   console.log(user)
@@ -153,7 +153,7 @@ const ProfilePage = props => {
     </div>
 
 
-    <div>
+    {/* <div>
       {user.products.map(element => {
         return (
           <div>
@@ -171,7 +171,7 @@ const ProfilePage = props => {
           </div>
         );
       })}
-    </div>
+    </div> */}
 
 
     {/* <div className="full-product">
