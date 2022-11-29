@@ -79,7 +79,6 @@ const ProductListing = props => {
               id : product? product.author_username: ""
             }}>{product? product.author_username: ""}</Link> */}
      </p>
-    {/* later should be filled with product price from DB */}
     <p className="price"> ${product? product.price: ""}</p>
     </div>
 

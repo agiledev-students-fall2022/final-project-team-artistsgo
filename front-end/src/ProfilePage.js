@@ -19,7 +19,10 @@ import Card from './elements/Card'
 const ProfilePage = props => {
   const [user, setUser] = useState(null);
   const [collection, setCollection] = useState(null);
+  const [searchParams] = useSearchParams();
   //const location = useLocation();
+  // const { from } = location.state
+  // const state  = this.props.location.state.username;
 
   useEffect(() => {
     console.log(searchParams.get("username"));
@@ -32,21 +35,6 @@ const ProfilePage = props => {
       throw(err)
     })
   }, [])
-  // const { from } = location.state
-  // const state  = this.props.location.state.username;
-
-  // useEffect(() => {
-  //   console.log(searchParams.get("author_username"));
-  //   axios.get(`http://localhost:3001/product/${searchParams.get("abcdfd123")}`)
-  //   .then(apiResponse => {
-  //     // console.log(apiResponse.data[0])
-  //     console.log(apiResponse.data)
-  //     setCollection(apiResponse.data.products);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
 
   useEffect(() => {
     axios.get("http://localhost:3001/product")
@@ -58,20 +46,6 @@ const ProfilePage = props => {
       throw(err)
     })
   }, [])
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3001/product`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setCollection(apiResponse.data.product[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
-
-
-  const [searchParams] = useSearchParams();
 
   // BELOW IS THE ACTUAL ONE WHEN WE HAVE REAL DATA
 
@@ -86,54 +60,6 @@ const ProfilePage = props => {
   //     throw(err)
   //   })
   // }, [])
-
-  // useEffect(() => {
-  //   console.log(searchParams.get("name"));
-  //   axios.get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setProduct(apiResponse.data.product[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
-  // useEffect(() => {
-  //   console.log(searchParams.get("product"));
-  //   axios.get(`http://localhost:3001/product/${"product"}`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setProduct(apiResponse.data.product[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
-
-  // const productList = user? user.products: "";
-  const productImageList = [];
-  
-  console.log(user)
-
-  // for (let element of user.products) {
-  //   //productList.name.push(<li>{element}</li>)
-
-  //   console.log(product)
-
-
-  //   for (let item of product) {
-  //     if (item.name === element) {
-  //       productList.push({"name": "element", "image": "item.image"})
-  //       console.log(productList)
-  //     }
-  //     else {
-  //       productList.push({"name": "element", "image": "null"})
-  //     }
-  //   }
-  // }
-
-
-
 
   return (
     <>
@@ -176,57 +102,6 @@ const ProfilePage = props => {
         : ""
       }
       </div>
-
-    {/* <div>
-      {user.products.map(element => {
-        return (
-          <div>
-            <div>
-              {product.map(item => {
-                return (
-                  <div>
-                    {item.name === "obj23434"? <img className="featured-works" src={item.image} />: void(0)} 
-                  </div>
-                );
-              })}
-            </div>
-            <p><Link to="/ProductListing">{element}</Link></p>
-            <hr />
-          </div>
-        );
-      })}
-    </div> */}
-
-
-    {/* <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
-
-    <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
-
-    <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
-
-    <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div> */}
-
-
   </>
   )
 }
