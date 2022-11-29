@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
+import Card from './elements/Card'
 
 
 /**
@@ -17,7 +18,7 @@ import { useSearchParams } from 'react-router-dom'
 
 const ProfilePage = props => {
   const [user, setUser] = useState(null);
-  const [product, setProduct] = useState(null);
+  const [collection, setCollection] = useState(null);
   //const location = useLocation();
 
   useEffect(() => {
@@ -35,11 +36,12 @@ const ProfilePage = props => {
   // const state  = this.props.location.state.username;
 
   useEffect(() => {
-    axios.get("http://localhost:3001/product")
+    console.log(searchParams.get("author_username"));
+    axios.get(`http://localhost:3001/product/${"abcdfd123"}`)
     .then(apiResponse => {
       // console.log(apiResponse.data[0])
       console.log(apiResponse.data)
-      setProduct(apiResponse.data.products);
+      setCollection(apiResponse.data.products);
     })
     .catch(err => {
       throw(err)
@@ -151,6 +153,18 @@ const ProfilePage = props => {
     </p>
 
     </div>
+
+    <div className='cards-container'>
+      {
+        collection?
+          collection.map((item, i) => {
+            if(i<10){
+              return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
+            }
+          })
+        : ""
+      }
+      </div>
 
 
     {/* <div>
