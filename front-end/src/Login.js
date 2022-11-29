@@ -1,63 +1,127 @@
-import React, { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+// import React, { useState, useEffect} from "react";
+// import { Link } from "react-router-dom";
+// import jwt_decode from "jwt-decode";
+
+import React, { useState, useEffect } from 'react';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { gapi, loadGapiInsideDOM } from 'gapi-script';
 import "./Login.css";
-import jwt_decode from "jwt-decode";
 
-export default function Login() {
-    
-    const [user, setUser] = useState({});
-
-    function handleCallbackResponse(response) {
-      console.log("Encoded JWT ID Token: " + response.credential);
-      var userObject = jwt_decode(response.credential);
-      console.log(userObject)
-      setUser(userObject);
-      document.getElementById("signInDiv").hidden = true;
-    }
-    
-    function handleSignOut(event) {
-      setUser({});
-      document.getElementById("signInDiv").hidden = false;
-    }
-  
-    //testing user authentication
+function Login() {
+    const [ profile, setProfile ] = useState([]);
+    const clientId = '386932037035-k8v833noqjk7m4auae0t83vnkrqvvg3t.apps.googleusercontent.com';
     useEffect(() => {
-      /* global google */
-      google.accounts.id.initialize({
-        client_id: "186661128169-rtbrhibr9p5ne088h88sssvl4sei2nto.apps.googleusercontent.com",
-        callback: handleCallbackResponse
-      });
-  
-      google.accounts.id.renderButton(
-        document.getElementById("signInDiv"),
-        { theme: "outline", sign: "large"}
-      );
-  
-      google.accounts.id.prompt();
-    }, []);
-    //if we have no user: sign in button
-    //if we have user: show login button
+        const initClient = () => {
+            gapi.client.init({
+                clientId: clientId,
+                scope: ''
+            });
+        };
+        gapi.load('client:auth2', initClient);
+    });
 
-    /* FOR REGULARLY REGISTERING WITHOUT GOOGLE */
-    // const [loading, setLoading] = useState(false);
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     setLoading(true);
-    // }
+    const onSuccess = (res) => {
+        setProfile(res.profileObj);
+    };
+
+    const onFailure = (err) => {
+        console.log('failed', err);
+    };
+
+    const logOut = () => {
+        setProfile(null);
+    };
 
     return (
-        <>
-        <div id="page-wrap">
-        <div id = "signInDiv"></div>
-        {  Object.keys(user).length != 0 &&
-          <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
-        }
-        { user && 
-         <div> 
-            <img src={user.picture}></img>
-            <p>{user.name}</p>
-          </div>}
+        <div>
+            <h1>Welcome to your Profile, {profile.name}</h1>
+            <br />
+            <br />
+            {profile ? (
+                <div>
+                    <img src={profile.imageUrl} alt="user image" />
+                    <h3>Name: {profile.name}</h3>
+                    <p>Contact: {profile.email}</p>
+                    <p>User Services: </p>
+                    <p>User's Products: </p>
+                    <br />
+                    <br />
+                    <GoogleLogout clientId={clientId} buttonText="Log out" onLogoutSuccess={logOut} />
+                </div>
+            ) : (
+                <GoogleLogin
+                    clientId={clientId}
+                    buttonText="Sign in with Google"
+                    onSuccess={onSuccess}
+                    onFailure={onFailure}
+                    cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
+                    className = "google-button"
+                />
+            )}
         </div>
+    );
+}
+
+export default Login;
+
+
+
+// export default function Login() {
+    
+//     const [user, setUser] = useState({});
+
+//     function handleCallbackResponse(response) {
+//       console.log("Encoded JWT ID Token: " + response.credential);
+//       var userObject = jwt_decode(response.credential);
+//       console.log(userObject)
+//       setUser(userObject);
+//       document.getElementById("signInDiv").hidden = true;
+//     }
+    
+//     function handleSignOut(event) {
+//       setUser({});
+//       document.getElementById("signInDiv").hidden = false;
+//     }
+  
+//     //testing user authentication
+//     useEffect(() => {
+//       /* global google */
+//       google.accounts.id.initialize({
+//         client_id: "186661128169-rtbrhibr9p5ne088h88sssvl4sei2nto.apps.googleusercontent.com",
+//         callback: handleCallbackResponse
+//       });
+  
+//       google.accounts.id.renderButton(
+//         document.getElementById("signInDiv"),
+//         { theme: "outline", sign: "large"}
+//       );
+  
+//       google.accounts.id.prompt();
+//     }, []);
+//     //if we have no user: sign in button
+//     //if we have user: show login button
+
+//     /* FOR REGULARLY REGISTERING WITHOUT GOOGLE */
+//     // const [loading, setLoading] = useState(false);
+//     // const handleSubmit = (e) => {
+//     //     e.preventDefault();
+//     //     setLoading(true);
+//     // }
+
+//     return (
+//         <>
+//         <div id="page-wrap">
+//         <div id = "signInDiv"></div>
+//         {  Object.keys(user).length != 0 &&
+//           <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
+//         }
+//         { user && 
+//          <div> 
+//             <img src={user.picture}></img>
+//             <p>{user.name}</p>
+//           </div>}
+//         </div>
 
         {/* FOR REGULARLY REGISTERING WITHOUT GOOGLE */}
         {/* <div className="container">
@@ -106,9 +170,9 @@ export default function Login() {
             </div>
             </div>
         </div> */}
-        </>
-    );
-    }
+    //     </>
+    // );
+    // }
 
 
 
