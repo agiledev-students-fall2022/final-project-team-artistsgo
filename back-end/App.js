@@ -1,4 +1,6 @@
 const express = require("express") 
+const session = require("express-session")
+const passport = require("passport")
 const app = express() 
 const path = require("path")
 const axios = require("axios")
@@ -7,6 +9,46 @@ require("dotenv").config({ silent: true })
 const mongoose = require('mongoose');
 const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
 app.use(express.json()) // decode JSON-formatted incoming POST data
+app.use(session({ secret: "cats "}));
+app.use(passport.initialize());
+app.use(passport.session());
+require("./Auth")
+
+
+//FOR PASSPORT.JS
+function isSignedIn(req, res, next) {
+  req.user ? next() : res.status(401).json({ message: "Unauthorized" })
+}
+
+app.get('/', (req, res) => {
+  res.send('<a href="/auth/google">Sign in with Google</a>');
+});
+
+app.get('/protected', (req, res) => {
+  res.send('Welcome to the protected route, ' + req.user.displayName + '!');
+});
+
+app.get('/logout', (req, res) => { 
+  req.logout();
+  res.send('Logged out');
+});
+
+app.get('/auth/google', 
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/google/callback', 
+  passport.authenticate('google', { 
+    successRedirect: '/protected',
+    failureRedirect: '/auth/failuire',
+   }),
+);
+
+app.get('/auth/failure', (req, res) => {
+  res.send('You failed to authenticate!');
+});
+
+//END for PASSPORT.JS
 
 const connectionparams={
   useNewUrlParser:"true",
@@ -30,6 +72,7 @@ mongoose
 
 const { Product } = require('./models/Product')
 const { User } = require('./models/User')
+const { authenticate } = require("passport")
 
 app.get('/product', async (req, res) => {
   // load all products from database
@@ -64,6 +107,7 @@ app.get('/user', async (req, res) => {
     })
   }
 })
+
 
 
 // THIS STUFF BELOW IS FROM SPRINT 2

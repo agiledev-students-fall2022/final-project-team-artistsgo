@@ -2,12 +2,12 @@
 // import { Link } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
+import './Login.css';
 import React, { useState, useEffect } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { gapi, loadGapiInsideDOM } from 'gapi-script';
-import "./Login.css";
+import { gapi } from 'gapi-script';
 
-function Login() {
+function App() {
     const [ profile, setProfile ] = useState([]);
     const clientId = '386932037035-k8v833noqjk7m4auae0t83vnkrqvvg3t.apps.googleusercontent.com';
     useEffect(() => {
@@ -33,17 +33,17 @@ function Login() {
     };
 
     return (
-        <div>
-            <h1>Welcome to your Profile, {profile.name}</h1>
+        <div className='container'>
+            <h1>{profile.name}'s Page</h1>
             <br />
             <br />
             {profile ? (
                 <div>
                     <img src={profile.imageUrl} alt="user image" />
-                    <h3>Name: {profile.name}</h3>
-                    <p>Contact: {profile.email}</p>
-                    <p>User Services: </p>
-                    <p>User's Products: </p>
+                    <p>Name: {profile.name}</p>
+                    <p>Email Address: {profile.email}</p>
+                    <p> My Products: </p>
+                    <p> My Services: </p>
                     <br />
                     <br />
                     <GoogleLogout clientId={clientId} buttonText="Log out" onLogoutSuccess={logOut} />
@@ -56,14 +56,12 @@ function Login() {
                     onFailure={onFailure}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}
-                    className = "google-button"
                 />
             )}
         </div>
     );
 }
-
-export default Login;
+export default App;
 
 
 
