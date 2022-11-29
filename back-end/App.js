@@ -1,52 +1,153 @@
 const express = require("express") 
+const session = require("express-session")
+const passport = require("passport")
 const app = express() 
 const path = require("path")
 const axios = require("axios")
+const cors = require("cors")
+require("dotenv").config({ silent: true })
+const mongoose = require('mongoose');
+const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
+app.use(express.json()) // decode JSON-formatted incoming POST data
+app.use(session({ secret: "cats "}));
+app.use(passport.initialize());
+app.use(passport.session());
+require("./Auth")
+
+
+//FOR PASSPORT.JS
+function isSignedIn(req, res, next) {
+  req.user ? next() : res.status(401).json({ message: "Unauthorized" })
+}
+
+app.get('/', (req, res) => {
+  res.send('<a href="/auth/google">Sign in with Google</a>');
+});
+
+app.get('/protected', (req, res) => {
+  res.send('Welcome to the protected route, ' + req.user.displayName + '!');
+});
+
+app.get('/logout', (req, res) => { 
+  req.logout();
+  res.send('Logged out');
+});
+
+app.get('/auth/google', 
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/google/callback', 
+  passport.authenticate('google', { 
+    successRedirect: '/protected',
+    failureRedirect: '/auth/failuire',
+   }),
+);
+
+app.get('/auth/failure', (req, res) => {
+  res.send('You failed to authenticate!');
+});
+
+//END for PASSPORT.JS
+
+const connectionparams={
+  useNewUrlParser:"true",
+  useUnifiedTopology:"true"
+}
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+//Any reference to /static/html.html would = /public/html.html
 app.use("/static", express.static("public"))
+app.use(cors())
 
-app.get("/getUserData", (req, res, next) => {
-axios
-    .get("https://my.api.mockaroo.com/user_data.json?key=8103fdd0")
-    .then(apiResponse => res.json(apiResponse.data)) 
-    .catch(err => next(err))
+mongoose
+  .connect(dburl,connectionparams)
+  .then(()=>{
+    console.log("Connected to DB");
+  })
+  .catch((e)=>{
+    console.log("Error:", e);
+  });
+
+const { Product } = require('./models/Product')
+const { User } = require('./models/User')
+const { authenticate } = require("passport")
+
+app.get('/product', async (req, res) => {
+  // load all products from database
+  try {
+    const products = await Product.find({})
+    res.json({
+      products: products,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve products from the database',
+    })
+  }
 })
 
-app.get("/getProductData", (req, res, next) => {
-axios
-    .get("https://my.api.mockaroo.com/product_data.json?key=8103fdd0")
-    .then(apiResponse => res.json(apiResponse.data)) 
-    .catch(err => next(err))
+app.get('/user', async (req, res) => {
+  // load all users from database
+  try {
+    const users = await User.find({})
+    res.json({
+      users: users,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve products from the database',
+    })
+  }
 })
 
-// *********IGNORE THIS STUFF BELOW ITS SOME EXPERIMENTATION*********
-// app.get("/getRandomPictures", (req, res, next) => {
-// // use axios to make a request to an API for animal data
+
+
+// THIS STUFF BELOW IS FROM SPRINT 2
+// app.get("/user", (req, res, next) => {
 // axios
-//     .get("https://picsum.photos/200")
-//     .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-//     .catch(err => next(err)) // pass any errors to express
+//     .get("https://my.api.mockaroo.com/user_data.json?key=94293da0")
+//     .then(apiResponse => res.json(apiResponse.data)) 
+//     .catch(err => next(err))
 // })
 
-// app.get("/getRandomPictures", (req, res) => {
-//     res.sendFile("https://picsum.photos/200");
+// app.get("/product", (req, res, next) => {
+// axios
+//     .get("https://my.api.mockaroo.com/item_data.json?key=94293da0")
+//     .then(apiResponse => res.json(apiResponse.data)) 
+//     .catch(err => next(err))
+// })
+
+// // route to get a specific product
+// app.get("/product/:title", async (req, res) => {
+//     try {
+//       const apiResponse = await axios.get(
+//         `${process.env.API_BASE_URL_PRODUCT}?key=${process.env.API_SECRET_KEY_PRODUCT}&title=${req.params.title}`
+//       )
+      
+//       const product = apiResponse.data.find(p => p.title === title);
+
+//       const responseData = {
+//         title: product.title,
+//         username: product.username,
+//         description: product.description,
+//         service_or_product: product.service_or_product,
+//         num_of_likes: product.num_of_likes,
+//         tags: product.tags,
+//         price: product.price,
+//       }
+//       res.json(responseData)
+//     } catch (err) {
+//       res.json(err)
+//     }
 //   })
-
-
-//   app.get("/getRandomPictures", function(req, res) {
-//     var requestSettings = {
-//         url: "https://picsum.photos/200",
-//         method: 'GET',
-//         encoding: null
-//     };
-
-//     request(requestSettings, function(error, response, body) {
-//         res.set('Content-Type', 'image/png');
-//         res.send(body);
-//     });
-// });
 
 
 module.exports = app
