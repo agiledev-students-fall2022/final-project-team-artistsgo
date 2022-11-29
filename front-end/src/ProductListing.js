@@ -1,20 +1,34 @@
 import { Link } from 'react-router-dom'
 import './ProductListing.css'
-import art1 from './mug1.png'
-import art2 from './mug2.png'
-import art3 from './mug3.png'
-import art4 from './mug4.png'
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import axios from 'axios'
 
 /**
  * A React component that represents the ProductListing page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
- const Slideimages=[art1,art2,art3,art4];
  const delay = 4000;
 
 const ProductListing = props => {
+
+  const [product, setProduct] = useState(null);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    console.log(searchParams.get("product_id"));
+    axios.get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
+    .then(apiResponse => {
+      console.log(apiResponse)
+      setProduct(apiResponse.data.product[0]);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
+
   const [index, setIndex]=React.useState(0);
   const timeoutRef = React.useRef(null);
   function resetTimeout() {
@@ -36,18 +50,26 @@ const ProductListing = props => {
     };
   }, [index]);
 
+  const Slideimages=[product? product.image: ""];
+
+
 
   return (
     <>
     <div className = "intro-text">
     {/* later should be filled with product name from DB */}
-    <p className="title">Checkered Handmade Ceramic Mug</p>
+    <p className="title">{product? product.name: ""}</p>
     {/* later should be filled with user name from DB */}
     <p className="profile-link">
-            <Link to="/ProfilePage">Foo Barstein</Link>
+            <Link to="/ProfilePage">{product? product.author_username: ""}</Link>
+{/* 
+            <Link to= "/ProfilePage"
+            state={{
+              id : product? product.author_username: ""
+            }}>{product? product.author_username: ""}</Link> */}
      </p>
     {/* later should be filled with product price from DB */}
-    <p> $15.00 </p>
+    <p className="price"> ${product? product.price: ""}</p>
     </div>
 
 
@@ -56,7 +78,7 @@ const ProductListing = props => {
         <div className='slide'>
           {Slideimages.map((imageslide, index) => (
             <div className='slide' key={index}>
-              <img src={imageslide} alt="your works" className='slide' />
+              <img src={imageslide} alt="your works" className='product-listing-photo slide' />
             </div>
           ))}
         </div>
@@ -77,16 +99,11 @@ const ProductListing = props => {
 
 
     {/* later should be filled with product description from DB */}
-    <p className = "description">This is a handmade mug that is glazed in a checkered pattern. It was handmade by me!
-        It can handle the dishwasher, but if you can, I would hand wash it more often than not.
-        Price is negotiable, but please be aware handmade items take a lot of time and love.
-        It's so cute and makes an amazing addition to any shelf. It'll make your morning coffee
-        so much more fun! If your interested please email me at foobarstein@gmail.com
+    <p className = "description">{product? product.description: ""}
     </p>
 
   </>
   )
 }
 
-// make this component available to be imported into any other file
 export default ProductListing

@@ -2,10 +2,8 @@
 import './Music.css'
 import { Link } from 'react-router-dom'
 import Card from './elements/Card'
-import mug1 from "./mug1.png"
-import mug2 from "./mug2.png"
-import mug3 from "./mug3.png"
-import mug4 from "./mug4.png"
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 /**
  * A React component that represents the Arts and Crafts page of the app.
@@ -13,18 +11,34 @@ import mug4 from "./mug4.png"
  * @returns The contents of this component, in JSX form.
  */
 const Music = props => {
+  const [collection, setCollection] = useState(null)
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/product")
+    .then(apiResponse => {
+      // console.log(apiResponse.data[0])
+      setCollection(apiResponse.data.products);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
+ 
   return (
   <>
     <div>
       <h1>Music</h1>
       <h2>Popular Work</h2>
       <div className='cards-container'>
-        <Card image={mug1} name="Come Home the Kids Miss You" path="ProductListing" author="Jack Harlow" description="Jack Harlow's second studio album."/>
-        <Card image={mug2} name="Hotel California" path="ProductListing" author="The Eagles" description="An American classic, the Eagles' fifth studio album."/>
-        <Card image={mug3} name="AM" path="ProductListing" author="Arctic Monkeys" description="Arctic Monkeys fifth album, released back in 2013 when they were good."/>
-        <Card image={mug4} name="The Dark Side of the Moon" path="ProductListing" author="Pink Floyd" description="One of those albums that you have to sit down and listen to start to finish."/>
-        <Card image={mug1} name="Come Home the Kids Miss You" path="ProductListing" author="Jack Harlow" description="Jack Harlow's second studio album."/>
-        <Card image={mug2} name="Hotel California" path="ProductListing" author="The Eagles" description="An American classic, the Eagles' fifth studio album."/>
+      {
+        collection?
+          collection.map((item, i) => {
+            if(i<10){
+              return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
+            }
+          })
+        : ""
+      }
       </div>
     </div>  
   </>
