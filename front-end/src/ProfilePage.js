@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
+import Card from './elements/Card'
 
 
 /**
@@ -17,36 +18,34 @@ import { useSearchParams } from 'react-router-dom'
 
 const ProfilePage = props => {
   const [user, setUser] = useState(null);
-  const [product, setProduct] = useState(null);
-  const location = useLocation();
+  const [collection, setCollection] = useState(null);
+  const [searchParams] = useSearchParams();
+  //const location = useLocation();
   // const { from } = location.state
   // const state  = this.props.location.state.username;
 
   useEffect(() => {
-    axios.get("http://localhost:3001/product")
+    console.log(searchParams.get("username"));
+    axios.get(`http://localhost:3001/user/${"igeniede"}`)
     .then(apiResponse => {
-      // console.log(apiResponse.data[0])
-      console.log(apiResponse.data)
-      setProduct(apiResponse.data.products);
+      console.log(apiResponse)
+      setUser(apiResponse.data.user[0]);
     })
     .catch(err => {
       throw(err)
     })
   }, [])
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3001/product`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setProduct(apiResponse.data.product[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
-
-
-  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    axios.get("http://localhost:3001/product")
+    .then(apiResponse => {
+      // console.log(apiResponse.data[0])
+      setCollection(apiResponse.data.products);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
 
   // BELOW IS THE ACTUAL ONE WHEN WE HAVE REAL DATA
 
@@ -61,66 +60,6 @@ const ProfilePage = props => {
   //     throw(err)
   //   })
   // }, [])
-
-  useEffect(() => {
-    //console.log(searchParams.get("igeniede"));
-    axios.get(`http://localhost:3001/user/${"igeniede"}`)
-    .then(apiResponse => {
-      console.log(apiResponse)
-      setUser(apiResponse.data.user[0]);
-    })
-    .catch(err => {
-      throw(err)
-    })
-  }, [])
-
-  // useEffect(() => {
-  //   console.log(searchParams.get("name"));
-  //   axios.get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setProduct(apiResponse.data.product[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
-  // useEffect(() => {
-  //   console.log(searchParams.get("product"));
-  //   axios.get(`http://localhost:3001/product/${"product"}`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setProduct(apiResponse.data.product[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
-
-  // const productList = user.products;
-  const productImageList = [];
-  
-  console.log(user)
-
-  // for (let element of user.products) {
-  //   //productList.name.push(<li>{element}</li>)
-
-  //   console.log(product)
-
-
-  //   for (let item of product) {
-  //     if (item.name === element) {
-  //       productList.push({"name": "element", "image": "item.image"})
-  //       console.log(productList)
-  //     }
-  //     else {
-  //       productList.push({"name": "element", "image": "null"})
-  //     }
-  //   }
-  // }
-
-
-
 
   return (
     <>
@@ -152,57 +91,17 @@ const ProfilePage = props => {
 
     </div>
 
-
-    <div>
-      {user.products.map(element => {
-        return (
-          <div>
-            <div>
-              {product.map(item => {
-                return (
-                  <div>
-                    {item.name === "obj23434"? <img className="featured-works" src={item.image} />: void(0)} 
-                  </div>
-                );
-              })}
-            </div>
-            <p><Link to="/ProductListing">{element}</Link></p>
-            <hr />
-          </div>
-        );
-      })}
-    </div>
-
-
-    {/* <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
-
-    <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
-
-    <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div>
-
-    <div className="full-product">
-    <a href = "/ProductListing">
-    <img className="featured-works" src={productPhoto} alt="Profile Photo" />
-    </a>
-    <p><Link to="/ProductListing">Checkered Ceramic Mug</Link></p>
-    </div> */}
-
-
+    <div className='cards-container'>
+      {
+        collection?
+          collection.map((item, i) => {
+            if(i<10 && item.author_username === "abcdfd123"){
+              return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
+            }
+          })
+        : ""
+      }
+      </div>
   </>
   )
 }

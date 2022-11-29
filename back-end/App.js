@@ -141,7 +141,6 @@ app.get('/product/:name', async (req, res) => {
   }
 })
 
-
 app.get('/user', async (req, res) => {
   // load all users from database
   try {
@@ -179,45 +178,24 @@ app.get('/user/:username', async (req, res) => {
   }
 });
 
-
-// THIS STUFF BELOW IS FROM SPRINT 2
-// app.get("/user", (req, res, next) => {
-// axios
-//     .get("https://my.api.mockaroo.com/user_data.json?key=94293da0")
-//     .then(apiResponse => res.json(apiResponse.data)) 
-//     .catch(err => next(err))
-// })
-
-// app.get("/product", (req, res, next) => {
-// axios
-//     .get("https://my.api.mockaroo.com/item_data.json?key=94293da0")
-//     .then(apiResponse => res.json(apiResponse.data)) 
-//     .catch(err => next(err))
-// })
-
-// // route to get a specific product
-// app.get("/product/:title", async (req, res) => {
-//     try {
-//       const apiResponse = await axios.get(
-//         `${process.env.API_BASE_URL_PRODUCT}?key=${process.env.API_SECRET_KEY_PRODUCT}&title=${req.params.title}`
-//       )
-      
-//       const product = apiResponse.data.find(p => p.title === title);
-
-//       const responseData = {
-//         title: product.title,
-//         username: product.username,
-//         description: product.description,
-//         service_or_product: product.service_or_product,
-//         num_of_likes: product.num_of_likes,
-//         tags: product.tags,
-//         price: product.price,
-//       }
-//       res.json(responseData)
-//     } catch (err) {
-//       res.json(err)
-//     }
-//   })
-
+app.post('/product/save', async (req, res) => {
+  // try to save the message to the database
+  try {
+    const product = await Product.create({
+      likes: req.body.likes,
+      product: req.body.product,
+    })
+    return res.json({
+      product: product, // return the message we just saved
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save the message to the database',
+    })
+  }
+})
 
 module.exports = app

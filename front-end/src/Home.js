@@ -8,7 +8,6 @@ import axios from 'axios'
 import ReactSearchBox from 'react-search-box'
 
 const delay = 4000;
-
 const Home=props=>{
 
   const [products, setProducts] = useState([]);

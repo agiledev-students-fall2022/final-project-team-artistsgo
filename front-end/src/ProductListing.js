@@ -52,6 +52,17 @@ const ProductListing = props => {
 
   const Slideimages=[product? product.image: ""];
 
+  // let state = {
+  //   count: product? product.likes: ""
+  // }
+
+  // let increment = () => {
+  //   let newCount = this.state.count + 1
+  //   this.setState({
+  //     count: newCount
+  //   })
+  // }
+
 
 
   return (
@@ -68,9 +79,12 @@ const ProductListing = props => {
               id : product? product.author_username: ""
             }}>{product? product.author_username: ""}</Link> */}
      </p>
-    {/* later should be filled with product price from DB */}
     <p className="price"> ${product? product.price: ""}</p>
     </div>
+
+    {/* <div>
+          <button onClick={this.increment}> Likes: {this.state.count} </button>
+    </div> */}
 
 
     <home><h1 ><div className='slideshow'>
