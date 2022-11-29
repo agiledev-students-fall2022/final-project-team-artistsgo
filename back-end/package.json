@@ -17,9 +17,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mocha": "^10.1.0",
     "mongoose": "^6.7.2",
     "nyc": "^15.1.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {

@@ -3,8 +3,8 @@ const passport = require( 'passport' );
 
 
 passport.use(new GoogleStrategy({
-    clientID: '186661128169-rtbrhibr9p5ne088h88sssvl4sei2nto.apps.googleusercontent.com',
-    clientSecret: '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',
+    clientID: '858364270611-n9baol12m5cjh86n47ruam7uci496co4.apps.googleusercontent.com',
+    clientSecret: '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',
     callbackURL: "http://localhost:3001/auth/google/callback",
     passReqToCallback   : true
   },
