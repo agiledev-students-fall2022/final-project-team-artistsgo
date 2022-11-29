@@ -72,7 +72,6 @@ mongoose
 
 const { Product } = require('./models/Product')
 const { User } = require('./models/User')
-const { authenticate } = require("passport")
 
 app.get('/product', async (req, res) => {
   // load all products from database
@@ -91,6 +90,47 @@ app.get('/product', async (req, res) => {
   }
 })
 
+app.get('/product/:productId', async (req, res) => {
+  console.log(req.params.productId)
+  const productId = req.params.productId
+  console.log(productId)
+  try {
+    const product = await Product.find({name: productId});
+    console.log(product)
+    res.json({
+      product: product,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve product from the database',
+    })
+  }
+})
+
+app.get('/product/:name', async (req, res) => {
+  console.log(req.params.name)
+  const name = req.params.name
+  console.log(name)
+  try {
+    const product = await Product.find({name: name});
+    console.log(product)
+    res.json({
+      product: product,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve product from the database',
+    })
+  }
+})
+
+
 app.get('/user', async (req, res) => {
   // load all users from database
   try {
@@ -108,6 +148,25 @@ app.get('/user', async (req, res) => {
   }
 })
 
+app.get('/user/:username', async (req, res) => {
+  console.log(req.params.username)
+  const username = req.params.username
+  console.log(username)
+  try {
+    const user = await User.find({username: username});
+    console.log(user)
+    res.json({
+      user: user,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve user from the database',
+    })
+  }
+});
 
 
 // THIS STUFF BELOW IS FROM SPRINT 2

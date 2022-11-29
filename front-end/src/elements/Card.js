@@ -9,7 +9,7 @@ import "./Card.css"
 const Card = props => {
   return (
   <>
-    <Link className='card-container' to={`/${props.path}`}>
+    <Link className='card-container' to={`/ProductListing?product_id=${props.name}`}>
         <img src={props.image} alt="Image" />
         <h3>{props.name}</h3>
         {props.price? <p className="price">${props.price.toFixed(2)}</p>: <></>}

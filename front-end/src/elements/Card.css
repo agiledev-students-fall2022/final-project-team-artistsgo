@@ -7,6 +7,9 @@
     margin: 10px 0px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-decoration: none;
+    overflow: hidden;
+    /* height: 400px; */
+
 }
 
 .card-container h3{
@@ -22,6 +25,11 @@
     padding: 0px 10px;
     margin-bottom: 8px;
     margin-top: 10px;
+    height: 200px;
+    /* height: 100%; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 .card-container .author{
     color: #555;
