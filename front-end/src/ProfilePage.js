@@ -35,12 +35,23 @@ const ProfilePage = props => {
   // const { from } = location.state
   // const state  = this.props.location.state.username;
 
+  // useEffect(() => {
+  //   console.log(searchParams.get("author_username"));
+  //   axios.get(`http://localhost:3001/product/${searchParams.get("abcdfd123")}`)
+  //   .then(apiResponse => {
+  //     // console.log(apiResponse.data[0])
+  //     console.log(apiResponse.data)
+  //     setCollection(apiResponse.data.products);
+  //   })
+  //   .catch(err => {
+  //     throw(err)
+  //   })
+  // }, [])
+
   useEffect(() => {
-    console.log(searchParams.get("author_username"));
-    axios.get(`http://localhost:3001/product/${"abcdfd123"}`)
+    axios.get("http://localhost:3001/product")
     .then(apiResponse => {
       // console.log(apiResponse.data[0])
-      console.log(apiResponse.data)
       setCollection(apiResponse.data.products);
     })
     .catch(err => {
@@ -52,7 +63,7 @@ const ProfilePage = props => {
   //   axios.get(`http://localhost:3001/product`)
   //   .then(apiResponse => {
   //     console.log(apiResponse)
-  //     setProduct(apiResponse.data.product[0]);
+  //     setCollection(apiResponse.data.product[0]);
   //   })
   //   .catch(err => {
   //     throw(err)
@@ -158,14 +169,13 @@ const ProfilePage = props => {
       {
         collection?
           collection.map((item, i) => {
-            if(i<10){
+            if(i<10 && item.author_username === "abcdfd123"){
               return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
             }
           })
         : ""
       }
       </div>
-
 
     {/* <div>
       {user.products.map(element => {
