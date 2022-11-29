@@ -50,3 +50,18 @@
     text-decoration: none;
     font-weight: 500;
 }
+
+.card-container .like-button{
+    padding: 10px 10px;
+    /* background-color: #ff4444; */
+    color: #212529;
+    border-top: 1px solid #21252930;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.like-button.clicked{
+    background-color: #ff4444;
+    color: white;
+    transition: 0.15s;
+}
