@@ -5,8 +5,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const delay = 4000;
-
-
 const Home=props=>{
 
   const [products, setProducts] = useState([]);

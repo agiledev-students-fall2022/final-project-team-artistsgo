@@ -26,6 +26,9 @@ const Sidebar = props=>{
             <a className='menu-item' href='./Login'>
                 Login
             </a>
+            <a className='menu-item' href="/Upload">
+                Upload
+            </a>  
         </Menu>
         
     )
