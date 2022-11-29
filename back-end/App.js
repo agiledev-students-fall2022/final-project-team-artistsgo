@@ -1,6 +1,8 @@
 const express = require("express") 
 const session = require("express-session")
 const passport = require("passport")
+require('dotenv').config( { path: '../../.env' } );
+require("./Passport")
 const app = express() 
 const path = require("path")
 const axios = require("axios")
@@ -9,10 +11,24 @@ require("dotenv").config({ silent: true })
 const mongoose = require('mongoose');
 const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
 app.use(express.json()) // decode JSON-formatted incoming POST data
-app.use(session({ secret: "cats "}));
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./Auth")
+const authRoute = require("./routes/auth");
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+//Any reference to /static/html.html would = /public/html.html
+app.use("/static", express.static("public"))
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
+
+app.use("/auth", authRoute);
 
 
 //FOR PASSPORT.JS
@@ -20,7 +36,7 @@ function isSignedIn(req, res, next) {
   req.user ? next() : res.status(401).json({ message: "Unauthorized" })
 }
 
-app.get('/', (req, res) => {
+app.get('/auth', (req, res) => {
   res.send('<a href="/auth/google">Sign in with Google</a>');
 });
 
@@ -28,16 +44,17 @@ app.get('/protected', isSignedIn, (req, res) => {
   res.send('Welcome to the protected route, ' + req.user.displayName + '!');
 });
 
-app.get('/logout', (req, res) => { 
+app.get('/logout', (req, res) => {
   req.logout();
-  res.send('Logged out');
+  req.session.destroy();
+  res.send('Goodbye!');
 });
 
 app.get('/auth/google', 
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-app.get('/google/callback', 
+app.get('auth/google/callback', 
   passport.authenticate('google', { 
     successRedirect: '/protected',
     failureRedirect: '/auth/failuire',
@@ -54,12 +71,6 @@ const connectionparams={
   useNewUrlParser:"true",
   useUnifiedTopology:"true"
 }
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-//Any reference to /static/html.html would = /public/html.html
-app.use("/static", express.static("public"))
-app.use(cors())
 
 mongoose
   .connect(dburl,connectionparams)
