@@ -130,6 +130,26 @@ app.get('/product/:name', async (req, res) => {
   }
 })
 
+app.get('/product/:author_username', async (req, res) => {
+  console.log(req.params.author_username)
+  const name = req.params.author_username
+  console.log(author_username)
+  try {
+    const product = await Product.find({author_username: author_username});
+    console.log(product)
+    res.json({
+      product: product,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve product from the database',
+    })
+  }
+})
+
 
 app.get('/user', async (req, res) => {
   // load all users from database
