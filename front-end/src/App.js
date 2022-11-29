@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './Home'
 import ProductListing from './ProductListing';
 import ProfilePage from './ProfilePage';
@@ -21,6 +21,32 @@ import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
 
 function App() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const getUser = () => {
+      fetch("http://localhost:5000/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error("authentication has been failed!");
+        })
+        .then((resObject) => {
+          setUser(resObject.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUser();
+  }, []);
+
   return (
     <div className="App" id="outer-container">
       <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
@@ -36,7 +62,8 @@ function App() {
           <Route path="/ProductListing" element={<ProductListing />}></Route>
           {/* a route for the profile page */}
           <Route path="/ProfilePage" element={<ProfilePage />}></Route>
-          <Route path ="/Login" element={<Login/>}></Route>
+          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+          {/* <Route path="/post/:id" element={user ? <Post /> : <Navigate to="/login" />} ></Route> */}
           <Route path ="/Register" element={<Register/>}></Route>
           <Route path ="/Aboutus" element={<Aboutus/>}></Route>
           <Route path ="/Arts-And-Crafts" element={<ArtsAndCrafts/>}></Route>

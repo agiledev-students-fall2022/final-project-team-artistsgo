@@ -3,6 +3,7 @@ import { slide as Menu } from 'react-burger-menu'
 import './Sidebar.css'
 
 const Sidebar = props=>{
+    
     return(
         <Menu>
             <a className='menu-item' href="/">
@@ -23,7 +24,7 @@ const Sidebar = props=>{
             <a className='menu-item' href="/Marketplace">
                 Marketplace
             </a>  
-            <a className='menu-item' href='./Login'>
+            <a className='menu-item' href='./Login'  >
                 Login
             </a>
             <a className='menu-item' href="/Upload">
