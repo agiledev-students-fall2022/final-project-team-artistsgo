@@ -12,22 +12,22 @@ const Aboutus = props =>{
         <gall className='gallery-about'>
           <a ><img src={"http://localhost:3001/static/creators/Genie.jpg"}/>
           <p></p>
-          <artists>Genie Hou</artists>
+          <p>Genie Hou</p>
           <p>ch3801@nyu.edu</p>
           </a>
           <a ><img src={"http://localhost:3001/static/creators/Isabel.jpeg"}/>
           <p></p>
-          <artists>Isabel Chen</artists>
+          <p>Isabel Chen</p>
           <p>igc234@nyu.edu</p>
           </a>
           <a ><img src={"http://localhost:3001/static/creators/Derek.jpg"}/>
           <p></p>
-          <artists>Derek Han</artists>
+          <p>Derek Han</p>
           <p>swh376@nyu.edu</p>
           </a>
           <a ><img src={"http://localhost:3001/static/creators/Joseph.jpeg"}/>
           <p></p>
-          <artists>Joseph Yusurof</artists>
+          <p>Joseph Yusurof</p>
           <p>jey2011@nyu.edu</p>
           </a>
         </gall></about>

@@ -3,19 +3,21 @@
     linear-gradient(#b7c3f3,transparent),
     linear-gradient(to top left,#dd7596, transparent),
     linear-gradient(to top right, blue, transparent);
-  min-height: 10vh;
+  height: clamp(70px,2vw,90px);
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2vw; /* half the font size of the header */
+  font-size: clamp(10px,2vw,20px);; /* half the font size of the header */
   color: #413c58;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  bottom:2px ;
 
 }
 .p1-footer{
-  margin-top: auto;
-  font-size: 2vw; /* half the font size of the header */
+  margin-top: 20px;
+  font-size: clamp(10px,2vw,20px); /* half the font size of the header */
   top: 10px;
   color: #413c58;
   display: grid;
