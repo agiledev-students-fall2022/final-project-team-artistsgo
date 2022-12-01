@@ -22,14 +22,16 @@
 .slideshow{
     margin: 0 auto;
     overflow: hidden;
-    max-width:500 px;
-    padding: 5px;
+    max-width: 100vw;
+    max-height: auto;
     vertical-align: top;
 }
 .slide{
     display: inline-block;
-    width: auto;
-    height: 300px;
+    min-height: 300px;
+    min-width: auto;
+    max-width: 100vw;
+    object-fit: cover;
     border-radius: 20px;
 }
 .slideshowSlider{
@@ -56,11 +58,14 @@
 
   .gallery {
     --s: 30vw; /* controls the size */
+    --maxs: 400px;
     --g: 3vw;  /* controls the gap */
-  
+    --maxg: 40px;
     display: grid;
+    margin: 0 auto;
     gap: var(--g);
     width: calc(3*var(--s) + 2*var(--g)); /* 3 times the size plus 2 times the gap */
+    max-width:calc(3*var(--maxs) + 2*var(--maxg)) ;
     aspect-ratio: 1;
     grid-template-columns: repeat(3, auto);
     padding: 2vw;
@@ -81,25 +86,24 @@
  
   .gallery desc{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 3vw;
-    font-size:  2.5vw ; 
+    font-size: clamp(20px,2vw,30px);
     color: #413c58;
   }
   .gallery artists{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 2.5vw;
-    font-size:  2vw ; 
+    font-size:clamp(10px,2vw,20px);
+    margin: 0 auto;
     color: #413c58;
   }
 
-.gallery desc{
-  padding-bottom: 0px;
-}
   .gallery .gallery-artist-link{
-    padding: 0;
-    margin: 0;
+    padding: 0 auto;
+    margin: 0 auto;
   }
-
+  .gallery p{
+    line-height: 15px;
+    margin-bottom: 20px;
+  }
   .g-back{
     background:white;
     background-blend-mode: screen;

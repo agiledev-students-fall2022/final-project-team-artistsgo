@@ -25,7 +25,8 @@
     width: calc(3*var(--s) + 2*var(--g)); /* 3 times the size plus 2 times the gap */
     aspect-ratio: 1;
     grid-template-columns: repeat(2, auto);
-    padding: 2vw;
+
+    margin: 20px;
   }
 
   .gallery-about img {
@@ -43,9 +44,14 @@
 
   .gallery-about artists{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 2.5vw;
     font-size:  2vw ; 
     color: #413c58;
+    line-height: 10px;
+  }
+
+  .gallery-about p{
+    font-size: clamp(10px,2vw,20px);
+    line-height: 1px;
   }
   .g-back{
     background:white;
