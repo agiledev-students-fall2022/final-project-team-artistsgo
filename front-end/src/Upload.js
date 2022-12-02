@@ -1,5 +1,4 @@
 import './Upload.css'
-import { Link } from 'react-router-dom'
 import React from 'react';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -7,12 +6,12 @@ import axios from 'axios'
 const Upload = props =>{
 	const [newProduct, setNewProduct] = useState(
         {
-            name:'',
-      		description:'',
-      		author_username:'',
-      		price:'',
+            name: "",
+      		description:"",
+      		author_username:"",
+      		price:"",
       		tags:[],
-      		photo:'',
+      		photo:"",
       		likes:0,
         }
     );
@@ -20,20 +19,24 @@ const Upload = props =>{
 	const handleSubmit=(e)=>{
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append('photo', newProduct.photo);
-        formData.append('description', newProduct.birthdate);
-		formData.append('author_username', newProduct.birthdate);
+		formData.append("photo", newProduct.photo);
+        formData.append('description', newProduct.description);
+		formData.append('author_username', newProduct.author_username);
         formData.append('name', newProduct.name);
         formData.append('price', newProduct.price);
-        formData.append('tags', newProduct.tags);
+        //formData.append('tags[]', newProduct.tags);
 
-		axios.post('http://localhost:3001/product/add/', formData)
-             .then(res => {
-                console.log(res);
-             })
-             .catch(err => {
+		axios
+        .post(
+			'http://localhost:3001/product/add/',
+            formData
+		)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
                 console.log(err);
-             });
+        });
 	}
 
 	const handleChange = (e) => {
@@ -41,16 +44,17 @@ const Upload = props =>{
     }
 
     const handlePhoto = (e) => {
-        setNewProduct({...newProduct, tags: e.target.files[0]});
+        setNewProduct({...newProduct, photo: e.target.files[0]});
     }
 
 	const handleTags = (e) => {
-        setNewProduct({[e.target.name]:e.target.value.split(',')}
+        setNewProduct({...newProduct, [e.target.name]:e.target.value.split(',')}
 		  );
     }
 
 	return(
-		<form onSubmit={handleSubmit} encType='multipart/form-data'>
+		<form onSubmit={handleSubmit}  enctype="multipart/form-data" >
+            <div class="form-group">
             <input 
                 type="file" 
                 accept=".png, .jpg, .jpeg"
@@ -78,20 +82,20 @@ const Upload = props =>{
             <input 
                 type="text"
 				placeholder="descriptions"
-				name="descriptions"
+				name="description"
                 value={newProduct.description}
                 onChange={handleChange}
             />
 			<p/>
 
-			<input 
+			{/* <input 
                 type="text"
                 name="tags[tag][]"
 				placeholder="tags"
                 value={newProduct.tags}
                 onChange={handleTags}
-            />
-			<p> Price: </p>
+            /> */}
+			<p> </p>
 			<input
                 type="number"
                 name="price"
@@ -103,6 +107,7 @@ const Upload = props =>{
             <input 
                 type="submit"
             />
+            </div>
         </form>
 	);
 }

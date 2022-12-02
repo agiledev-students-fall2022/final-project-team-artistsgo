@@ -11,6 +11,7 @@ const multer= require("multer")
 const { v4: uuidv4 } = require('uuid');
 const cors = require("cors")
 require("dotenv").config({ silent: true })
+const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
@@ -22,28 +23,6 @@ app.use(express.urlencoded({ extended: true }))
 
 //Any reference to /static/html.html would = /public/html.html
 app.use("/static", express.static("public"))
-
-
-//store upload images
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-      cb(null, 'images');
-  },
-  filename: function(req, file, cb) {   
-      cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-  if(allowedFileTypes.includes(file.mimetype)) {
-      cb(null, true);
-  } else {
-      cb(null, false);
-  }
-}
-
-let upload = multer({ storage, fileFilter });
 
 app.use(
   cors({
@@ -223,16 +202,34 @@ app.post('/product/save', async (req, res) => {
   }
 })
 
+//store upload images
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, './images')
+  },
+  filename: function(req, file, cb) {   
+    cb(null, file.fieldname + "-" + Date.now())
+  }
+});
 
-app.post('/product/add', async(req, res) => {
-  upload.single('photo');
-  try{
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if(allowedFileTypes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(null, false);
+  }
+}
+
+let upload = multer({ storage, fileFilter});
+
+app.post('/product/add', upload.single("photo"), (req,res) =>{
     const name = req.body.name
     const author_username=req.body.author_username
     const price=req.body.price
     const tags=req.body.tags
     const description = req.body.description
-    const photo = req.body.image
+    const photo = req.file.filename
     const likes= req.body.lkes
     const newProductData = {
       name,
@@ -244,18 +241,10 @@ app.post('/product/add', async(req, res) => {
       likes
   }
   const newProduct = new Product(newProductData)
-  newProduct.save();
-  return res.json({
-    newproduct: newProduct,
-    status: "Product Added",
-  })
-  }catch(err) {
-    console.error(err)
-    return res.status(400).json({
-      error: err,
-      status: 'failed to save the product to the database',
-    })
-  }
+  newProduct.save()
+            .then(() => res.json('Product Added'))
+            .catch(err => res.status(400).json('Error: ' + err));
 });
+
 
 module.exports = app

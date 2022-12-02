@@ -3,9 +3,9 @@ const Schema = mongoose.Schema
 
 const productSchema = new Schema(
   {
-    _id: {
-      type: String,
-    },
+    // _id: {
+    //   type:  mongoose.Schema.Types.ObjectId,
+    // },
     name: {
       type: String,
       required: true,
@@ -20,11 +20,11 @@ const productSchema = new Schema(
       },
     price: {
         type: Number,
-        required: true,
+
       },
     tags: {
         type: Array,
-        required: true,
+
       },
     image: {
         type: String,
