@@ -5,56 +5,106 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Upload = props =>{
-	const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+	const [newProduct, setNewProduct] = useState(
+        {
+            name:'',
+      		description:'',
+      		author_username:'',
+      		price:'',
+      		tags:[],
+      		photo:'',
+      		likes:0,
+        }
+    );
 
-    const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
-	};
-
-	const handleSubmission = () => {
+	const handleSubmit=(e)=>{
+		e.preventDefault();
 		const formData = new FormData();
+		formData.append('photo', newProduct.photo);
+        formData.append('description', newProduct.birthdate);
+		formData.append('author_username', newProduct.birthdate);
+        formData.append('name', newProduct.name);
+        formData.append('price', newProduct.price);
+        formData.append('tags', newProduct.tags);
 
-		formData.append('File', selectedFile);
+		axios.post('http://localhost:3001/product/add/', formData)
+             .then(res => {
+                console.log(res);
+             })
+             .catch(err => {
+                console.log(err);
+             });
+	}
 
-		fetch(
-			'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
-	};
+	const handleChange = (e) => {
+        setNewProduct({...newProduct, [e.target.name]: e.target.value});
+    }
+
+    const handlePhoto = (e) => {
+        setNewProduct({...newProduct, tags: e.target.files[0]});
+    }
+
+	const handleTags = (e) => {
+        setNewProduct({[e.target.name]:e.target.value.split(',')}
+		  );
+    }
 
 	return(
-   <div>
-			<input type="file" name="file" onChange={changeHandler} />
-            {isFilePicked ? (
-				<div>
-					<p>Filename: {selectedFile.name}</p>
-					<p>Filetype: {selectedFile.type}</p>
-					<p>Size in bytes: {selectedFile.size}</p>
-					<p>
-						lastModifiedDate:{' '}
-						{selectedFile.lastModifiedDate.toLocaleDateString()}
-					</p>
-				</div>
-			) : (
-				<p>Select a file to show details</p>
-			)}
-			<div>
-				<button onClick={handleSubmission}>Submit</button>
-			</div>
-		</div>
-	)
+		<form onSubmit={handleSubmit} encType='multipart/form-data'>
+            <input 
+                type="file" 
+                accept=".png, .jpg, .jpeg"
+                name="photo"
+                onChange={handlePhoto}
+            />
+			<p/>
+			<input 
+                type="text"
+                name="author_username"
+                value={newProduct.author_username}
+				placeholder="author_username"
+                onChange={handleChange}
+            />
+			<p/>
+            <input 
+                type="text"
+                placeholder="name"
+                name="name"
+                value={newProduct.name}
+                onChange={handleChange}
+            />
+			<p/>
+
+            <input 
+                type="text"
+				placeholder="descriptions"
+				name="descriptions"
+                value={newProduct.description}
+                onChange={handleChange}
+            />
+			<p/>
+
+			<input 
+                type="text"
+                name="tags[tag][]"
+				placeholder="tags"
+                value={newProduct.tags}
+                onChange={handleTags}
+            />
+			<p> Price: </p>
+			<input
+                type="number"
+                name="price"
+				placeholder='0'
+                value={newProduct.price}
+                onChange={handleChange}
+            />
+			<p/>
+            <input 
+                type="submit"
+            />
+        </form>
+	);
 }
 
   
