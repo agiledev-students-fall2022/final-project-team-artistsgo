@@ -6,10 +6,13 @@ require("./Passport")
 const app = express() 
 const path = require("path")
 const axios = require("axios")
+//for uploading images
+const multer= require("multer")
+const { v4: uuidv4 } = require('uuid');
 const cors = require("cors")
 require("dotenv").config({ silent: true })
+const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-const dburl="mongodb+srv://mongo:n5HBuQOqMlpgmMsb@cluster0.nrb6jku.mongodb.net/ArtistsGo?retryWrites=true&w=majority"
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -17,6 +20,7 @@ app.use(passport.session());
 const authRoute = require("./routes/auth");
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
 //Any reference to /static/html.html would = /public/html.html
 app.use("/static", express.static("public"))
 
@@ -73,7 +77,7 @@ const connectionparams={
 }
 
 mongoose
-  .connect(dburl,connectionparams)
+  .connect(`${process.env.DB_CONNECTION_STRING}`,connectionparams)
   .then(()=>{
     console.log("Connected to DB");
   })
@@ -197,5 +201,50 @@ app.post('/product/save', async (req, res) => {
     })
   }
 })
+
+//store upload images
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, './images')
+  },
+  filename: function(req, file, cb) {   
+    cb(null, file.fieldname + "-" + Date.now())
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if(allowedFileTypes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(null, false);
+  }
+}
+
+let upload = multer({ storage, fileFilter});
+
+app.post('/product/add', upload.single("photo"), (req,res) =>{
+    const name = req.body.name
+    const author_username=req.body.author_username
+    const price=req.body.price
+    const tags=req.body.tags
+    const description = req.body.description
+    const photo = req.file.filename
+    const likes= req.body.lkes
+    const newProductData = {
+      name,
+      description,
+      author_username,
+      price,
+      tags,
+      photo,
+      likes
+  }
+  const newProduct = new Product(newProductData)
+  newProduct.save()
+            .then(() => res.json('Product Added'))
+            .catch(err => res.status(400).json('Error: ' + err));
+});
+
 
 module.exports = app
