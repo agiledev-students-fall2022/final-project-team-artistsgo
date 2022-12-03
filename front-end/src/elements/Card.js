@@ -8,7 +8,7 @@ import "./Card.css"
  * @returns The contents of this component, in JSX form.
  */
 const Card = props => {
-  
+  const url = "http://localhost:3001/";
   const [liked, setLiked] = useState(false);
   const [numLikes, setNumLikes] = useState(props.collection.likes)
   function like() {
@@ -22,7 +22,7 @@ const Card = props => {
   return (
   <div className="card-container">
     <Link className='card-container' to={`/ProductListing?product_id=${props.name}`}>
-        <img src={props.image} alt="Image" />
+        <img src={url+props.image} alt="Image" />
         <h3>{props.name}</h3>
         {props.price? <p className="price">${props.price.toFixed(2)}</p>: <></>}
         <p className='author'>{props.author}</p>

@@ -28,7 +28,7 @@ const ProductListing = props => {
       throw(err)
     })
   }, [])
-
+  const url = "http://localhost:3001/";
   const [index, setIndex]=React.useState(0);
   const timeoutRef = React.useRef(null);
   function resetTimeout() {
@@ -50,7 +50,7 @@ const ProductListing = props => {
     };
   }, [index]);
 
-  const Slideimages=[product? product.image: ""];
+  const Slideimages=[product? url+product.image: ""];
 
   // let state = {
   //   count: product? product.likes: ""

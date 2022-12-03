@@ -20,7 +20,6 @@ const productSchema = new Schema(
       },
     price: {
         type: Number,
-
       },
     tags: {
         type: Array,
@@ -28,11 +27,9 @@ const productSchema = new Schema(
       },
     image: {
         type: String,
-        required: true,
       },
      likes: {
         type: Number,
-        required: true,
       },
   },
   {
