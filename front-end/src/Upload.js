@@ -2,41 +2,44 @@ import './Upload.css'
 import React from 'react';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom';
 
 const Upload = props =>{
+    const navigate = useNavigate();
 	const [newProduct, setNewProduct] = useState(
         {
-            name: "",
-      		description:"",
-      		author_username:"",
-      		price:"",
-      		tags:[],
-      		photo:"",
-      		likes:0,
+            name:'',
+      		description:'',
+      		author_username:'',
+      		price: 0,
+      		tags:['a','b'],
+      		image:'',
+      		likes: 0,   
         }
     );
 
 	const handleSubmit=(e)=>{
-		e.preventDefault();
-		const formData = new FormData();
-		formData.append("photo", newProduct.photo);
-        formData.append('description', newProduct.description);
-		formData.append('author_username', newProduct.author_username);
-        formData.append('name', newProduct.name);
-        formData.append('price', newProduct.price);
-        //formData.append('tags[]', newProduct.tags);
-
-		axios
-        .post(
-			'http://localhost:3001/product/add/',
-            formData
-		)
+		e.preventDefault()
+		const formData = new FormData()
+		formData.append('photo', newProduct.image)
+        formData.append('description', newProduct.description)
+		formData.append('author_username', newProduct.author_username)
+        formData.append('name', newProduct.name)
+        formData.append('price', newProduct.price)
+        formData.append('likes', 0)
+        formData.append('tags', JSON.stringify(newProduct.tags))
+       
+		axios.post('http://localhost:3001/product/add/', formData)
         .then(res => {
-            console.log(res)
+            console.log(res);
         })
         .catch(err => {
                 console.log(err);
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
         });
+        navigate('/');
 	}
 
 	const handleChange = (e) => {
@@ -44,11 +47,16 @@ const Upload = props =>{
     }
 
     const handlePhoto = (e) => {
-        setNewProduct({...newProduct, photo: e.target.files[0]});
+        setNewProduct({...newProduct, image: e.target.files[0]});
     }
 
 	const handleTags = (e) => {
-        setNewProduct({...newProduct, [e.target.name]:e.target.value.split(',')}
+        setNewProduct({...newProduct, tags: '['+ e.target.value.split(',')+']'}
+		  );
+    }
+
+    const handlePrice = (e) => {
+        setNewProduct({...newProduct, [e.target.name]: e.target.value}
 		  );
     }
 
@@ -58,8 +66,9 @@ const Upload = props =>{
             <input 
                 type="file" 
                 accept=".png, .jpg, .jpeg"
-                name="photo"
+                name='photo'
                 onChange={handlePhoto}
+
             />
 			<p/>
 			<input 
@@ -88,20 +97,20 @@ const Upload = props =>{
             />
 			<p/>
 
-			{/* <input 
+			<input 
                 type="text"
-                name="tags[tag][]"
+                name="tags[]"
 				placeholder="tags"
-                value={newProduct.tags}
                 onChange={handleTags}
-            /> */}
-			<p> </p>
+            /> 
+			 <p> </p>
 			<input
                 type="number"
                 name="price"
 				placeholder='0'
                 value={newProduct.price}
-                onChange={handleChange}
+                onChange={handlePrice}
+
             />
 			<p/>
             <input 

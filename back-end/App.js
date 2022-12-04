@@ -202,15 +202,17 @@ app.post('/product/save', async (req, res) => {
   }
 })
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 //store upload images
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
       cb(null, './images')
   },
   filename: function(req, file, cb) {   
-    cb(null, file.fieldname + "-" + Date.now())
+    cb(null,
+      new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname)
   }
-});
+})
 
 const fileFilter = (req, file, cb) => {
   const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -221,30 +223,24 @@ const fileFilter = (req, file, cb) => {
   }
 }
 
-let upload = multer({ storage, fileFilter});
+const upload = multer({ storage:storage, fileFilter:fileFilter});
 
-app.post('/product/add', upload.single("photo"), (req,res) =>{
-    const name = req.body.name
-    const author_username=req.body.author_username
-    const price=req.body.price
-    const tags=req.body.tags
-    const description = req.body.description
-    const photo = req.file.filename
-    const likes= req.body.lkes
-    const newProductData = {
-      name,
-      description,
-      author_username,
-      price,
-      tags,
-      photo,
-      likes
-  }
-  const newProduct = new Product(newProductData)
-  newProduct.save()
-            .then(() => res.json('Product Added'))
-            .catch(err => res.status(400).json('Error: ' + err));
-});
+app.post('/product/add', upload.single('photo'), async (req,res) =>{
+  try{
+    req.body.photo = req.file.path
+    const newProduct1 = new Product({
+      name: req.body.name,
+      description:req.body.description,
+      author_username:req.body.author_username,
+      price:req.body.price,
+      tags: JSON.parse(req.body.tags,','),
+      image:  req.body.photo,
+      likes: req.body.lkes
+    })
+    const createProduct=await newProduct1.save();
+    res.redirect('/');
+  } catch(e){res.status(400).send(e);
+}});
 
 
 module.exports = app

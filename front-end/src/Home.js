@@ -22,9 +22,10 @@ const Home=props=>{
       throw(err)
     })
   }, [])
+  const url = "http://localhost:3001/";
 
   const Slideimages=[];
-  products.forEach(product=>{Slideimages.push(product? product.image: "")});
+  products.forEach(product=>{Slideimages.push(product? url+ product.image: "")});
   const product1=products[0];
   const product2=products[1];
   const product3=products[2];
@@ -106,37 +107,37 @@ const Home=props=>{
     <div className='g-back'>
     <div className='p1-home'>Popular Work</div>
         <gall className='gallery'>
-          <a href={`/ProductListing?product_id=${products[0]?products[0].name:""}`}> <img src={products[0]?products[0].image:""}/>
+          <a href={`/ProductListing?product_id=${products[0]?products[0].name:""}`}> <img src={products[0]?url+products[0].image:""}/>
           <desc>{products[0]?products[0].name:""}</desc>
           <p className="gallery-artist-link">
             <artists><Link to ="/ProfilePage">{products[0]?products[0].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href={`/ProductListing?product_id=${products[1]?products[1].name:""}`}> <img src={products[1]?products[1].image:""}/>
+          <a href={`/ProductListing?product_id=${products[1]?products[1].name:""}`}> <img src={products[1]?url+products[1].image:""}/>
           <desc>{products[1]?products[1].name:""}</desc>
           <p className="gallery-artist-link">
             <artists><Link to ="/ProfilePage">{products[1]?products[1].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href={`/ProductListing?product_id=${products[2]?products[2].name:""}`}> <img src={products[2]?products[2].image:""}/>
+          <a href={`/ProductListing?product_id=${products[2]?products[2].name:""}`}> <img src={products[2]?url+products[2].image:""}/>
           <desc>{products[2]?products[2].name:""}</desc>
           <p className="gallery-artist-link">
             <artists><Link to ="/ProfilePage">{products[2]?products[2].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href={`/ProductListing?product_id=${products[3]?products[3].name:""}`}><img src={products[3]?products[3].image:""}/>
+          <a href={`/ProductListing?product_id=${products[3]?products[3].name:""}`}><img src={products[3]?url+products[3].image:""}/>
           <desc>{products[3]?products[3].name:""}</desc>
           <p className="gallery-artist-link">
             <artists><Link to ="/ProfilePage">{products[3]?products[3].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href={`/ProductListing?product_id=${products[4]?products[4].name:""}`}><img src={products[4]?products[4].image:""}/>
+          <a href={`/ProductListing?product_id=${products[4]?products[4].name:""}`}><img src={products[4]?url+products[4].image:""}/>
           <desc>{products[4]?products[4].name:""}</desc>
           <p className="gallery-artist-link">
             <artists><Link to ="/ProfilePage">{products[4]?products[4].author_username:""}</Link></artists>
           </p>
           </a>
-          <a href={`/ProductListing?product_id=${products[5]?products[5].name:""}`}><img src={products[5]?products[5].image:""}/>
+          <a href={`/ProductListing?product_id=${products[5]?products[5].name:""}`}><img src={products[5]?url+products[5].image:""}/>
           <desc>{products[5]?products[5].name:""}</desc>
           <p className="gallery-artist-link">
             <artists><Link to ="/ProfilePage">{products[5]?products[5].author_username:""}</Link></artists>
