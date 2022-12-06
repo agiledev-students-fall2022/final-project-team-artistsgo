@@ -233,12 +233,11 @@ app.post('/product/add', upload.single('photo'), async (req,res) =>{
       description:req.body.description,
       author_username:req.body.author_username,
       price:req.body.price,
-      tags: JSON.parse(req.body.tags,','),
+      tags: JSON.parse(req.body.tags),
       image:  req.body.photo,
       likes: req.body.lkes
     })
     const createProduct=await newProduct1.save();
-    res.redirect('/');
   } catch(e){res.status(400).send(e);
 }});
 

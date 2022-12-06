@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 
 const Upload = props =>{
     const navigate = useNavigate();
+    const [checked, setChecked] = useState([]);
 	const [newProduct, setNewProduct] = useState(
         {
             name:'',
@@ -49,69 +50,103 @@ const Upload = props =>{
     const handlePhoto = (e) => {
         setNewProduct({...newProduct, image: e.target.files[0]});
     }
-
+    
 	const handleTags = (e) => {
-        setNewProduct({...newProduct, tags: '['+ e.target.value.split(',')+']'}
-		  );
+        var updatedList = [...checked];
+        if (e.target.checked) {
+            updatedList = [...checked, e.target.value];
+        } else {
+            updatedList.splice(checked.indexOf(e.target.value), 1);
+        }
+        setChecked(updatedList);
+        setNewProduct({...newProduct, tags: updatedList});
+        console.log(newProduct.tags);
     }
+
+    /* const handleTags2=(e)=>{
+        const tagslist=newProduct.tags;
+        const another=e.target.value.split(',');
+        for (let i=0;i<another.length;i++){
+            tagslist.push(another[i]);
+        }
+        console.log(tagslist)
+        setNewProduct({...newProduct, tags: tagslist});
+        console.log(newProduct.tags);
+    } */
 
     const handlePrice = (e) => {
         setNewProduct({...newProduct, [e.target.name]: e.target.value}
 		  );
     }
+    const checkList = ["Arts & Craft", "Dance", "Music", "Marketplace", "Services"];
 
 	return(
 		<form onSubmit={handleSubmit}  enctype="multipart/form-data" >
             <div class="form-group">
+            <legend className='p1-upload'> choose a picture of your art:
             <input 
                 type="file" 
                 accept=".png, .jpg, .jpeg"
                 name='photo'
                 onChange={handlePhoto}
-
             />
-			<p/>
-			<input 
-                type="text"
-                name="author_username"
-                value={newProduct.author_username}
-				placeholder="author_username"
-                onChange={handleChange}
-            />
-			<p/>
+            </legend>
+        
+            <legend className='p1-upload'>name of the artwork:
             <input 
                 type="text"
                 placeholder="name"
                 name="name"
                 value={newProduct.name}
                 onChange={handleChange}
-            />
-			<p/>
-
+            /></legend>
+            <legend className='p1-upload'>author username:
+			<input 
+                type="text"
+                name="author_username"
+                value={newProduct.author_username}
+				placeholder="author_username"
+                onChange={handleChange}
+            /></legend>
+            <legend className='p1-upload'>description:
             <input 
                 type="text"
 				placeholder="descriptions"
 				name="description"
                 value={newProduct.description}
                 onChange={handleChange}
-            />
-			<p/>
+            /></legend>
 
+             <legend className="p1-upload">Check your product's catergories:
+             <div className='checkboxall'>
+             <div className="list-container">
+            {checkList.map((item, index) => (
+                <div key={index}>
+                    <input value={item} name="tags[]" type="checkbox" onChange={handleTags}/>
+                <span>{item}</span>
+                </div>
+            ))}
+            </div>
+            </div>
+            </legend>
+            <p>Please check marketplace if you would like to sell!</p>
+            {/* <legend className='p1-upload'>addtional tags, split using comma:
 			<input 
                 type="text"
                 name="tags[]"
 				placeholder="tags"
-                onChange={handleTags}
+                onChange={handleTags2}
             /> 
-			 <p> </p>
+            </legend> */}
+            <legend className='p1-upload'>Price:
 			<input
                 type="number"
                 name="price"
 				placeholder='0'
                 value={newProduct.price}
                 onChange={handlePrice}
-
             />
+            </legend>
 			<p/>
             <input 
                 type="submit"
