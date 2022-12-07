@@ -22,8 +22,8 @@ const ProfilePage = props => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   console.log(location);
-  const { from } = location.state
-  const state  = this.props.location.state.username;
+  //const { from } = location.state
+  //const state  = this.props.location.state.username;
   //console.log(param0);
 
   // useEffect(() => {
