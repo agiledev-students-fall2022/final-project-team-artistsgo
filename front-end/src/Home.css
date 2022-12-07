@@ -86,7 +86,7 @@
  
   .gallery desc{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: clamp(20px,2vw,30px);
+    font-size: clamp(15px,2vw,25px);
     color: #413c58;
   }
   .gallery artists{

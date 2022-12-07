@@ -25,7 +25,10 @@ const Home=props=>{
   const url = "http://localhost:3001/";
 
   const Slideimages=[];
-  products.forEach(product=>{Slideimages.push(product? url+ product.image: "")});
+  for(let i = 0; i < 6; i++){
+    let product=products[i];
+    Slideimages.push(product? url+ product.image: "")
+  };
   const product1=products[0];
   const product2=products[1];
   const product3=products[2];
@@ -106,7 +109,7 @@ const Home=props=>{
     </h1>
     <div className='g-back'>
     <div className='p1-home'>Popular Work</div>
-        <gall className='gallery'>
+        <div className='gallery'>
           <a href={`/ProductListing?product_id=${products[0]?products[0].name:""}`}> <img src={products[0]?url+products[0].image:""}/>
           <desc>{products[0]?products[0].name:""}</desc>
           <p className="gallery-artist-link">
@@ -143,7 +146,7 @@ const Home=props=>{
             <artists><Link to ="/ProfilePage">{products[5]?products[5].author_username:""}</Link></artists>
           </p>
           </a>
-        </gall>
+        </div>
         </div>
       </home>
   )
