@@ -21,15 +21,11 @@ const ProfilePage = props => {
   const [collection, setCollection] = useState(null);
   const [searchParams] = useSearchParams();
   const location = useLocation();
-  //console.log(location);
-  //const { from } = location.state
-  //const state  = this.props.location.state.username;
-  //console.log(param0);
+  const currentUser = location.state.id;
 
   useEffect(() => {
     axios.get("http://localhost:3001/product")
     .then(apiResponse => {
-      // console.log(apiResponse.data[0])
       setCollection(apiResponse.data.products);
     })
     .catch(err => {
@@ -39,7 +35,7 @@ const ProfilePage = props => {
 
   useEffect(() => {
     console.log(searchParams.get("username"));
-    axios.get(`http://localhost:3001/user/${location.state.id}`)
+    axios.get(`http://localhost:3001/user/${currentUser}`)
     .then(apiResponse => {
       console.log(apiResponse)
       setUser(apiResponse.data.user[0]);
@@ -84,8 +80,8 @@ const ProfilePage = props => {
       {
         collection?
           collection.map((item, i) => {
-            if(i<10 && item.author_username === "abcdfd123"){
-              return <Card image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
+            if(i<10 && item.author_username === currentUser){
+              return <Card collection={collection? collection[i]: ""} image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
             }
           })
         : ""
