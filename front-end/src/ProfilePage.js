@@ -2,7 +2,7 @@
 import './ProfilePage.css'
 import productPhoto from './homeart/mug1.png'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react' 
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
@@ -20,21 +20,23 @@ const ProfilePage = props => {
   const [user, setUser] = useState(null);
   const [collection, setCollection] = useState(null);
   const [searchParams] = useSearchParams();
-  //const location = useLocation();
-  // const { from } = location.state
-  // const state  = this.props.location.state.username;
+  const location = useLocation();
+  console.log(location);
+  const { from } = location.state
+  const state  = this.props.location.state.username;
+  //console.log(param0);
 
-  useEffect(() => {
-    console.log(searchParams.get("username"));
-    axios.get(`http://localhost:3001/user/${"igeniede"}`)
-    .then(apiResponse => {
-      console.log(apiResponse)
-      setUser(apiResponse.data.user[0]);
-    })
-    .catch(err => {
-      throw(err)
-    })
-  }, [])
+  // useEffect(() => {
+  //   console.log(searchParams.get("username"));
+  //   axios.get(`http://localhost:3001/user/${"igeniede"}`)
+  //   .then(apiResponse => {
+  //     console.log(apiResponse)
+  //     setUser(apiResponse.data.user[0]);
+  //   })
+  //   .catch(err => {
+  //     throw(err)
+  //   })
+  // }, [])
 
   useEffect(() => {
     axios.get("http://localhost:3001/product")
@@ -49,17 +51,17 @@ const ProfilePage = props => {
 
   // BELOW IS THE ACTUAL ONE WHEN WE HAVE REAL DATA
 
-  // useEffect(() => {
-  //   console.log(searchParams.get("location.state.id"));
-  //   axios.get(`http://localhost:3001/user/${"location.state.id"}`)
-  //   .then(apiResponse => {
-  //     console.log(apiResponse)
-  //     setUser(apiResponse.data.user[0]);
-  //   })
-  //   .catch(err => {
-  //     throw(err)
-  //   })
-  // }, [])
+  useEffect(() => {
+    console.log(searchParams.get("location.state.id"));
+    axios.get(`http://localhost:3001/user/${"location.state.id"}`)
+    .then(apiResponse => {
+      console.log(apiResponse)
+      setUser(apiResponse.data.user[0]);
+    })
+    .catch(err => {
+      throw(err)
+    })
+  }, [])
 
   return (
     <>
