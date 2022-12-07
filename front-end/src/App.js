@@ -16,6 +16,7 @@ import Marketplace from './Marketplace';
 import Services from './Services';
 import Music from './Music';
 import Upload from './Upload';
+import Faq from "./Faq";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
@@ -72,6 +73,7 @@ function App() {
           <Route path ="/Marketplace" element={<Marketplace/>}></Route>
           <Route path ="/Music" element={<Music/>}></Route>
           <Route path ="/Upload" element={<Upload/>}></Route>
+          <Route path ="/Faq" element={<Faq/>}></Route>
 
         </Routes>
       </main>
