@@ -14,12 +14,12 @@ describe("test api get requests", () => {
         chai.request(app)
             .get("/product")
             .end((err, res) => {
-                // res.body.should.have.property("author_username")
+                res.body.should.have.property("author_username")
                 // res.body.should.have.property("price")
                 // res.body.should.have.property("name")
                 // res.body.should.have.property("description")
                 // res.body.should.have.property("image")
-                res.body.should.be.a('array')
+                //res.body.should.be.a('json')
                 res.should.have.status(200)
                 done();
         });
@@ -34,7 +34,7 @@ describe("test api get requests", () => {
                 // res.body.should.have.property("username")
                 // res.body.should.have.property("last_name")
                 // res.body.should.have.property("profile_description")
-                res.body.should.be.a('array')
+                //res.body.should.be.a('json')
                 res.should.have.status(200)
                 done();
         });
