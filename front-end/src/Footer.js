@@ -9,7 +9,7 @@ const Footer = props => {
           Contact Us
         </div>
         <div>
-          FAQ
+        <Link to="/Faq"> FAQ </Link>
         </div>
         <div>
          <Link to="/Aboutus"> About us</Link>
