@@ -1,0 +1,16 @@
+{
+  apps : [
+    {
+      name      : "front-end",
+      script    : "npm",
+      interpreter: "none",
+      args: "start"
+    },
+    {
+      name      : "back-end",
+      script    : "npm",
+      interpreter: "none",
+      args: "start"
+    }
+  ]
+}
