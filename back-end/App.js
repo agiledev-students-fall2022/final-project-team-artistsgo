@@ -24,6 +24,12 @@ app.use(express.urlencoded({ extended: true }))
 //Any reference to /static/html.html would = /public/html.html
 app.use("/static", express.static("public"))
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Request-Private-Network', 'true');
+  res.setHeader('Access-Control-Allow-Private-Network', 'true');
+  next();
+});
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -31,12 +37,6 @@ app.use(
     credentials: true,
   })
 );
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Request-Private-Network', 'true');
-  res.setHeader('Access-Control-Allow-Private-Network', 'true');
-  next();
-});
 
 app.use("/auth", authRoute);
 
