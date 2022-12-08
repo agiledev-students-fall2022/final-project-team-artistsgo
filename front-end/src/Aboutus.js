@@ -27,7 +27,7 @@ const Aboutus = props =>{
           </a>
           <a ><img src={"http://localhost:3001/static/creators/Joseph.jpeg"}/>
           <p></p>
-          <p>Joseph Yusurof</p>
+          <p>Joseph Yusufov</p>
           <p>jey2011@nyu.edu</p>
           </a>
         </gall></about>
