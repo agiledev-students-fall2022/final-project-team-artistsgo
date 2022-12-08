@@ -33,8 +33,8 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.append('Access-Control-Request-Private-Network', 'true');
-  res.append('Access-Control-Allow-Private-Network', 'true');
+  res.setHeader('Access-Control-Request-Private-Network', 'true');
+  res.setHeader('Access-Control-Allow-Private-Network', 'true');
   next();
 });
 
