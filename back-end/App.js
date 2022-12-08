@@ -24,11 +24,11 @@ app.use(express.urlencoded({ extended: true }))
 //Any reference to /static/html.html would = /public/html.html
 app.use("/static", express.static("public"))
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.setHeader('Access-Control-Request-Private-Network', 'true');
   res.setHeader('Access-Control-Allow-Private-Network', 'true');
   next();
-});
+}); */
 
 app.use(
   cors({
@@ -98,6 +98,8 @@ app.get('/product', async (req, res) => {
   // load all products from database
   try {
     const products = await Product.find({})
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     res.json({
       products: products,
       status: 'all good',
@@ -117,6 +119,8 @@ app.get('/product/:productId', async (req, res) => {
   console.log(productId)
   try {
     const product = await Product.find({name: productId});
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     console.log(product)
     res.json({
       product: product,
@@ -138,6 +142,8 @@ app.get('/product/collection/:collectionName', async (req, res) => {
   try {
     const products = await Product.find({tags: collectionName});
     console.log(products)
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     res.json({
       products: products,
       status: 'all good',
@@ -158,6 +164,8 @@ app.get('/product/:name', async (req, res) => {
   console.log(name)
   try {
     const product = await Product.find({name: name});
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     console.log(product)
     res.json({
       product: product,
@@ -176,6 +184,8 @@ app.get('/user', async (req, res) => {
   // load all users from database
   try {
     const users = await User.find({})
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     res.json({
       users: users,
       status: 'all good',
@@ -195,6 +205,8 @@ app.get('/user/:username', async (req, res) => {
   console.log(username)
   try {
     const user = await User.find({username: username});
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     console.log(user)
     res.json({
       user: user,
@@ -216,6 +228,8 @@ app.post('/product/save', async (req, res) => {
       likes: req.body.likes,
       product: req.body.product,
     })
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     return res.json({
       product: product, // return the message we just saved
       status: 'all good',
@@ -264,6 +278,8 @@ app.post('/product/add', upload.single('photo'), async (req,res) =>{
       image:  req.body.photo,
       likes: req.body.lkes
     })
+    res.setHeader('Access-Control-Request-Private-Network', 'true');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
     const createProduct=await newProduct1.save();
   } catch(e){res.status(400).send(e);
 }});
