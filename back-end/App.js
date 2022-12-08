@@ -125,6 +125,27 @@ app.get('/product/:productId', async (req, res) => {
   }
 })
 
+app.get('/product/collection/:collectionName', async (req, res) => {
+  console.log(req.params.collectionName)
+  const collectionName = req.params.collectionName
+  console.log(collectionName)
+  try {
+    const products = await Product.find({tags: collectionName});
+    console.log(products)
+    res.json({
+      products: products,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve product from the database',
+    })
+  }
+})
+
+
 app.get('/product/:name', async (req, res) => {
   console.log(req.params.name)
   const name = req.params.name

@@ -14,9 +14,9 @@ const Music = props => {
   const [collection, setCollection] = useState(null)
 
   useEffect(() => {
-    axios.get("http://localhost:3001/product")
+    axios.get("http://localhost:3001/product/collection/music")
     .then(apiResponse => {
-      // console.log(apiResponse.data[0])
+      // console.log(apiResponse.data)
       setCollection(apiResponse.data.products);
     })
     .catch(err => {
@@ -33,9 +33,7 @@ const Music = props => {
       {
         collection?
           collection.map((item, i) => {
-            if(i<10){
-              return <Card collection={collection? collection[i]: ""} image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
-            }
+            return <Card collection={collection? collection[i]: ""} image={collection? collection[i].image: ""} name={collection? collection[i].name: ""} path="ProductListing" author={collection? collection[i].author_username: ""} description={collection? collection[i].description: ""} key={"item-" + i} product_id={collection? collection[i]._id: ""}/>
           })
         : ""
       }

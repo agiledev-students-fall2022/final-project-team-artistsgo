@@ -29,6 +29,9 @@ const Upload = props =>{
         formData.append('price', newProduct.price)
         formData.append('likes', 0)
         formData.append('tags', JSON.stringify(newProduct.tags))
+        // formData.append('tags', JSON.stringify(newProduct.tags.map((e, i) => {
+        //     return(e.toLowerCase().replaceAll(" ", "-"));
+        // })))
        
 		axios.post('http://localhost:3001/product/add/', formData)
         .then(res => {
@@ -78,7 +81,7 @@ const Upload = props =>{
         setNewProduct({...newProduct, [e.target.name]: e.target.value}
 		  );
     }
-    const checkList = ["Arts & Craft", "Dance", "Music", "Marketplace", "Services"];
+    const checkList = ["arts-and-crafts", "dance", "music", "marketplace", "services"];
 
 	return(
 		<form onSubmit={handleSubmit}  enctype="multipart/form-data" >
