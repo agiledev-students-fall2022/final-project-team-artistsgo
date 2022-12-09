@@ -32,11 +32,13 @@ app.use("/static", express.static("public"))
 
 app.use(
   cors({
-    origin: "http://192.241.146.229:3000",
+    origin: ["http://192.241.146.229:3000"],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
+app.options('*', cors(corsOptions));
+
 
 app.use("/auth", authRoute);
 
