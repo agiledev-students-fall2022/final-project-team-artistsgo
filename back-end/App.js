@@ -30,15 +30,15 @@ app.use("/static", express.static("public"))
   next();
 }); */
 
+corsOptions={
+  origin:["http://localhost:3000"],
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+}
 app.use(
-  cors({
-    origin:'*',
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
+  cors(corsOptions)
 );
 app.options('*', cors(corsOptions));
-
 
 app.use("/auth", authRoute);
 
