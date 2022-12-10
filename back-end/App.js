@@ -16,13 +16,20 @@ const { User } = require("./models/User");
 const app = express();
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use("/static", express.static("public"));
+/* app.use((req, res, next) => {
+  res.setHeader('Access-Control-Request-Private-Network', 'true');
+  res.setHeader('Access-Control-Allow-Private-Network', 'true');
+  next();
+}); */
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: true,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
+
 app.use(bodyParser.json(), urlencodedparser);
 
 const connectionparams = {
