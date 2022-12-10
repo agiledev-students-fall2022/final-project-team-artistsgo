@@ -1,6 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 // THIS FILE IS NOT CORRECT ***********
 
@@ -27,16 +26,16 @@ const userSchema = new Schema(
       required: false,
     },
     email: {
-    type: String,
-    required: true,
+      type: String,
+      required: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     profilepic: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
     username: {
       type: String,
@@ -50,12 +49,12 @@ const userSchema = new Schema(
   {
     timestamps: true,
   }
-)
+);
 
 // create mongoose Model
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model("User", userSchema);
 
 // export the model so other modules can import it
 module.exports = {
   User,
-}
+};

@@ -1,77 +1,79 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width:  36px;
-    height: 30px;
-    left:2em;
-    top:3.3vh;
-  }
-  
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: #a5ffd6;
-    border-radius: 20%;
-  }
-  
-  /* Color/shape of burger icon bars on hover*/
-  .bm-burger-bars-hover {
-    background: #cf1259;
-  }
-  
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 20px;
-    width: 24px;
-  }
-  
-  /* Color/shape of close button cross */
-  .bm-cross {
-    background: #413c58;
-  }
-  
-  /*
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 2em;
+  top: 3.3vh;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #a5ffd6;
+  border-radius: 20%;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #cf1259;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 20px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #413c58;
+}
+
+/*
   Sidebar wrapper styles
   Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
   */
-  .bm-menu-wrap {
-    position: fixed;
-    height: 100%;
-  }
-  
-  /* General sidebar styles */
-  .bm-menu {
-    background: #b7c3f3;
-    padding: 2.5em 1.5em 1.5em ;
-    font-size: 1.3em;
-    border-radius: 5%;
-  }
-  
-  /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: #373a47;
-  }
-  
-  /* Wrapper for item list */
-  .bm-item-list {
-    display: inline-block;
-    color: #cf1259;
-    padding: 0.8em;
-  }
-  
-  /* Individual item */
-  .bm-item {
-    display: inline-block;
-    padding: 0.4em;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
 
-  }
- 
-  /* Styling of overlay */
-  .bm-overlay {
-    background: #413c58;
-  }
+/* General sidebar styles */
+.bm-menu {
+  background: #b7c3f3;
+  padding: 2.5em 1.5em 1.5em;
+  font-size: 1.3em;
+  border-radius: 5%;
+}
 
-  .bm:hover{
-    color: #cf1259;
-  }
-  a:link { text-decoration: none; }
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  display: inline-block;
+  color: #cf1259;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+  padding: 0.4em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: #413c58;
+}
+
+.bm:hover {
+  color: #cf1259;
+}
+a:link {
+  text-decoration: none;
+}

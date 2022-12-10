@@ -1,9 +1,26 @@
-import "./Aboutus.css";
+// import './Aboutus.css';
 
-const Aboutus = (props) => {
+import { useEffect, useState } from "react";
+
+const User = (props) => {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    fetch("/user/info", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // if(data.isLoggedIn)
+        console.log(data);
+        if (data.user) setUser(data.user);
+      });
+  }, []);
+
   return (
     <about>
-      <h1 className="h1-about">About Us</h1>
+      <h1 className="h1-about">Welcome, {user.username}</h1>
       <p1 className="p1-about">
         We are a team of NYU students aiming to build a community for the
         artists on campus. Come share your creativity and connect with your
@@ -41,4 +58,4 @@ const Aboutus = (props) => {
   );
 };
 
-export default Aboutus;
+export default User;
