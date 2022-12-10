@@ -1,22 +1,61 @@
-const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-const passport = require( 'passport' );
+const { User } = require("./models/User");
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
+const app = express.Router();
+app.post("/register", async (req, res) => {
+  const user = req.body;
+  console.log(user);
+  const takenUsername = await User.findOne({ username: user.username });
+  const takenEmail = await User.findOne({ email: user.email });
 
-passport.use(new GoogleStrategy({
-    clientID: '858364270611-n9baol12m5cjh86n47ruam7uci496co4.apps.googleusercontent.com',
-    clientSecret: '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',
-    callbackURL: "http://localhost:3001/auth/google/callback",
-    passReqToCallback   : true
-  },
-  function(request, accessToken, refreshToken, profile, done) {
-      return done(null, profile);
+  if (takenUsername || takenEmail) {
+    res.json({ message: "Username or email has already been taken." });
+  } else {
+    user.password = await bcrypt.hash(req.body.password, 10);
+
+    const dbuser = new User({
+      username: user.username.toLowerCase(),
+      email: user.email.toLowerCase(),
+      password: user.password,
+    });
+
+    dbuser.save();
+    res.json({ message: "success" });
   }
-));
-
-passport.serializeUser(function(user, done) {
-    done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
-    done(null, user);
+app.post("/login", (req, res) => {
+  const userLoggedIn = req.body;
+  console.log(userLoggedIn);
+  User.findOne({ username: userLoggedIn.username }).then((dbUser) => {
+    if (!dbUser) {
+      return res.json({ message: "Invalid Username or Password" });
+    }
+    bcrypt.compare(userLoggedIn.password, dbUser.password).then((isCorrect) => {
+      if (isCorrect) {
+        const payload = {
+          id: dbUser._id,
+          username: dbUser.username,
+        };
+        jwt.sign(
+          payload,
+          process.env.JWT_SECRET,
+          { expiresIn: 86400 },
+          (err, token) => {
+            if (err) return res.json({ message: err });
+            return res.json({
+              message: "Success",
+              token: "Bearer " + token,
+            });
+          }
+        );
+      } else {
+        return res.json({ message: "Invalid Username or Password" });
+      }
+    });
+  });
 });
+
+module.exports = app;

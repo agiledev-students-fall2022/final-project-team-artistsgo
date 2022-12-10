@@ -1,12 +1,11 @@
 .intro-text {
-    font-size: calc(5px + 1vmin);
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: calc(5px + 1vmin);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .title {
   padding-top: 20px;
   font-size: 3.5em;
-
 }
 
 .product-listing-photo {
@@ -17,31 +16,24 @@
 
 .description {
   padding: 10px 10px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 1.5em;
   text-align: left;
 }
 
 .profile-link {
-    display: inline-block;
-    font-size: 2em;
+  display: inline-block;
+  font-size: 2em;
 }
 .profile-link a {
-color: black;
-text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 
 .profile-link:hover a {
-color: gray;
+  color: gray;
 }
 
-.price{
+.price {
   font-size: 2em;
 }
-
-
-
-
-
-
-

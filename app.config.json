@@ -1,14 +1,26 @@
 {
+<<<<<<< HEAD
+  "apps": [
+    {
+      "name": "front-end",
+      "script": "npm",
+=======
   "apps" : [
     {
       "name"      : "front-end",
       "script"    : "npm",
+>>>>>>> master
       "interpreter": "none",
       "args": "start"
     },
     {
+<<<<<<< HEAD
+      "name": "back-end",
+      "script": "npm",
+=======
       "name"      : "back-end",
       "script"    : "npm",
+>>>>>>> master
       "interpreter": "none",
       "args": "start"
     }

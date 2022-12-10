@@ -1,60 +1,61 @@
-.h1-about{
-    align-items: center;
-    justify-content: center;
-    font-size: calc(2em + 0.5vmin); 
-    color:#413c58;
-    font-family: Calibri, 'Trebuchet MS', sans-serif;
-    Padding: calc(5px + 0.5vmin);
-    background: white;
+.h1-about {
+  align-items: center;
+  justify-content: center;
+  font-size: calc(2em + 0.5vmin);
+  color: #413c58;
+  font-family: Calibri, "Trebuchet MS", sans-serif;
+  padding: calc(5px + 0.5vmin);
+  background: white;
 }
-.p1-about{
-    align-items: center;
-    justify-content: center;
-    font-size: calc(1em + 0.5vmin); 
-    color: #413c58;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    Padding: 10px ;
+.p1-about {
+  align-items: center;
+  justify-content: center;
+  font-size: calc(1em + 0.5vmin);
+  color: #413c58;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding: 10px;
 }
 
 .gallery-about {
-    --s: 30vw; /* controls the size */
-    --g: 3vw;  /* controls the gap */
-  
-    display: grid;
-    gap: var(--g);
-    width: calc(3*var(--s) + 2*var(--g)); /* 3 times the size plus 2 times the gap */
-    aspect-ratio: 1;
-    grid-template-columns: repeat(2, auto);
+  --s: 30vw; /* controls the size */
+  --g: 3vw; /* controls the gap */
 
-    margin: 20px;
-  }
+  display: grid;
+  gap: var(--g);
+  width: calc(
+    3 * var(--s) + 2 * var(--g)
+  ); /* 3 times the size plus 2 times the gap */
+  aspect-ratio: 1;
+  grid-template-columns: repeat(2, auto);
 
-  .gallery-about img {
-    width: 0;
-    height: 0;
-    min-height: 80%;
-    min-width: 100%;
-    object-fit: cover;
-    border-radius: 30%;
-  }
+  margin: 20px;
+}
 
-  .gallery-about img:hover{
-    border: 5px solid #b7c3f3;
-  }
+.gallery-about img {
+  width: 0;
+  height: 0;
+  min-height: 80%;
+  min-width: 100%;
+  object-fit: cover;
+  border-radius: 30%;
+}
 
-  .gallery-about artists{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size:  2vw ; 
-    color: #413c58;
-    line-height: 10px;
-  }
+.gallery-about img:hover {
+  border: 5px solid #b7c3f3;
+}
 
-  .gallery-about p{
-    font-size: clamp(10px,2vw,20px);
-    line-height: 1px;
-  }
-  .g-back{
-    background:white;
-    background-blend-mode: screen;
-  }
-  
+.gallery-about artists {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 2vw;
+  color: #413c58;
+  line-height: 10px;
+}
+
+.gallery-about p {
+  font-size: clamp(10px, 2vw, 20px);
+  line-height: 1px;
+}
+.g-back {
+  background: white;
+  background-blend-mode: screen;
+}

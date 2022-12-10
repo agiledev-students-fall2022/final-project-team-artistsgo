@@ -1,8 +1,15 @@
 {
+<<<<<<< HEAD
+  "apps": [
+    {
+      "name": "back-end",
+      "script": "npm",
+=======
   "apps" : [
     {
       "name"      : "back-end",
       "script"    : "npm",
+>>>>>>> master
       "interpreter": "none",
       "args": "start"
     }
