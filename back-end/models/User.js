@@ -6,38 +6,46 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema(
   {
-    _id: {
+    google_id: {
       type: String,
-      required: true,
+      required: false,
+    },
+    facebook_id: {
+      type: String,
+      required: false,
+    },
+    github_id: {
+      type: String,
+      required: false,
     },
     last_name: {
       type: String,
-      required: true,
+      required: false,
     },
     first_name: {
       type: String,
-      required: true,
+      required: false,
     },
     email: {
     type: String,
     required: true,
     },
+    password: {
+      type: String,
+      required: true
+    },
     profilepic: {
         type: String,
-        required: true,
+        required: false,
     },
-    first_name: {
-        type: String,
-        required: true,
-      },
-      username: {
-        type: String,
-        required: true,
-      },
-      products: {
-        type: Array,
-        required: true,
-      },
+    username: {
+      type: String,
+      required: true,
+    },
+    products: {
+      type: Array,
+      required: false,
+    },
   },
   {
     timestamps: true,

@@ -2,28 +2,28 @@ const express = require("express")
 const session = require("express-session")
 const passport = require("passport")
 require('dotenv').config( { path: '../../.env' } );
-require("./Passport")
-const app = express() 
-const path = require("path")
-const axios = require("axios")
-//for uploading images
-const multer= require("multer")
-const { v4: uuidv4 } = require('uuid');
-const cors = require("cors")
 require("dotenv").config({ silent: true })
-const { body, validationResult } = require('express-validator');
+const path = require("path")
+const multer= require("multer")
+const cors = require("cors")
+// const { body, validationResult } = require('express-validator');
+const bodyParser = require("body-parser")
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
+const app = express() 
+const urlencodedparser = bodyParser.urlencoded({ extended: false })
+
 app.use(express.json()) // decode JSON-formatted incoming POST data
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-const authRoute = require("./routes/auth");
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-//Any reference to /static/html.html would = /public/html.html
+// app.use(
+//   session({
+//     secret: process.env.APP_SECRET || 'this is the default passphrase',
+//     resave: false,
+//     saveUninitialized: false
+//   })
+// )
 app.use("/static", express.static("public"))
-
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -31,45 +31,7 @@ app.use(
     credentials: true,
   })
 );
-
-app.use("/auth", authRoute);
-
-
-//FOR PASSPORT.JS
-function isSignedIn(req, res, next) {
-  req.user ? next() : res.status(401).json({ message: "Unauthorized" })
-}
-
-app.get('/auth', (req, res) => {
-  res.send('<a href="/auth/google">Sign in with Google</a>');
-});
-
-app.get('/protected', isSignedIn, (req, res) => {
-  res.send('Welcome to the protected route, ' + req.user.displayName + '!');
-});
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.send('Goodbye!');
-});
-
-app.get('/auth/google', 
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-
-app.get('auth/google/callback', 
-  passport.authenticate('google', { 
-    successRedirect: '/protected',
-    failureRedirect: '/auth/failuire',
-   }),
-);
-
-app.get('/auth/failure', (req, res) => {
-  res.send('You failed to authenticate!');
-});
-
-//END for PASSPORT.JS
+app.use(bodyParser.json(), urlencodedparser)
 
 const connectionparams={
   useNewUrlParser:"true",
@@ -86,7 +48,86 @@ mongoose
   });
 
 const { Product } = require('./models/Product')
-const { User } = require('./models/User')
+const { User } = require('./models/User');
+
+app.post('/register', async (req, res) => {
+  const user = req.body;
+  console.log(user)
+  const takenUsername = await User.findOne({username: user.username})
+  const takenEmail = await User.findOne({email: user.email})
+
+  if(takenUsername || takenEmail){
+    res.json({message: "Username or email has already been taken."})
+  } else {
+    user.password = await bcrypt.hash(req.body.password, 10);
+
+    const dbuser = new User({
+      username: user.username.toLowerCase(),
+      email: user.email.toLowerCase(),
+      password: user.password
+    })
+
+    dbuser.save();
+    res.json({message: "success"})
+  }
+})
+
+app.post('/login', (req, res) => {
+  const userLoggedIn = req.body
+  console.log(userLoggedIn)
+  User.findOne({username: userLoggedIn.username})
+  .then(dbUser => {
+    if(!dbUser){
+      return res.json({message: "Invalid Username or Password"})
+    }
+    bcrypt.compare(userLoggedIn.password, dbUser.password)
+    .then(isCorrect => {
+      if(isCorrect){
+        const payload = {
+          id: dbUser._id,
+          username: dbUser.username
+        }
+        jwt.sign(
+          payload,
+          process.env.JWT_SECRET,
+          {expiresIn: 86400},
+          (err, token) => {
+            if(err) return res.json({message: err})
+            return res.json({
+              message: "Success",
+              token: "Bearer " + token
+            })
+          }
+        )
+      } else {
+        return res.json({message: "Invalid Username or Password"})
+      }
+    })
+  })
+})
+
+function verifyJWT(req, res, next) {
+  const token = req.headers['x-access-token']?.split(' ')[1]
+
+  if(token){
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if(err) return res.json({isLoggedIn: false, message: "failed to authenticate"})
+      req.user = {};
+      req.user.id = decoded.id
+      req.user.username = decoded.username
+      next()
+    })
+  } else {
+    res.json({message: "incorrect token", isLoggedIn: false})
+  }
+}
+
+app.get("/isUserAuth", verifyJWT, (req, res) => {
+  res.json({isLoggedIn: true, username: req.user.username})
+})
+
+
+
 
 app.get('/product', async (req, res) => {
   // load all products from database
