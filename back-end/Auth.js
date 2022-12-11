@@ -2,6 +2,7 @@ const { User } = require("./models/User");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const secrets = require("./secrets.json");
 
 const app = express.Router();
 app.post("/register", async (req, res) => {
@@ -41,7 +42,7 @@ app.post("/login", (req, res) => {
         };
         jwt.sign(
           payload,
-          process.env.JWT_SECRET,
+          secrets.JWT_SECRET,
           { expiresIn: 86400 },
           (err, token) => {
             if (err) return res.json({ message: err });

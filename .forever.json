@@ -1,8 +1,8 @@
 
 {
-    "uid": "ArtistsGo app",
+    "uid": "ArtistsGo",
     "append": true,
     "watch": true,
-    "script": "back-end/Server.js",
+    "script": "./back-end/Server.js",
     "sourceDir": "."
 }

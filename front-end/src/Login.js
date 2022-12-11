@@ -53,7 +53,7 @@ const Login = () => {
   }
 
   return (
-    <div className="text-white flex flex-col h-screen w-screen items-center justify-center">
+    <div className="flex flex-col h-screen w-screen items-center justify-center">
       <div className="p-5 text-3xl font-extrabold">Login</div>
       <form
         className="mx-5 flex flex-col w-72"

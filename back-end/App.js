@@ -12,6 +12,7 @@ const authRouter = require("./Auth");
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
 const { Product } = require("./models/Product");
 const { User } = require("./models/User");
+const secrets = require("./secrets.json");
 
 const app = express();
 app.use(express.json()); // decode JSON-formatted incoming POST data
@@ -37,7 +38,7 @@ const connectionparams = {
   useUnifiedTopology: "true",
 };
 mongoose
-  .connect(`${process.env.DB_CONNECTION_STRING}`, connectionparams)
+  .connect(`${secrets.DB_CONNECTION_STRING}`, connectionparams)
   .then(() => {
     console.log("Connected to DB");
   })
@@ -58,7 +59,7 @@ function verifyJWT(req, res, next) {
   const token = req.headers["x-access-token"]?.split(" ")[1];
 
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, secrets.JWT_SECRET, (err, decoded) => {
       if (err)
         return res.json({ isLoggedIn: false, message: "incorrect token" });
       req.user = {};
