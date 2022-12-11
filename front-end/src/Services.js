@@ -14,7 +14,7 @@ const Services = (props) => {
 
   useEffect(() => {
     axios
-      .get("/product/collection/services")
+      .get("/api/product/collection/services")
       .then((apiResponse) => {
         // console.log(apiResponse.data[0])
         setCollection(apiResponse.data.products);

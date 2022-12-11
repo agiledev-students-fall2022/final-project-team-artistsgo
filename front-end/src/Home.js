@@ -13,10 +13,11 @@ const Home = (props) => {
 
   useEffect(() => {
     axios
-      .get("/product")
+      .get("/api/product")
       .then((apiResponse) => {
+        console.log("API RESPONSE");
+        console.log(apiResponse);
         setProducts(apiResponse.data.products);
-        //console.log("rendered 1")
       })
       .catch((err) => {
         throw err;
@@ -27,7 +28,7 @@ const Home = (props) => {
   const Slideimages = [];
   for (let i = 0; i < 6; i++) {
     let product = products[i];
-    Slideimages.push(product ? "/" + product.image : "");
+    Slideimages.push(product ? "/api/" + product.image : "");
   }
   const product1 = products[0];
   const product2 = products[1];
@@ -125,7 +126,7 @@ const Home = (props) => {
             }`}
           >
             {" "}
-            <img src={products[0] ? "/" + products[0].image : ""} />
+            <img src={products[0] ? "/api/" + products[0].image : ""} />
             <desc>{products[0] ? products[0].name : ""}</desc>
             <p className="gallery-artist-link">
               <artists>
@@ -146,7 +147,7 @@ const Home = (props) => {
             }`}
           >
             {" "}
-            <img src={products[1] ? "/" + products[1].image : ""} />
+            <img src={products[1] ? "/api/" + products[1].image : ""} />
             <desc>{products[1] ? products[1].name : ""}</desc>
             <p className="gallery-artist-link">
               <artists>
@@ -167,7 +168,7 @@ const Home = (props) => {
             }`}
           >
             {" "}
-            <img src={products[2] ? "/" + products[2].image : ""} />
+            <img src={products[2] ? "/api/" + products[2].image : ""} />
             <desc>{products[2] ? products[2].name : ""}</desc>
             <p className="gallery-artist-link">
               <artists>
@@ -187,7 +188,7 @@ const Home = (props) => {
               products[3] ? products[3]._id : ""
             }`}
           >
-            <img src={products[3] ? "/" + products[3].image : ""} />
+            <img src={products[3] ? "/api/" + products[3].image : ""} />
             <desc>{products[3] ? products[3].name : ""}</desc>
             <p className="gallery-artist-link">
               <artists>
@@ -207,7 +208,7 @@ const Home = (props) => {
               products[4] ? products[4]._id : ""
             }`}
           >
-            <img src={products[4] ? "/" + products[4].image : ""} />
+            <img src={products[4] ? "/api/" + products[4].image : ""} />
             <desc>{products[4] ? products[4].name : ""}</desc>
             <p className="gallery-artist-link">
               <artists>
@@ -227,7 +228,7 @@ const Home = (props) => {
               products[5] ? products[5]._id : ""
             }`}
           >
-            <img src={products[5] ? "/" + products[5].image : ""} />
+            <img src={products[5] ? "/api/" + products[5].image : ""} />
             <desc>{products[5] ? products[5].name : ""}</desc>
             <p className="gallery-artist-link">
               <artists>

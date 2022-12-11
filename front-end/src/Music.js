@@ -14,7 +14,7 @@ const Music = (props) => {
 
   useEffect(() => {
     axios
-      .get("/product/collection/music")
+      .get("/api/product/collection/music")
       .then((apiResponse) => {
         // console.log(apiResponse.data)
         setCollection(apiResponse.data.products);

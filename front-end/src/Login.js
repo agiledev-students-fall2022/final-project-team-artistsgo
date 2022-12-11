@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("/isUserAuth", {
+    fetch("/api/isUserAuth", {
       method: "GET",
       headers: {
         "x-access-token": localStorage.getItem("token"),
@@ -32,7 +32,7 @@ const Login = () => {
       password: form[1].value,
     };
 
-    fetch("/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

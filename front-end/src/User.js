@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const User = (props) => {
   const [user, setUser] = useState({});
   useEffect(() => {
-    fetch("/user/info", {
+    fetch("/api/user/info", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },

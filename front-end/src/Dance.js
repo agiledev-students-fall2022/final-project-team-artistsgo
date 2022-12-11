@@ -14,7 +14,7 @@ const Dance = (props) => {
 
   useEffect(() => {
     axios
-      .get("/product/collection/dance")
+      .get("/api/product/collection/dance")
       .then((apiResponse) => {
         // console.log(apiResponse.data[0])
         setCollection(apiResponse.data.products);
