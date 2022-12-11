@@ -32,7 +32,7 @@ const Upload = (props) => {
     // })))
 
     axios
-      .post("http://localhost:3001/product/add/", formData)
+      .post("/product/add/", formData)
       .then((res) => {
         console.log(res);
       })

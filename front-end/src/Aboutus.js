@@ -13,25 +13,25 @@ const Aboutus = (props) => {
       <p1 className="p1-about">Send us an email if you have any questions.</p1>
       <gall className="gallery-about">
         <a>
-          <img src={"http://localhost:3001/static/creators/Genie.jpg"} />
+          <img src={"/static/creators/Genie.jpg"} />
           <p></p>
           <p>Genie Hou</p>
           <p>ch3801@nyu.edu</p>
         </a>
         <a>
-          <img src={"http://localhost:3001/static/creators/Isabel.jpeg"} />
+          <img src={"/static/creators/Isabel.jpeg"} />
           <p></p>
           <p>Isabel Chen</p>
           <p>igc234@nyu.edu</p>
         </a>
         <a>
-          <img src={"http://localhost:3001/static/creators/Derek.jpg"} />
+          <img src={"/static/creators/Derek.jpg"} />
           <p></p>
           <p>Derek Han</p>
           <p>swh376@nyu.edu</p>
         </a>
         <a>
-          <img src={"http://localhost:3001/static/creators/Joseph.jpeg"} />
+          <img src={"/static/creators/Joseph.jpeg"} />
           <p></p>
           <p>Joseph Yusufov</p>
           <p>jey2011@nyu.edu</p>

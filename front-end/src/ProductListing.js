@@ -19,7 +19,7 @@ const ProductListing = (props) => {
   useEffect(() => {
     console.log(searchParams.get("product_id"));
     axios
-      .get(`http://localhost:3001/product/${searchParams.get("product_id")}`)
+      .get(`/product/${searchParams.get("product_id")}`)
       .then((apiResponse) => {
         console.log(apiResponse);
         setProduct(apiResponse.data.product);
@@ -28,7 +28,7 @@ const ProductListing = (props) => {
         throw err;
       });
   }, []);
-  const url = "http://localhost:3001/";
+  // const url = "http://localhost:3001/";
   const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
   function resetTimeout() {
@@ -50,7 +50,7 @@ const ProductListing = (props) => {
     };
   }, [index]);
 
-  const Slideimages = [product ? url + product.image : ""];
+  const Slideimages = [product ? "/" + product.image : ""];
 
   // let state = {
   //   count: product? product.likes: ""
