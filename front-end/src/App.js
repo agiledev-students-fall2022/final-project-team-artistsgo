@@ -24,35 +24,35 @@ import Upload from "./Upload";
 import Faq from "./Faq";
 import User from "./User";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
-import jwt_decode from "jwt-decode";
+// import { useEffect, useState } from "react";
+// import jwt_decode from "jwt-decode";
 
 function App() {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
+  // const [user, setUser] = useState(null);
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     fetch("http://localhost:5000/auth/login/success", {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Credentials": true,
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (response.status === 200) return response.json();
+  //         throw new Error("authentication has been failed!");
+  //       })
+  //       .then((resObject) => {
+  //         setUser(resObject.user);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+  //   getUser();
+  // }, []);
 
   return (
     <div className="App" id="outer-container">
@@ -68,10 +68,6 @@ function App() {
             <Route path="/ProductListing" element={<ProductListing />}></Route>
             {/* a route for the profile page */}
             <Route path="/ProfilePage" element={<ProfilePage />}></Route>
-            <Route
-              path="/login"
-              element={user ? <Navigate to="/" /> : <Login />}
-            />
             {/* <Route path="/post/:id" element={user ? <Post /> : <Navigate to="/login" />} ></Route> */}
             <Route path="/Register" element={<Register />}></Route>
             <Route path="/Aboutus" element={<Aboutus />}></Route>
@@ -81,6 +77,7 @@ function App() {
             <Route path="/Marketplace" element={<Marketplace />}></Route>
             <Route path="/Music" element={<Music />}></Route>
             <Route path="/Upload" element={<Upload />}></Route>
+            <Route path="/Login" element={<Login />}></Route>
             <Route path="/User" element={<User />}></Route>
             <Route path="/Faq" element={<Faq />}></Route>
           </Routes>

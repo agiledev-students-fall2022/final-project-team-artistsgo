@@ -19,7 +19,7 @@ const Login = () => {
         return res.json();
       })
       .then((data) => {
-        if (data.token) navigate("/");
+        if (data.isLoggedIn) navigate("/");
       });
   }, []);
 

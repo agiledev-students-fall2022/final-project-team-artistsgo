@@ -22,7 +22,7 @@ const ProfilePage = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/product")
+      .get("/product")
       .then((apiResponse) => {
         setCollection(apiResponse.data.products);
       })
@@ -34,7 +34,7 @@ const ProfilePage = (props) => {
   useEffect(() => {
     console.log(searchParams.get("username"));
     axios
-      .get(`http://localhost:3001/user/${currentUser}`)
+      .get(`/user/${currentUser}`)
       .then((apiResponse) => {
         console.log(apiResponse);
         setUser(apiResponse.data.user[0]);
