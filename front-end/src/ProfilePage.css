@@ -1,0 +1,45 @@
+.profile-picture {
+  width: 200px;
+  vertical-align: middle;
+  border-radius: 50%;
+  padding-top: 25px;
+  padding-bottom: 5px;
+  align-items: center;
+}
+
+.users-name {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+}
+
+.user-name {
+  display: inline-block;
+  padding-bottom: 20px;
+  font-size: 12px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.profile-description {
+  padding: 10px 10px;
+  max-width: 400px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.description-style {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1.5px solid gray;
+  border-radius: 10px;
+}
+
+.featured-works {
+  border-radius: 33px;
+  padding: 20px;
+  width: 250px;
+}
+
+.full-product {
+  padding-top: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

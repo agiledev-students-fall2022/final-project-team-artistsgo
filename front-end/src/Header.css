@@ -1,0 +1,54 @@
+.Header-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Header-header {
+  background: linear-gradient(#b7c3f3, transparent),
+    linear-gradient(to bottom left, #dd7596, transparent),
+    linear-gradient(to bottom right, blue, transparent);
+  max-height: 90px;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(12px + 1vmin);
+  color: #a5ffd6;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.Header-header img {
+  max-height: 60px;
+  width: auto;
+}
+
+.logo {
+  display: block;
+  padding: 1em;
+}
+
+.nav-links {
+  list-style: none;
+}
+.nav-item {
+  display: inline-block;
+  align-items: left;
+  padding: 1em;
+}
+.nav-item a {
+  color: #a5ffd6;
+  text-decoration: none;
+}
+
+.nav-item:hover a {
+  color: gray;
+}
+
+.logo img {
+  width: 100%;
+  vertical-align: sub;
+}

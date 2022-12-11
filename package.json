@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-burger-menu": "^3.0.8",
+    "react-router-dom": "^6.4.2"
+  }
+}
