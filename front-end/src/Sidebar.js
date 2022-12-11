@@ -7,7 +7,7 @@ import axios from "axios";
 const Sidebar = (props) => {
   const [user, setUser] = useState({});
   useEffect(() => {
-    fetch("/user/info", {
+    fetch("/api/user/info", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -19,6 +19,12 @@ const Sidebar = (props) => {
         if (data.user) setUser(data.user);
       });
   }, []);
+
+  async function handleLogout(e) {
+    e.preventDefault();
+
+    localStorage.removeItem("token");
+  }
   return (
     <Menu>
       <a className="menu-item" href="/">
@@ -48,6 +54,11 @@ const Sidebar = (props) => {
       {user.username && (
         <a className="menu-item" href="/User">
           {user.username}'s profile
+        </a>
+      )}
+      {user.username && (
+        <a className="menu-item" href="#" onClick={(e) => handleLogout(e)}>
+          Logout
         </a>
       )}
     </Menu>

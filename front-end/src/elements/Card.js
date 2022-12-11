@@ -26,7 +26,7 @@ const Card = (props) => {
         to={`/ProductListing?product_id=${props.collection._id}`}
       >
         {/* <img src={url + props.image} alt="Image" /> */}
-        <img src={"/" + props.image} alt="Image" />
+        <img src={"/api/" + props.image} alt="Image" />
         <h3>{props.name}</h3>
         {props.price ? (
           <p className="price">${props.price.toFixed(2)}</p>

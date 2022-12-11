@@ -45,7 +45,14 @@ mongoose
     console.log("Error:", e);
   });
 
-app.use("/", authRouter);
+app.use(express.static(path.join(__dirname, "..", "front-end", "build")));
+
+app.get(/^((?!api).)*$/, function (req, res) {
+  // console.log(req);
+  console.log("general request");
+  res.sendFile(path.join(__dirname, "..", "front-end", "build", "index.html"));
+});
+app.use("/api", authRouter);
 
 function verifyJWT(req, res, next) {
   const token = req.headers["x-access-token"]?.split(" ")[1];
@@ -64,18 +71,19 @@ function verifyJWT(req, res, next) {
   }
 }
 
-app.get("/isUserAuth", verifyJWT, (req, res) => {
+app.get("/api/isUserAuth", verifyJWT, (req, res) => {
   res.json({ isLoggedIn: true, username: req.user.username });
 });
 
-app.get("/user/info", verifyJWT, (req, res) => {
+app.get("/api/user/info", verifyJWT, (req, res) => {
   User.findById(req.user.id).then((dbUser) => {
     const user = { email: dbUser.email, username: dbUser.username };
     res.json({ user: user, message: "user info retrieved" });
   });
 });
 
-app.get("/product", async (req, res) => {
+app.get("/api/product", async (req, res) => {
+  console.log("api request");
   try {
     const products = await Product.find({});
     res.json({
@@ -83,7 +91,7 @@ app.get("/product", async (req, res) => {
       status: "all good",
     });
   } catch (err) {
-    console.error(err);
+    // console.error(err);
     res.status(400).json({
       error: err,
       status: "failed to retrieve products from the database",
@@ -91,7 +99,7 @@ app.get("/product", async (req, res) => {
   }
 });
 
-app.get("/product/:productId", async (req, res) => {
+app.get("/api/product/:productId", async (req, res) => {
   console.log(req.params.productId);
   const productId = req.params.productId;
   console.log(productId);
@@ -111,7 +119,7 @@ app.get("/product/:productId", async (req, res) => {
   }
 });
 
-app.get("/product/collection/:collectionName", async (req, res) => {
+app.get("/api/product/collection/:collectionName", async (req, res) => {
   console.log(req.params.collectionName);
   const collectionName = req.params.collectionName;
   console.log(collectionName);
@@ -131,7 +139,7 @@ app.get("/product/collection/:collectionName", async (req, res) => {
   }
 });
 
-app.get("/product/:name", async (req, res) => {
+app.get("/api/product/:name", async (req, res) => {
   console.log(req.params.name);
   const name = req.params.name;
   console.log(name);
@@ -151,7 +159,7 @@ app.get("/product/:name", async (req, res) => {
   }
 });
 
-app.get("/user", async (req, res) => {
+app.get("/api/user", async (req, res) => {
   // load all users from database
   try {
     const users = await User.find({});
@@ -168,7 +176,7 @@ app.get("/user", async (req, res) => {
   }
 });
 
-app.get("/user/:username", async (req, res) => {
+app.get("/api/user/:username", async (req, res) => {
   console.log(req.params.username);
   const username = req.params.username;
   console.log(username);
@@ -188,7 +196,7 @@ app.get("/user/:username", async (req, res) => {
   }
 });
 
-app.post("/product/save", async (req, res) => {
+app.post("/api/product/save", async (req, res) => {
   // try to save the message to the database
   try {
     const product = await Product.create({
@@ -208,7 +216,7 @@ app.post("/product/save", async (req, res) => {
   }
 });
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/api/images/", express.static(path.join(__dirname, "images")));
 //store upload images
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -233,7 +241,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-app.post("/product/add", upload.single("photo"), async (req, res) => {
+app.post("/api/product/add", upload.single("photo"), async (req, res) => {
   try {
     req.body.photo = req.file.path;
     const newProduct1 = new Product({

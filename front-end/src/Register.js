@@ -14,7 +14,7 @@ export default function Register() {
     };
 
     console.log(user);
-    fetch("/register", {
+    fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -31,7 +31,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/isUserAuth", {
+    fetch("/api/isUserAuth", {
       method: "GET",
       headers: {
         "x-access-token": localStorage.getItem("token"),

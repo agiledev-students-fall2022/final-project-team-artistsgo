@@ -14,7 +14,7 @@ const Marketplace = (props) => {
 
   useEffect(() => {
     axios
-      .get("/product/collection/marketplace")
+      .get("/api/product/collection/marketplace")
       .then((apiResponse) => {
         // console.log(apiResponse.data[0])
         setCollection(apiResponse.data.products);

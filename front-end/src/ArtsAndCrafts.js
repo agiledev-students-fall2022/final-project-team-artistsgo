@@ -14,7 +14,7 @@ const ArtsAndCrafts = (props) => {
 
   useEffect(() => {
     axios
-      .get("/product/collection/arts-and-crafts")
+      .get("/api/product/collection/arts-and-crafts")
       .then((apiResponse) => {
         // console.log(apiResponse.data[0])
         console.log(apiResponse.data);
