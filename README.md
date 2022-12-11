@@ -3,6 +3,7 @@
 # Project Repository
 
 ## Description of ArtistsGo
+Here is the link to the app: http://192.241.146.229/
 
 # Product Vision
 
